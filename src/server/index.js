@@ -1,10 +1,11 @@
-const path = require('path');
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
+import path from 'path';
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
 
-const postsRoutes = require('./routes/posts.js');
+import postsRoutes from './routes/posts';
 
+const isDev = process.env.NODE_ENV === 'development';
 const PORT = process.env.PORT || 4001;
 const app = express();
 const CONNECTION_URL =
@@ -16,7 +17,7 @@ app.use(cors());
 
 app.use('/api/posts', postsRoutes);
 
-if (process.env.NODE_ENV === 'production') {
+if (!isDev) {
   app.use('/assets', express.static(path.join(__dirname, '../../dist')));
 
   app.get('/*', (_, res) => {
@@ -32,7 +33,11 @@ mongoose
   .then(() => {
     app.listen(PORT, () =>
       // eslint-disable-next-line
-      console.log(`✨ Project is running at http://localhost:${PORT}/`)
+      console.log(
+        `✨ ${
+          isDev ? 'API' : 'Project'
+        } is running at http://localhost:${PORT}/`
+      )
     );
   })
   // eslint-disable-next-line
