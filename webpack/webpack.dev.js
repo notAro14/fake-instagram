@@ -13,6 +13,9 @@ module.exports = () =>
       historyApiFallback: true,
       hot: true,
       port: 4000,
+      proxy: {
+        '/api': 'http://localhost:4001',
+      },
       publicPath: '/assets/',
     },
 
