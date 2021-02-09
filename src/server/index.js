@@ -3,19 +3,18 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const postsRoutes = require('./routes/posts.js');
+
 const PORT = process.env.PORT || 4001;
 const app = express();
+const CONNECTION_URL =
+  'mongodb+srv://instagram-like:instagram-like@cluster0.y6lml.mongodb.net/instagram?retryWrites=true&w=majority';
 
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 app.use(express.json({ limit: '30mb' }));
 app.use(cors());
 
-const CONNECTION_URL =
-  'mongodb+srv://instagram-like:instagram-like@cluster0.y6lml.mongodb.net/instagram?retryWrites=true&w=majority';
-
-app.get('/api/hello', (_, res) => {
-  res.json({ message: 'Hello World' });
-});
+app.use('/api/posts', postsRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/assets', express.static(path.join(__dirname, '../../dist')));

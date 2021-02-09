@@ -11,7 +11,7 @@ const HomePage = () => {
       <button
         type="button"
         onClick={async () => {
-          const response = await fetch('/api/hello');
+          const response = await fetch('/api/posts');
           const incomingData = await response.json();
           console.log(incomingData);
           setData(incomingData);

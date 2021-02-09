@@ -17,7 +17,7 @@
     "lint": "eslint --ext .jsx,.js src/ webpack/",
     "serve": "NODE_ENV=production node src/server",
     "server": "nodemon src/server",
-    "start": "concurrently \"yarn client\" \"yarn server\"",
+    "start": "concurrently --kill-others-on-fail \"yarn client\" \"yarn server\"",
     "test": "jest --coverage --passWithNoTests",
     "update": "yarn upgrade-interactive --latest",
     "postinstall": "husky install"
