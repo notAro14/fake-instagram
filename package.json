@@ -16,7 +16,8 @@
     "lint": "eslint --ext .jsx,.js src/ webpack/",
     "serve": "NODE_ENV=production node src/server/server.js",
     "start": "npm-run-all clean dev",
-    "test": "jest --coverage --passWithNoTests"
+    "test": "jest --coverage --passWithNoTests",
+    "update": "yarn upgrade-interactive --latest"
   },
   "keywords": [
     "webpack",
