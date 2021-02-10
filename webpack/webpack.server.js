@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -24,4 +25,13 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js'],
   },
+  plugins: [
+    new WebpackShellPluginNext({
+      onBuildEnd: {
+        scripts: ['nodemon dist/server'],
+        blocking: false,
+        parallel: true,
+      },
+    }),
+  ],
 };

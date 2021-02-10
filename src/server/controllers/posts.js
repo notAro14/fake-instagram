@@ -1,4 +1,4 @@
 // eslint-disable-next-line
 export const getPosts = (req, res) => {
-  res.json({ message: 'This is MVC' });
+  res.json({ message: 'This is sooo COOL' });
 };
