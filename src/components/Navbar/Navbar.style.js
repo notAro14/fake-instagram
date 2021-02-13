@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Link from '../Link/Link.style';
 
 export const Logo = styled.span`
-  color: tomato;
+  color: red;
   font-weight: 900;
   font-family: cursive;
 `;
@@ -49,13 +49,13 @@ export const NavLinkWrapper = styled.li`
 export const SearchBarWrapper = styled.div`
   align-items: center;
   display: flex;
-  border: 1px solid #c8c8c8;
+  border: 1px solid var(--text-secondary);
   border-radius: 4px;
-  color: #c8c8c8;
+  color: var(--text-secondary);
   font-size: 0.8rem;
   justify-content: space-between;
   padding: 0.5rem 0.5rem;
-  width: 250px;
+  width: 300px;
   @media (max-width: 765px) {
     display: none;
   }
@@ -63,10 +63,11 @@ export const SearchBarWrapper = styled.div`
 
 export const SearchBarInput = styled.input`
   border: none;
+  font-size: 1rem;
   outline: none;
   padding-left: 0.5rem;
   width: 90%;
   &::placeholder {
-    color: #c8c8c8;
+    color: var(--text-secondary);
   }
 `;

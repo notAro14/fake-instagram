@@ -1,6 +1,9 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  html {
+    --text-secondary: rgb(199,199,199)
+  }
   * {
     margin: 0;
     padding: 0;
