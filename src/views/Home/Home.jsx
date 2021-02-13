@@ -1,20 +1,13 @@
 import React from 'react';
-import { HomeWrapper, LeftWrapper, RightWrapper } from './Home.style';
+import { HomeWrapper } from './Home.style';
+import Aside from './Aside';
+import Main from './Main';
 
 const Home = () => {
   return (
     <HomeWrapper>
-      <LeftWrapper>HOME</LeftWrapper>
-      <RightWrapper>
-        <p>ASIDE</p>
-        <p>ASIDE</p>
-        <p>ASIDE</p>
-        <p>ASIDE</p>
-        <p>ASIDE</p>
-        <p>ASIDE</p>
-        <p>ASIDE</p>
-        <p>ASIDE</p>
-      </RightWrapper>
+      <Main />
+      <Aside />
     </HomeWrapper>
   );
 };

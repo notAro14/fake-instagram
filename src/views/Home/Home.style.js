@@ -5,7 +5,7 @@ export const HomeWrapper = styled.section`
   height: 100%;
 `;
 
-export const LeftWrapper = styled.main`
+export const MainWrapper = styled.main`
   background-color: dodgerblue;
   height: 100%;
   width: 60%;
@@ -15,7 +15,7 @@ export const LeftWrapper = styled.main`
   }
 `;
 
-export const RightWrapper = styled.aside`
+export const AsideWrapper = styled.aside`
   align-self: flex-start;
   background-color: green;
   height: auto;
@@ -23,7 +23,4 @@ export const RightWrapper = styled.aside`
   position: sticky;
   top: 66px;
   width: 40%;
-  @media (max-width: 1000px) {
-    display: none;
-  }
 `;
