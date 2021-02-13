@@ -20,7 +20,7 @@ module.exports = {
     // new CleanWebpackPlugin(),
     new ProgressPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Webpack Boilerplate for React',
+      title: 'Fake - Instagram',
       favicon: path.resolve(__dirname, '..', 'src', 'images', 'favicon.png'),
       template: path.resolve(__dirname, '..', 'src', 'template.html'),
       filename: 'index.html',
