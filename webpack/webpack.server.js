@@ -25,13 +25,15 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js'],
   },
-  plugins: [
-    new WebpackShellPluginNext({
-      onBuildEnd: {
-        scripts: ['nodemon dist/server'],
-        blocking: false,
-        parallel: true,
-      },
-    }),
-  ],
+  plugins: isDev
+    ? [
+        new WebpackShellPluginNext({
+          onBuildEnd: {
+            scripts: ['nodemon dist/server'],
+            blocking: false,
+            parallel: true,
+          },
+        }),
+      ]
+    : [],
 };
