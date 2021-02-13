@@ -7,7 +7,7 @@ export const Logo = styled.span`
   font-family: cursive;
 `;
 
-export const LogoContainer = styled(Link)`
+export const LogoWrapper = styled(Link)`
   display: flex;
   align-items: center;
 `;
@@ -15,7 +15,7 @@ export const LogoContainer = styled(Link)`
 export const NavbarWrapper = styled.nav`
   background-color: #fff;
   border-bottom: 1px solid #dbdbdb;
-  position: fixed;
+  position: sticky;
   padding: 1rem 0;
   width: 100%;
   top: 0;
@@ -27,11 +27,8 @@ export const NavbarContent = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  width: 60%;
-  @media (max-width: 1000px) {
-    width: 80%;
-  }
-  @media (max-width: 768px) {
+  width: 70%;
+  @media (max-width: 1200px) {
     width: 95%;
   }
 `;
@@ -45,11 +42,11 @@ export const NavLinks = styled.ul`
   }
 `;
 
-export const NavLinkContainer = styled.li`
+export const NavLinkWrapper = styled.li`
   font-size: 1.5rem;
 `;
 
-export const SearchBarContainer = styled.div`
+export const SearchBarWrapper = styled.div`
   align-items: center;
   display: flex;
   border: 1px solid #c8c8c8;

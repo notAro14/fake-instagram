@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLinkContainer } from './Navbar.style';
+import { NavLinkWrapper } from './Navbar.style';
 import Link from '../Link/Link.style';
 
 const NavLink = ({ children, to }) => {
   return (
-    <NavLinkContainer>
+    <NavLinkWrapper>
       <Link to={to}>{children}</Link>
-    </NavLinkContainer>
+    </NavLinkWrapper>
   );
 };
 

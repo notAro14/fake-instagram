@@ -1,13 +1,13 @@
 import React from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { SearchBarContainer, SearchBarInput } from './Navbar.style';
+import { SearchBarWrapper, SearchBarInput } from './Navbar.style';
 
 const SearchBar = () => {
   return (
-    <SearchBarContainer>
+    <SearchBarWrapper>
       <FiSearch />
       <SearchBarInput placeholder="Rechercher" />
-    </SearchBarContainer>
+    </SearchBarWrapper>
   );
 };
 

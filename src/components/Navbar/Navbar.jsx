@@ -4,25 +4,23 @@ import { FiSend } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
 import {
   Logo,
-  LogoContainer,
+  LogoWrapper,
   NavbarWrapper,
   NavbarContent,
   NavLinks,
 } from './Navbar.style';
 import NavLink from './NavLink';
 import SearchBar from './SearchBar';
+import logo from '../../images/logo.png';
 
 const Navbar = () => {
   return (
     <NavbarWrapper>
       <NavbarContent>
-        <LogoContainer to="/">
+        <LogoWrapper to="/">
           <Logo>Fake -</Logo>
-          <img
-            alt="Instagram"
-            src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
-          />
-        </LogoContainer>
+          <img alt="Instagram" src={logo} />
+        </LogoWrapper>
         <SearchBar />
         <NavLinks>
           <NavLink to="/">
