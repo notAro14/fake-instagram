@@ -45,6 +45,6 @@ mongoose
     );
   })
   // eslint-disable-next-line
-  .catch(error => console.error(error.message));
+  .catch(error => console.error(error));
 
 mongoose.set('useFindAndModify', false);
