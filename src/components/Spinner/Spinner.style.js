@@ -15,6 +15,6 @@ export const SpinnerOverlay = styled.div`
   border-top-color: grey;
   height: var(--size);
   margin: 0 auto;
-  margin-top: calc(50vh - 66px);
+  margin-top: calc(50vh - var(--navbar-height));
   width: var(--size);
 `;

@@ -14,7 +14,7 @@ export const LogoWrapper = styled(Link)`
 
 export const NavbarWrapper = styled.nav`
   background-color: #fff;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px solid var(--border-color);
   position: sticky;
   padding: 1rem 0;
   width: 100%;
