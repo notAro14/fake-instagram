@@ -7,6 +7,8 @@ export const GlobalStyle = createGlobalStyle`
     --bg-color: #fafafa;
     --navbar-height: 66px;
     --inter-post-space: 50px;
+    --primary-font: 'Montserrat';
+    --secondary-font: 'Dancing Script';
   }
   * {
     margin: 0;
@@ -15,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   body {
     background-color: var(--bg-color);
+    font-family: var(--primary-font);
   }
   ul {
     list-style-type: none

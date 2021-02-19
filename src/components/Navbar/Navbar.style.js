@@ -4,7 +4,7 @@ import Link from '../Link/Link.style';
 export const Logo = styled.span`
   color: red;
   font-weight: 900;
-  font-family: cursive;
+  font-family: var(--secondary-font), cursive;
 `;
 
 export const LogoWrapper = styled(Link)`
@@ -34,6 +34,7 @@ export const NavbarContent = styled.div`
 `;
 
 export const NavLinks = styled.ul`
+  align-items: center;
   display: flex;
   justify-content: space-around;
   width: 150px;

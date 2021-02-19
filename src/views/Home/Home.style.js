@@ -2,16 +2,16 @@ import styled from 'styled-components';
 
 export const HomeWrapper = styled.section`
   display: flex;
-  justify-content: space-between;
   height: 100%;
+  justify-content: space-between;
 `;
 
 export const MainWrapper = styled.main`
   height: 100%;
-  width: 60%;
   margin-top: 20px;
+  width: 60%;
   @media (max-width: 1000px) {
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
     width: 100%;
   }
 `;

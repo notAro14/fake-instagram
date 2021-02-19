@@ -1,7 +1,8 @@
 [
   {
     "_id": 1,
-    "creator": "Superman",
+    "creator_displayName": "Superman",
+    "creator_id": "super_man",
     "title": "I am the strongest",
     "description": "Protector of Metropolis",
     "hearts": "1542",
@@ -10,7 +11,8 @@
   },
   {
     "_id": 2,
-    "creator": "Batman",
+    "creator_displayName": "Batman",
+    "creator_id": "batman_",
     "title": "I am the night",
     "description": "The Gotham Knight",
     "hearts": "666",
