@@ -1,5 +1,11 @@
 import React from 'react';
-import { FiMoreHorizontal } from 'react-icons/fi';
+import { FiMoreHorizontal, FiMessageCircle, FiSend } from 'react-icons/fi';
+import {
+  BsHeart,
+  BsHeartFill,
+  BsBookmark,
+  BsBookmarkFill,
+} from 'react-icons/bs';
 import styled from 'styled-components';
 import { MainWrapper } from './Home.style';
 import postsJSON from '../../data/posts.json';
@@ -32,6 +38,10 @@ const CardUserAvatar = styled.div`
   border-radius: 100%;
   height: var(--temp);
   width: var(--temp);
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const CardUserName = styled.span`
@@ -62,6 +72,40 @@ const CardHeaderAction = styled.div`
   cursor: pointer;
 `;
 
+const CardMedia = styled.img`
+  background: lightgray;
+  width: 100%;
+`;
+
+const CardActions = styled.div`
+  align-items: center;
+  display: flex;
+  font-size: 1.75rem;
+  justify-content: space-between;
+  padding: 0.1rem 0;
+`;
+
+const CardAction = styled.span`
+  cursor: pointer;
+`;
+
+const CardContent = styled.div`
+  padding: 0.5rem 0.75rem;
+`;
+
+const CardLeftActions = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  width: 125px;
+`;
+
+const CardRightActions = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+`;
+
 const Main = () => {
   return (
     <MainWrapper>
@@ -71,16 +115,37 @@ const Main = () => {
             <CardHeaderContent>
               <CardUserAvatar />
               <CardUserName>
-                <Link to="/#">{post.creator_id}</Link>
+                <Link to="/#">{post.creatorId}</Link>
               </CardUserName>
             </CardHeaderContent>
             <CardHeaderAction>
               <FiMoreHorizontal />
             </CardHeaderAction>
           </CardHeader>
-          <div>Media</div>
-          <div>Content</div>
-          <div>Footer</div>
+          <CardMedia alt={post.creatorDisplayName} src={post.image} />
+          <CardContent>
+            <CardActions>
+              <CardLeftActions>
+                <CardAction>
+                  {post.liked ? <BsHeartFill /> : <BsHeart />}
+                </CardAction>
+                <CardAction>
+                  <FiMessageCircle />
+                </CardAction>
+                <CardAction>
+                  <FiSend />
+                </CardAction>
+              </CardLeftActions>
+              <CardRightActions>
+                <CardAction>
+                  {post.bookmarked ? <BsBookmarkFill /> : <BsBookmark />}
+                </CardAction>
+              </CardRightActions>
+            </CardActions>
+            <div>Content</div>
+            <div>Comments</div>
+          </CardContent>
+          <div>My Comment</div>
         </CardWrapper>
       ))}
     </MainWrapper>

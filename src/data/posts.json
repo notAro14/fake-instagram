@@ -1,22 +1,38 @@
 [
   {
     "_id": 1,
-    "creator_displayName": "Superman",
-    "creator_id": "super_man",
+    "creatorDisplayName": "Superman",
+    "creatorId": "super_man",
     "title": "I am the strongest",
     "description": "Protector of Metropolis",
     "hearts": "1542",
     "createdAt": "",
-    "image": ""
+    "liked": true,
+    "bookmarked": false,
+    "image": "https://images.unsplash.com/photo-1559107503-521c2b36b98d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
   },
   {
     "_id": 2,
-    "creator_displayName": "Batman",
-    "creator_id": "batman_",
+    "creatorDisplayName": "Batman",
+    "creatorId": "batman_",
     "title": "I am the night",
     "description": "The Gotham Knight",
     "hearts": "666",
+    "liked": true,
+    "bookmarked": true,
     "createdAt": "",
-    "image": ""
+    "image": "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+  },
+  {
+    "_id": 3,
+    "creatorDisplayName": "Aquaman",
+    "creatorId": "akwa-man",
+    "title": "Protect Martha",
+    "description": "My mama name is Martha",
+    "hearts": "14",
+    "liked": false,
+    "bookmarked": false,
+    "createdAt": "",
+    "image": "https://images.unsplash.com/photo-1559107749-09d30cc1d9bd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
   }
 ]
