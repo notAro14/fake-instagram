@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiOutlineSmile } from 'react-icons/ai';
 import { FiMoreHorizontal, FiMessageCircle, FiSend } from 'react-icons/fi';
 import {
   BsHeart,
@@ -47,27 +48,6 @@ const CardUserAvatar = styled.div`
 const CardUserName = styled.span`
   font-size: 0.95rem;
   margin-left: 0.85rem;
-  ${Link} {
-    position: relative;
-    &::before {
-      background: currentColor;
-      content: '';
-      height: 2px;
-      left: 0;
-      position: absolute;
-      top: 120%;
-      transform: scale3d(0, 1, 1);
-      transform-origin: right center;
-      transition: transform 250ms;
-      transition-timing-function: ease-out;
-      width: 100%;
-    }
-    &:hover::before {
-      transform: scale3d(1, 1, 1);
-      transform-origin: left center;
-      transition-timing-function: ease-in;
-    }
-  }
 `;
 
 const CardHeaderAction = styled.div`
@@ -98,7 +78,7 @@ const CardContent = styled.div`
 const CardLeftActions = styled.div`
   align-items: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 125px;
 `;
 
@@ -107,6 +87,117 @@ const CardRightActions = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+const ProfileLink = styled(Link)`
+  font-size: 0.9rem;
+  font-weight: 900;
+  position: relative;
+  &::before {
+    background: currentColor;
+    content: '';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    top: 100%;
+    transform: scale3d(0, 1, 1);
+    transform-origin: right center;
+    transition: transform 250ms;
+    transition-timing-function: ease-out;
+    width: 100%;
+  }
+  &:hover::before {
+    transform: scale3d(1, 1, 1);
+    transform-origin: left center;
+    transition-timing-function: ease-in;
+  }
+`;
+
+const Likes = styled.p`
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+`;
+
+const CardInfo = styled.div`
+  padding: 0.75rem 0;
+`;
+
+const Description = styled.span`
+  font-size: 0.8rem;
+`;
+
+const Comment = styled.div`
+  padding-bottom: 0.2rem;
+`;
+
+const Comments = styled.div``;
+
+const MyComment = styled.div`
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  padding: 0.75rem 0;
+  width: 100%;
+`;
+
+const Emoji = styled(AiOutlineSmile)`
+  font-size: 2rem;
+  padding: 0 0.5rem;
+  width: auto;
+`;
+
+const MyCommentForm = styled.form`
+  align-items: center;
+  display: flex;
+  width: 95%;
+`;
+
+const MyCommentInput = styled.input`
+  border: none;
+  font-size: 0.8rem;
+  outline: none;
+  padding: 0 1rem;
+  width: 100%;
+  &::placeholder {
+    color: var(--text-secondary);
+  }
+`;
+
+const MyCommentSubmitBtn = styled.button`
+  background-color: inherit;
+  border: none;
+  color: dodgerblue;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0 0.5rem;
+  &:disabled {
+    opacity: 0.3;
+  }
+`;
+
+const PublishComment = () => {
+  const [input, setInput] = React.useState('');
+  const onInputChange = evt => setInput(evt.target.value);
+  return (
+    <MyComment>
+      <Emoji />
+      <MyCommentForm>
+        <MyCommentInput
+          placeholder="Add a comment..."
+          id="my-comment"
+          name="my-comment"
+          type="text"
+          onChange={onInputChange}
+          value={input}
+        />
+        <MyCommentSubmitBtn disabled={input.length === 0} type="submit">
+          Publish
+        </MyCommentSubmitBtn>
+      </MyCommentForm>
+    </MyComment>
+  );
+};
 
 const Main = () => {
   return (
@@ -117,7 +208,7 @@ const Main = () => {
             <CardHeaderContent>
               <CardUserAvatar />
               <CardUserName>
-                <Link to="/#">{post.creatorId}</Link>
+                <ProfileLink to="/#">{post.creatorId}</ProfileLink>
               </CardUserName>
             </CardHeaderContent>
             <CardHeaderAction>
@@ -144,10 +235,23 @@ const Main = () => {
                 </CardAction>
               </CardRightActions>
             </CardActions>
-            <div>Content</div>
-            <div>Comments</div>
+            <CardInfo>
+              <Likes>
+                {`${post.hearts} Like${post.hearts > 1 ? 's' : ''}`}
+              </Likes>
+              <ProfileLink to="/#">{post.creatorId}</ProfileLink>{' '}
+              <Description>{post.description}</Description>
+            </CardInfo>
+            <Comments>
+              {post.comments.map(comment => (
+                <Comment key={comment._id}>
+                  <ProfileLink to="/#">{comment.profileId}</ProfileLink>{' '}
+                  <Description>{comment.comment}</Description>
+                </Comment>
+              ))}
+            </Comments>
           </CardContent>
-          <div>My Comment</div>
+          <PublishComment />
         </CardWrapper>
       ))}
     </MainWrapper>
