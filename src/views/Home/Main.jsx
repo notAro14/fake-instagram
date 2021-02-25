@@ -50,20 +50,22 @@ const CardUserName = styled.span`
   ${Link} {
     position: relative;
     &::before {
-      bottom: 0;
       background: currentColor;
       content: '';
-      height: 1px;
+      height: 2px;
       left: 0;
       position: absolute;
+      top: 120%;
       transform: scale3d(0, 1, 1);
       transform-origin: right center;
-      transition: transform 0.3s;
+      transition: transform 250ms;
+      transition-timing-function: ease-out;
       width: 100%;
     }
     &:hover::before {
       transform: scale3d(1, 1, 1);
       transform-origin: left center;
+      transition-timing-function: ease-in;
     }
   }
 `;
