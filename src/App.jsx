@@ -1,31 +1,31 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
+import loadable from '@loadable/component';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Layout from '~modules/common/Layout';
+import Spinner from '~modules/common/Spinner';
 
-import Loading from './components/Loading/Loading';
-import Layout from './components/Layout/Layout';
-
-const HomePage = lazy(() =>
-  import(/* webpackChunkName: "HomePage" */ './views/HomePage')
+const Feed = loadable(() =>
+  import(/* webpackChunkName: "Feed" */ '~modules/Feed')
 );
-const InstallationPage = lazy(() =>
-  import(/* webpackChunkName: "InstallationPage" */ './views/InstallationPage')
-);
-const NotFoundPage = lazy(() =>
-  import(/* webpackChunkName: "NotFoundPage" */ './views/NotFoundPage')
+const FourOFour = loadable(() =>
+  import(/* webpackChunkName: "FourOFour" */ '~modules/FourOFour')
 );
 
-export default () => {
+const App = () => {
   return (
     <Router>
       <Layout>
-        <Suspense fallback={<Loading />}>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/installation" component={InstallationPage} />
-            <Route component={NotFoundPage} />
-          </Switch>
-        </Suspense>
+        <Switch>
+          <Route exact path="/">
+            <Feed fallback={<Spinner />} />
+          </Route>
+          <Route>
+            <FourOFour fallback={<Spinner />} />
+          </Route>
+        </Switch>
       </Layout>
     </Router>
   );
 };
+
+export default App;

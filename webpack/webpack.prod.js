@@ -35,10 +35,11 @@ module.exports = () => {
       moduleIds: 'deterministic',
       splitChunks: {
         cacheGroups: {
-          vendors: {
+          defaultVendors: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
-            chunks: 'all',
+            chunks: 'initial',
+            reuseExistingChunk: true,
           },
         },
       },

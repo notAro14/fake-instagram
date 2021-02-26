@@ -20,9 +20,16 @@ module.exports = {
     // new CleanWebpackPlugin(),
     new ProgressPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Webpack Boilerplate for React',
-      favicon: path.resolve(__dirname, '..', 'src', 'images', 'favicon.png'),
-      template: path.resolve(__dirname, '..', 'src', 'template.html'),
+      title: 'Fake - Instagram',
+      favicon: path.resolve(
+        __dirname,
+        '..',
+        'src',
+        'public',
+        'images',
+        'favicon.png'
+      ),
+      template: path.resolve(__dirname, '..', 'src', 'public', 'template.html'),
       filename: 'index.html',
       alwaysWriteToDisk: true,
     }),
@@ -50,6 +57,11 @@ module.exports = {
     maxAssetSize: 512000,
   },
   resolve: {
+    alias: {
+      '~modules': path.resolve(__dirname, '..', 'src', 'modules'),
+      '~public': path.resolve(__dirname, '..', 'src', 'public'),
+      '~data': path.resolve(__dirname, '..', 'src', 'data'),
+    },
     extensions: ['*', '.js', '.jsx'],
   },
 };

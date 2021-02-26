@@ -9,7 +9,6 @@
     "airbnb",
     "airbnb/hooks",
     "prettier",
-    "prettier/react",
     "plugin:jest/recommended",
     "plugin:jest/style"
   ],
@@ -29,6 +28,8 @@
     "jest/valid-expect": "error",
     "arrow-body-style": "off",
     "react/jsx-props-no-spreading": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
     "import/prefer-default-export": "off",
     "no-underscore-dangle": "off"
   }
