@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import naruto from 'animexyz';
 import { useLocation } from 'react-router-dom';
-import { HomeWrapper } from './Home.style';
+import { HomeWrapper } from '../style/Feed.style';
 import Aside from './Aside';
 import Main from './Main';
 

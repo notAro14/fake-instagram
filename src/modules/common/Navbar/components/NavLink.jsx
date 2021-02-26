@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLinkWrapper } from './Navbar.style';
-import Link from '../Link/Link.style';
+import { NavLinkWrapper } from '../style/Navbar.style';
+import Link from '../../Link';
 
 const NavLink = ({ children, to }) => {
   return (

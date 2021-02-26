@@ -1,6 +1,6 @@
 import React from 'react';
-import { AsideWrapper } from './Home.style';
-import useMediaQuery from '../../hooks/useMediaQuery';
+import { AsideWrapper } from '../style/Feed.style';
+import useMediaQuery from '../../common/hooks/useMediaQuery';
 
 const Aside = () => {
   const isPage1000px = useMediaQuery('(max-width: 1000px');

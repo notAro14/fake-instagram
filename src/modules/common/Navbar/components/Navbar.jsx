@@ -8,10 +8,10 @@ import {
   NavbarWrapper,
   NavbarContent,
   NavLinks,
-} from './Navbar.style';
+} from '../style/Navbar.style';
 import NavLink from './NavLink';
 import SearchBar from './SearchBar';
-import logo from '../../images/logo.png';
+import logo from '../../../../public/images/logo.png';
 
 const Navbar = () => {
   return (

@@ -1,16 +1,16 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Layout from './components/Layout/Layout';
-import Spinner from './components/Spinner/Spinner';
+import Layout from './modules/common/Layout';
+import Spinner from './modules/common/Spinner';
 // import Home from './views/Home/Home';
 // import NotFound from './views/NotFound/NotFound';
 
-const Home = lazy(() =>
-  import(/* webpackChunkName: "Home" */ './views/Home/Home')
+const Feed = lazy(() =>
+  import(/* webpackChunkName: "Feed" */ './modules/Feed')
 );
 
-const NotFound = lazy(() =>
-  import(/* webpackChunkName: "NotFound" */ './views/NotFound/NotFound')
+const FourOFour = lazy(() =>
+  import(/* webpackChunkName: "FourOFour" */ './modules/FourOFour')
 );
 
 const App = () => {
@@ -19,8 +19,8 @@ const App = () => {
       <Layout>
         <Suspense fallback={<Spinner />}>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route component={NotFound} />
+            <Route exact path="/" component={Feed} />
+            <Route component={FourOFour} />
           </Switch>
         </Suspense>
       </Layout>

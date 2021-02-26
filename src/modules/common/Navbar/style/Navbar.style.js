@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Link from '../Link/Link.style';
+import Link from '../../Link';
 
 export const Logo = styled.span`
   color: red;

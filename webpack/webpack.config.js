@@ -21,8 +21,15 @@ module.exports = {
     new ProgressPlugin(),
     new HtmlWebpackPlugin({
       title: 'Fake - Instagram',
-      favicon: path.resolve(__dirname, '..', 'src', 'images', 'favicon.png'),
-      template: path.resolve(__dirname, '..', 'src', 'template.html'),
+      favicon: path.resolve(
+        __dirname,
+        '..',
+        'src',
+        'public',
+        'images',
+        'favicon.png'
+      ),
+      template: path.resolve(__dirname, '..', 'src', 'public', 'template.html'),
       filename: 'index.html',
       alwaysWriteToDisk: true,
     }),
