@@ -8,9 +8,9 @@ import {
   BsBookmarkFill,
 } from 'react-icons/bs';
 import styled from 'styled-components';
+import postsJSON from '~data/posts.json';
+import Link from '~modules/common/Link';
 import { MainWrapper } from '../style/Feed.style';
-import postsJSON from '../../../data/posts.json';
-import Link from '../../common/Link';
 
 const CardWrapper = styled.div`
   background-color: white;

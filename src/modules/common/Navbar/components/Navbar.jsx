@@ -2,6 +2,7 @@ import React from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FiSend } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
+import logo from '~public/images/logo.png';
 import {
   Logo,
   LogoWrapper,
@@ -11,7 +12,6 @@ import {
 } from '../style/Navbar.style';
 import NavLink from './NavLink';
 import SearchBar from './SearchBar';
-import logo from '../../../../public/images/logo.png';
 
 const Navbar = () => {
   return (

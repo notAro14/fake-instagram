@@ -57,6 +57,11 @@ module.exports = {
     maxAssetSize: 512000,
   },
   resolve: {
+    alias: {
+      '~modules': path.resolve(__dirname, '..', 'src', 'modules'),
+      '~public': path.resolve(__dirname, '..', 'src', 'public'),
+      '~data': path.resolve(__dirname, '..', 'src', 'data'),
+    },
     extensions: ['*', '.js', '.jsx'],
   },
 };

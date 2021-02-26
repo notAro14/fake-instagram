@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Navbar from '../../Navbar';
+import Navbar from '~modules/common/Navbar';
 import { GlobalStyle, LayoutWrapper } from '../style/Layout.style';
 
 const Layout = ({ children }) => {
