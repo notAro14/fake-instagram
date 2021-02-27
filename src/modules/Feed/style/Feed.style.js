@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import 'emoji-mart/css/emoji-mart.css';
 
 export const FeedWrapper = styled.section`
   display: flex;

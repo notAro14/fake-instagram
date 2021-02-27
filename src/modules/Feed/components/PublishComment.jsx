@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   MyComment,
   MyCommentForm,
@@ -6,13 +6,33 @@ import {
   MyCommentSubmitBtn,
   Emoji,
 } from '../style/PublishComment.style';
+import EmojiPicker from './EmojiPicker';
+import useEmojiPicker from '../hooks/useEmojiPicker';
 
 const PublishComment = () => {
-  const [input, setInput] = React.useState('');
+  const [input, setInput] = useState('');
+  const inputRef = useRef();
   const onInputChange = evt => setInput(evt.target.value);
+  const onEmojiSelected = emoji => {
+    setInput(prev => prev + emoji.native);
+    inputRef.current.focus();
+  };
+
+  const {
+    isEmojiPickerOpen,
+    onEmojiSelection,
+    closeEmojiPicker,
+    openEmojiPicker,
+  } = useEmojiPicker(onEmojiSelected);
+
   return (
     <MyComment>
-      <Emoji />
+      <EmojiPicker
+        isEmojiPickerOpen={isEmojiPickerOpen}
+        closeEmojiPicker={closeEmojiPicker}
+        onEmojiSelection={onEmojiSelection}
+      />
+      <Emoji onClick={openEmojiPicker} />
       <MyCommentForm>
         <MyCommentInput
           placeholder="Add a comment..."
@@ -21,6 +41,7 @@ const PublishComment = () => {
           type="text"
           onChange={onInputChange}
           value={input}
+          ref={inputRef}
         />
         <MyCommentSubmitBtn disabled={input.length === 0} type="submit">
           Publish

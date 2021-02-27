@@ -10,6 +10,7 @@ export const MyComment = styled.div`
 `;
 
 export const Emoji = styled(AiOutlineSmile)`
+  cursor: pointer;
   font-size: 2rem;
   padding: 0 0.5rem;
   width: auto;
