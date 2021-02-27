@@ -59,7 +59,13 @@ const Card = ({
       <CardContent>
         <CardActions>
           <CardLeftActions>
-            <CardAction>{liked ? <BsHeartFill /> : <BsHeart />}</CardAction>
+            <CardAction>
+              {liked ? (
+                <BsHeartFill style={{ color: 'tomato' }} />
+              ) : (
+                <BsHeart />
+              )}
+            </CardAction>
             <CardAction>
               <FiMessageCircle />
             </CardAction>
