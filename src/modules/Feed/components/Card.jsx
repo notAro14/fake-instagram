@@ -75,7 +75,11 @@ const Card = ({
           </CardLeftActions>
           <CardRightActions>
             <CardAction>
-              {bookmarked ? <BsBookmarkFill /> : <BsBookmark />}
+              {bookmarked ? (
+                <BsBookmarkFill style={{ color: 'dodgerblue' }} />
+              ) : (
+                <BsBookmark />
+              )}
             </CardAction>
           </CardRightActions>
         </CardActions>
