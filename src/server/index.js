@@ -1,6 +1,5 @@
 import path from 'path';
 import express from 'express';
-import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
@@ -16,7 +15,6 @@ const CONNECTION_URL = process.env.MONGO_DB_URI;
 // middlewares
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 app.use(express.json({ limit: '30mb' }));
-app.use(cors());
 
 // routes
 app.use('/api/posts', postsRoutes);
