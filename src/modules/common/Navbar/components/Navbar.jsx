@@ -1,6 +1,5 @@
 import React from 'react';
 import { AiFillHome } from 'react-icons/ai';
-import { FiSend } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
 import logo from '~public/images/logo.png';
 import {
@@ -26,9 +25,9 @@ const Navbar = () => {
           <NavLink to="/">
             <AiFillHome />
           </NavLink>
-          <NavLink to="/messages">
+          {/* <NavLink to="/messages">
             <FiSend />
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/profile">
             <CgProfile />
           </NavLink>

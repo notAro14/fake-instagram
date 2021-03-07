@@ -66,7 +66,7 @@ export const CardContent = styled.div`
 export const CardLeftActions = styled.div`
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 125px;
 `;
 

@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FiMoreHorizontal, FiMessageCircle, FiSend } from 'react-icons/fi';
-import {
-  BsHeart,
-  BsHeartFill,
-  BsBookmark,
-  BsBookmarkFill,
-} from 'react-icons/bs';
+import { FiMoreHorizontal, FiMessageCircle } from 'react-icons/fi';
+import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import {
   CardAction,
   CardActions,
@@ -17,7 +12,6 @@ import {
   CardInfo,
   CardLeftActions,
   CardMedia,
-  CardRightActions,
   CardUserAvatar,
   CardUserName,
   CardWrapper,
@@ -36,7 +30,6 @@ const Card = ({
     creatorId = 0,
     image = '',
     liked = false,
-    bookmarked = false,
     description = '',
     hearts = 0,
     comments = [],
@@ -69,11 +62,11 @@ const Card = ({
             <CardAction>
               <FiMessageCircle />
             </CardAction>
-            <CardAction>
+            {/* <CardAction>
               <FiSend />
-            </CardAction>
+            </CardAction> */}
           </CardLeftActions>
-          <CardRightActions>
+          {/* <CardRightActions>
             <CardAction>
               {bookmarked ? (
                 <BsBookmarkFill style={{ color: 'dodgerblue' }} />
@@ -81,7 +74,7 @@ const Card = ({
                 <BsBookmark />
               )}
             </CardAction>
-          </CardRightActions>
+          </CardRightActions> */}
         </CardActions>
         <CardInfo>
           <Likes>{`${hearts} Like${hearts > 1 ? 's' : ''}`}</Likes>
