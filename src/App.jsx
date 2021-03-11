@@ -1,14 +1,14 @@
 import React from 'react';
 import loadable from '@loadable/component';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Layout from '~modules/common/Layout';
-import Spinner from '~modules/common/Spinner';
+import Layout from '~components/Layout';
+import Spinner from '~components/common/Spinner';
 
 const Feed = loadable(() =>
-  import(/* webpackChunkName: "Feed" */ '~modules/Feed')
+  import(/* webpackChunkName: "Feed" */ '~components/Feed')
 );
 const FourOFour = loadable(() =>
-  import(/* webpackChunkName: "FourOFour" */ '~modules/FourOFour')
+  import(/* webpackChunkName: "FourOFour" */ '~components/FourOFour')
 );
 
 const App = () => {
