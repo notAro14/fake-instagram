@@ -10,7 +10,9 @@ dotenv.config();
 const isDev = process.env.NODE_ENV === 'development';
 const PORT = process.env.PORT || 4001;
 const app = express();
-const CONNECTION_URL = process.env.MONGO_DB_URI;
+const CONNECTION_URL = isDev
+  ? process.env.MONGO_DB_URI_LOCAL
+  : process.env.MONGO_DB_URI;
 
 // middlewares
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
