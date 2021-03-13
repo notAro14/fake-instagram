@@ -4,6 +4,7 @@ const path = require('path');
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { ProgressPlugin } = require('webpack');
 
 module.exports = {
@@ -21,19 +22,16 @@ module.exports = {
     new ProgressPlugin(),
     new HtmlWebpackPlugin({
       title: 'Fake - Instagram',
-      favicon: path.resolve(
-        __dirname,
-        '..',
-        'src',
-        'public',
-        'images',
-        'favicon.png'
-      ),
       template: path.resolve(__dirname, '..', 'src', 'public', 'template.html'),
       filename: 'index.html',
       alwaysWriteToDisk: true,
     }),
     new HtmlWebpackHarddiskPlugin(),
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, '..', 'src', 'public', 'favicon') },
+      ],
+    }),
   ],
   module: {
     rules: [
