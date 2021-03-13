@@ -36,7 +36,6 @@ const MyComment = () => {
       <MyCommentForm>
         <MyCommentInput
           placeholder="Add a comment..."
-          id="my-comment"
           name="my-comment"
           type="text"
           onChange={onInputChange}
