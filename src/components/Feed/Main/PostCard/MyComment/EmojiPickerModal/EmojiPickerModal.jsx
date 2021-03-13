@@ -5,7 +5,7 @@ import loadable from '@loadable/component';
 import Spinner from '~components/common/Spinner';
 
 const EmojiPicker = loadable(() =>
-  import(/* webpackChunkName: "EmojiPickerCore" */ './EmojiPicker')
+  import(/* webpackChunkName: "EmojiPicker" */ './EmojiPicker')
 );
 
 ReactModal.setAppElement('#root');
