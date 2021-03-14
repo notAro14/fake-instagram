@@ -2,9 +2,9 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   html {
-    --text-secondary: rgb(199,199,199);
-    --border-color: #dbdbdb;
-    --bg-color: #fafafa;
+    --text-secondary: hsl(0deg 0% 78%);
+    --border-color: hsl(0deg 0% 86%);
+    --bg-color: hsl(0deg 0% 98%);
     --navbar-height: 66px;
     --inter-post-space: 50px;
     --primary-font: 'Montserrat';
