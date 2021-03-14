@@ -32,6 +32,14 @@ const ProfileDisplayName = styled.p`
   font-size: 0.8rem;
 `;
 
+const Footer = styled.footer`
+  color: var(--text-secondary);
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+`;
+
 const ProfileUserName = styled(Link)`
   font-weight: 700;
 `;
@@ -53,6 +61,12 @@ const Aside = () => {
           <ProfileDisplayName>Display Name</ProfileDisplayName>
         </ProfileName>
       </ProfileCard>
+      <Footer>
+        <p>{`@${new Date().getFullYear()} INSTAGRAM CLONE`}</p>
+        <p>
+          By <a href="https://github.com/notAro14">notAro14</a>
+        </p>
+      </Footer>
     </AsideWrapper>
   );
 };
