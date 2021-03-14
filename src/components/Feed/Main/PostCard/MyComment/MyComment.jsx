@@ -33,7 +33,12 @@ const MyComment = forwardRef((props, ref) => {
         onEmojiSelection={onEmojiSelection}
       />
       <OpenEmojiPickerModal onClick={openEmojiPicker} />
-      <MyCommentForm>
+      <MyCommentForm
+        onSubmit={evt => {
+          evt.preventDefault();
+          setInput('');
+        }}
+      >
         <MyCommentInput
           placeholder="Add a comment..."
           name="my-comment"

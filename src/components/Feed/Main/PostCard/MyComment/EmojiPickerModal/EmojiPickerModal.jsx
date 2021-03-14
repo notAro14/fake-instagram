@@ -1,32 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactModal from 'react-modal';
 import loadable from '@loadable/component';
 import Spinner from '~components/common/Spinner';
+import Modal from '~components/common/Modal';
 
 const EmojiPicker = loadable(() =>
   import(/* webpackChunkName: "EmojiPicker" */ './EmojiPicker')
 );
-
-ReactModal.setAppElement('#root');
-ReactModal.defaultStyles = {
-  overlay: {
-    position: 'fixed',
-    top: 'var(--navbar-height)',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(3, 3, 3, 0.5)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  content: {
-    WebkitOverflowScrolling: 'touch',
-    borderRadius: '5px',
-    outline: 'none',
-  },
-};
 
 const EmojiPickerModal = ({
   onEmojiSelection,
@@ -34,17 +14,13 @@ const EmojiPickerModal = ({
   closeEmojiPicker,
 }) => {
   return (
-    <ReactModal
-      isOpen={isEmojiPickerOpen}
-      shouldCloseOnOverlayClick
-      onRequestClose={closeEmojiPicker}
-    >
+    <Modal isOpen={isEmojiPickerOpen} onClose={closeEmojiPicker}>
       <EmojiPicker
         fallback={<Spinner />}
         onEmojiSelection={onEmojiSelection}
         closeEmojiPicker={closeEmojiPicker}
       />
-    </ReactModal>
+    </Modal>
   );
 };
 

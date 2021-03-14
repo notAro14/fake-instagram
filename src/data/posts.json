@@ -1,18 +1,7 @@
 [
   {
     "_id": 1,
-    "comments": [
-      {
-        "_id": 1,
-        "comment": "HAHAHA SIMPLE MAN",
-        "profileId": "akwa-man"
-      },
-      {
-        "_id": 2,
-        "comment": "Oh my Gosh",
-        "profileId": "wonder1984"
-      }
-    ],
+    "comments": [],
     "createdAt": "",
     "creatorDisplayName": "Superman",
     "creatorId": "super_man",
@@ -24,18 +13,6 @@
   },
   {
     "_id": 2,
-    "comments": [
-      {
-        "_id": 1,
-        "comment": "HAHAHA SIMPLE MAN",
-        "profileId": "akwa-man"
-      },
-      {
-        "_id": 2,
-        "comment": "Oh my Gosh",
-        "profileId": "wonder1984"
-      }
-    ],
     "createdAt": "",
     "creatorDisplayName": "Batman",
     "creatorId": "batman_",
@@ -48,11 +25,6 @@
   {
     "_id": 3,
     "comments": [
-      {
-        "_id": 1,
-        "comment": "HAHAHA SIMPLE MAN",
-        "profileId": "akwa-man"
-      },
       {
         "_id": 2,
         "comment": "Oh my Gosh",

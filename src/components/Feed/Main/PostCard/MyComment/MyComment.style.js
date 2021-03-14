@@ -40,6 +40,7 @@ export const MyCommentSubmitBtn = styled.button`
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: 700;
+  outline: none;
   padding: 0 0.5rem;
   &:disabled {
     opacity: 0.3;
