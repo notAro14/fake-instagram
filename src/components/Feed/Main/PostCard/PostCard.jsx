@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import { FiMoreHorizontal, FiMessageCircle } from 'react-icons/fi';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
@@ -35,6 +35,7 @@ const Card = ({
     comments = [],
   },
 }) => {
+  const commentRef = createRef();
   return (
     <CardWrapper key={_id}>
       <CardHeader>
@@ -59,7 +60,11 @@ const Card = ({
                 <BsHeart />
               )}
             </CardAction>
-            <CardAction>
+            <CardAction
+              onClick={() => {
+                commentRef.current.focus();
+              }}
+            >
               <FiMessageCircle />
             </CardAction>
           </CardLeftActions>
@@ -78,7 +83,7 @@ const Card = ({
           ))}
         </Comments>
       </CardContent>
-      <MyComment />
+      <MyComment ref={commentRef} />
     </CardWrapper>
   );
 };

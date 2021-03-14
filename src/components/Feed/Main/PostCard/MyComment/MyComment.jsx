@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, forwardRef } from 'react';
 import {
   MyCommentWrapper,
   MyCommentForm,
@@ -9,9 +9,9 @@ import {
 import EmojiPickerModal from './EmojiPickerModal';
 import useEmojiPicker from './useEmojiPicker';
 
-const MyComment = () => {
+const MyComment = forwardRef((props, ref) => {
   const [input, setInput] = useState('');
-  const inputRef = useRef();
+  const inputRef = ref;
   const onInputChange = evt => setInput(evt.target.value);
   const onEmojiSelected = emoji => {
     setInput(prev => prev + emoji.native);
@@ -48,6 +48,6 @@ const MyComment = () => {
       </MyCommentForm>
     </MyCommentWrapper>
   );
-};
+});
 
 export default MyComment;
