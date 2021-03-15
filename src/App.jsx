@@ -10,6 +10,9 @@ const Feed = loadable(() =>
 const FourOFour = loadable(() =>
   import(/* webpackChunkName: "FourOFour" */ '~components/FourOFour')
 );
+const PublishPost = loadable(() =>
+  import(/* webpackChunkName: "PublishPost" */ '~components/PublishPost')
+);
 
 const App = () => {
   return (
@@ -18,6 +21,9 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <Feed fallback={<Spinner />} />
+          </Route>
+          <Route exact path="/publish">
+            <PublishPost fallback={<Spinner />} />
           </Route>
           <Route>
             <FourOFour fallback={<Spinner />} />

@@ -36,7 +36,7 @@ export const MyCommentInput = styled.input`
 export const MyCommentSubmitBtn = styled.button`
   background-color: inherit;
   border: none;
-  color: dodgerblue;
+  color: var(--bg-color-btn);
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: 700;

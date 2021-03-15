@@ -12,7 +12,7 @@ const navLinks = [
     icon: <AiFillHome />,
   },
   {
-    to: '#',
+    to: '/publish',
     key: 'publish',
     icon: <MdPhotoCamera />,
   },
