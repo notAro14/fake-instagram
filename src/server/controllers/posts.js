@@ -27,6 +27,25 @@ export const getOnePost = (req, res) => {
   );
 };
 
+export const updatePost = async (req, res) => {
+  const {
+    params: { _id },
+  } = req;
+  const { title, description } = req.body;
+  if (!_id) {
+    res.status(400).json({
+      data: [],
+      error: { name: 'InvalidSyntax', message: 'Id is invalid' },
+    });
+    return;
+  }
+  const post = await Post.findOne({ _id });
+  post.title = title;
+  post.description = description;
+  const postUpdated = await post.save();
+  res.status(200).json({ data: [postUpdated], error: null });
+};
+
 export const getPosts = async (req, res) => {
   try {
     const posts = await Post.find();
