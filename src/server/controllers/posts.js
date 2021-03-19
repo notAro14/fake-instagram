@@ -39,11 +39,19 @@ export const updatePost = async (req, res) => {
     });
     return;
   }
-  const post = await Post.findOne({ _id });
-  post.title = title;
-  post.description = description;
-  const postUpdated = await post.save();
-  res.status(200).json({ data: [postUpdated], error: null });
+  try {
+    const post = await Post.findOneAndUpdate(
+      { _id },
+      { title, description },
+      { new: true }
+    );
+    res.status(200).json({ data: [post], error: null });
+  } catch (error) {
+    const {
+      reason: { name, message },
+    } = error;
+    res.status(404).json({ data: [], error: { name, message } });
+  }
 };
 
 export const getPosts = async (req, res) => {
@@ -72,4 +80,17 @@ export const createPost = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error });
   }
+};
+
+export const deletePost = async (req, res) => {
+  const {
+    params: { _id },
+  } = req;
+  Post.deleteOne({ _id })
+    .then(postDeleted =>
+      res.status(200).json({ data: [postDeleted], error: null })
+    )
+    .catch(({ reason: { name, message } }) =>
+      res.status(500).json({ data: [], error: { name, message } })
+    );
 };
