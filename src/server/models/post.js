@@ -4,7 +4,7 @@ const { Schema, model } = mongoose;
 
 const postSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
-  creatorId: { type: String, required: true },
+  userId: { type: String, required: true },
   description: { type: String, required: true },
   hearts: { type: Number, default: 0 },
   image: String,
