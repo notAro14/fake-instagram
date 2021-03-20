@@ -3,12 +3,15 @@ import Post from '../models/post';
 export const updatePost = async (req, res) => {
   const { _id } = req.params;
   const { title, description } = req.body;
+  if (!title || !description) {
+    res.status(400).json('Title and/or description can not be empty value');
+    return;
+  }
   try {
-    const savedPost = await Post.findOneAndUpdate(
-      { _id },
-      { title, description },
-      { new: true }
-    ).exec();
+    const post = await Post.findById(_id).exec();
+    if (post.title !== title) post.title = title;
+    if (post.description !== description) post.description = description;
+    const savedPost = await post.save();
     res.json(savedPost);
   } catch (err) {
     res.status(500).json(err);
