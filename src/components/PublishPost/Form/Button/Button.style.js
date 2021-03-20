@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SubmitButtonWrapper = styled.button`
+const Button = styled.button`
   width: 100%;
   border: none;
   border-radius: 5px;
@@ -11,3 +11,5 @@ export const SubmitButtonWrapper = styled.button`
   font-weight: 700;
   margin-top: 10px;
 `;
+
+export default Button;

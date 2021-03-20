@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PublishPostWrapper = styled.form`
+export const PublishPostWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border-color);

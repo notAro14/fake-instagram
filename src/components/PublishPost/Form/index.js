@@ -1,3 +1,3 @@
-export { default } from './Form';
+export { default } from './Form.style';
 export { default as TextField } from './TextField';
-export { default as SubmitButton } from './SubmitButton';
+export { default as Button } from './Button';

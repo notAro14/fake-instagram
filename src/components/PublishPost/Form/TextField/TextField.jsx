@@ -24,7 +24,8 @@ TextField.defaultProps = {
 
 TextField.propTypes = {
   name: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+    .isRequired,
   placeholder: PropTypes.string,
   required: PropTypes.bool.isRequired,
 };
