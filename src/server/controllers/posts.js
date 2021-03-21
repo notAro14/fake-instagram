@@ -12,21 +12,21 @@ export const updatePost = async (req, res) => {
     if (post.title !== title) post.title = title;
     if (post.description !== description) post.description = description;
     const savedPost = await post.save();
-    res.json(savedPost);
-  } catch (err) {
-    res.status(400).json(err);
+    res.json({ post: savedPost });
+  } catch (error) {
+    res.status(400).json({ error });
   }
 };
 
 export const getPosts = async (req, res) => {
   const { _id } = req.params;
   try {
-    const posts = _id
+    const docs = _id
       ? await Post.findById(_id).exec()
       : await Post.find().exec();
-    res.json(posts);
-  } catch (err) {
-    res.status(404).json(err);
+    res.json({ posts: _id ? [docs] : docs });
+  } catch (error) {
+    res.status(404).json({ error });
   }
 };
 
@@ -34,19 +34,19 @@ export const createPost = async (req, res) => {
   const post = req.body;
   try {
     const savedPost = await new Post(post).save();
-    res.status(201).json(savedPost);
+    res.status(201).json({ post: savedPost });
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).json({ error });
   }
 };
 
 export const deletePost = (req, res) => {
   const { _id } = req.params;
-  Post.deleteOne({ _id }, (err, data) => {
-    if (err) {
-      res.status(400).json(err);
+  Post.deleteOne({ _id }, (error, message) => {
+    if (error) {
+      res.status(400).json({ error });
     } else {
-      res.status(200).json(data);
+      res.status(200).json({ message });
     }
   });
 };
