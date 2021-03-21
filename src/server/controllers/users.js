@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import User from '../models/user';
 
 export const signup = async (req, res) => {
@@ -13,12 +14,16 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
     const userSaved = await user.save();
+    const userInfo = {
+      userId: userSaved._id,
+      displayname: userSaved.displayname,
+      username: userSaved.username,
+      email: userSaved.email,
+    };
     res.status(201).json({
       user: {
-        _id: userSaved._id,
-        displayname: userSaved.displayname,
-        username: userSaved.username,
-        email: userSaved.email,
+        ...userInfo,
+        token: jwt.sign(userInfo, 'RANDOM_TOKEN_SECRET', { expiresIn: '24h' }),
       },
     });
   } catch (error) {
@@ -36,19 +41,24 @@ export const login = async (req, res) => {
   } else {
     const hashedPassword = user.password;
     try {
-      const match = bcrypt.compare(password, hashedPassword);
+      const match = await bcrypt.compare(password, hashedPassword);
       if (!match) {
         res.status(401).json({
           error: "L'identifiant et/ou le mot de passe sont incorrects",
         });
       } else {
+        const userInfo = {
+          userId: user._id,
+          email: user.email,
+          displayname: user.displayname,
+          username: user.username,
+        };
         res.json({
           user: {
-            _id: user._id,
-            email: user.email,
-            displayname: user.displayname,
-            username: user.username,
-            token: 'TOKEN',
+            ...userInfo,
+            token: jwt.sign(userInfo, 'RANDOM_TOKEN_SECRET', {
+              expiresIn: '24h',
+            }),
           },
         });
       }

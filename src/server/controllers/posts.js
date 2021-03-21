@@ -4,7 +4,7 @@ export const updatePost = async (req, res) => {
   const { _id } = req.params;
   const { title, description } = req.body;
   if (!title || !description) {
-    res.status(400).json('Title and/or description can not be empty value');
+    res.status(400).json('Title and/or description can not be empty value(s)');
     return;
   }
   try {
@@ -32,8 +32,9 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body;
+  const { userId } = req.user;
   try {
-    const savedPost = await new Post(post).save();
+    const savedPost = await new Post({ ...post, userId }).save();
     res.status(201).json({ post: savedPost });
   } catch (error) {
     res.status(400).json({ error });
