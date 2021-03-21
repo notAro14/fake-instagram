@@ -9,7 +9,6 @@ const Button = styled.button`
   background-color: var(--bg-color-btn);
   color: white;
   font-weight: 700;
-  margin-top: 10px;
 `;
 
 export default Button;

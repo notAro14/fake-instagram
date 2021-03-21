@@ -29,8 +29,11 @@ export const Input = styled.input`
   }
 `;
 
-export const FieldWrapper = styled.div`
+export const InputWrapper = styled.div`
   position: relative;
   width: 100%;
-  margin-bottom: 10px;
+`;
+
+export const FieldWrapper = styled.div`
+  width: 100%;
 `;
