@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import postsRoutes from './routes/posts';
+import usersRoutes from './routes/users';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.json({ limit: '30mb' }));
 
 // routes
 app.use('/api/posts', postsRoutes);
+app.use('/api/users', usersRoutes);
 
 // serving static files in production
 if (!isDev) {
