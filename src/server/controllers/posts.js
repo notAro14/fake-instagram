@@ -14,7 +14,7 @@ export const updatePost = async (req, res) => {
     const savedPost = await post.save();
     res.json(savedPost);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 };
 
@@ -26,7 +26,7 @@ export const getPosts = async (req, res) => {
       : await Post.find().exec();
     res.json(posts);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(404).json(err);
   }
 };
 
@@ -44,7 +44,7 @@ export const deletePost = (req, res) => {
   const { _id } = req.params;
   Post.deleteOne({ _id }, (err, data) => {
     if (err) {
-      res.status(500).json(err);
+      res.status(400).json(err);
     } else {
       res.status(200).json(data);
     }
