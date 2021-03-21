@@ -1,33 +1,22 @@
 import React from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import Form, { TextField, Button } from './Form';
+import * as yup from 'yup';
+import Form, { TextField, Button } from '~components/common/Form';
 import { PublishPostWrapper } from './PublishPost.style';
 
+const schema = yup.object().shape({
+  title: yup.string().max(30).required(),
+  description: yup.string().max(30).required(),
+});
+
 const PublishPost = () => {
-  const methods = useForm({ mode: 'onBlur' });
   return (
     <PublishPostWrapper>
       <h2>Publish your post</h2>
-      <FormProvider {...methods}>
-        <Form onSubmit={methods.handleSubmit(data => console.log(data))}>
-          <TextField
-            ref={methods.register({
-              required: 'The title is fucking required',
-              maxLength: { value: 5, message: 'Too Long' },
-            })}
-            name="title"
-          >
-            Give your post a title
-          </TextField>
-          <TextField
-            ref={methods.register({ required: 'It is required' })}
-            name="description"
-          >
-            Add a description
-          </TextField>
-          <Button type="submit">Post</Button>
-        </Form>
-      </FormProvider>
+      <Form yupSchema={schema} onSubmit={data => console.log(data)}>
+        <TextField name="title">Give your post a title</TextField>
+        <TextField name="description">Add a description</TextField>
+        <Button type="submit">Post</Button>
+      </Form>
     </PublishPostWrapper>
   );
 };

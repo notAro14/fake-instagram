@@ -37,3 +37,9 @@ export const InputWrapper = styled.div`
 export const FieldWrapper = styled.div`
   width: 100%;
 `;
+
+export const Error = styled.div`
+  color: red;
+  font-size: 0.75rem;
+  text-align: right;
+`;
