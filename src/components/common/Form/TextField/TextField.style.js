@@ -41,5 +41,6 @@ export const FieldWrapper = styled.div`
 export const Error = styled.div`
   color: red;
   font-size: 0.75rem;
-  text-align: right;
+  margin-left: 10px;
+  margin-top: 4px;
 `;
