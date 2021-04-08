@@ -32,9 +32,14 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body;
+  console.log({ file: req.file, text: post });
   const { userId } = req.user;
   try {
-    const savedPost = await new Post({ ...post, userId }).save();
+    const savedPost = await new Post({
+      ...post,
+      userId,
+      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    }).save();
     res.status(201).json({ post: savedPost });
   } catch (error) {
     res.status(400).json({ error });
