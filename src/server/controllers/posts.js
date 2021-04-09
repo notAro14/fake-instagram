@@ -1,3 +1,4 @@
+import fs from 'fs';
 import Post from '../models/post';
 
 export const updatePost = async (req, res) => {
@@ -48,11 +49,27 @@ export const createPost = async (req, res) => {
 
 export const deletePost = (req, res) => {
   const { _id } = req.params;
-  Post.deleteOne({ _id }, (error, message) => {
-    if (error) {
-      res.status(400).json({ error });
-    } else {
-      res.status(200).json({ message });
+  Post.findById(_id, (findError, post) => {
+    if (findError) {
+      res.status(404).json({ error: findError });
+      return;
     }
+
+    const [, filename] = post.image.split('/images/');
+    fs.unlink(`tmp/images/${filename}`, unlinkError => {
+      if (unlinkError) {
+        res.status(500).json({ error: unlinkError });
+        return;
+      }
+
+      Post.deleteOne({ _id }, (deleteError, message) => {
+        if (deleteError) {
+          res.status(400).json({ error: deleteError });
+          return;
+        }
+
+        res.status(200).json({ message });
+      });
+    });
   });
 };
