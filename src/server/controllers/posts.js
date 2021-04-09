@@ -4,18 +4,31 @@ import Post from '../models/post';
 export const updatePost = async (req, res) => {
   const { _id } = req.params;
   const { title, description } = req.body;
-  if (!title || !description) {
-    res.status(400).json('Title and/or description can not be empty value(s)');
-    return;
-  }
+  const { file } = req;
+
   try {
     const post = await Post.findById(_id).exec();
-    if (post.title !== title) post.title = title;
-    if (post.description !== description) post.description = description;
+    if (file) {
+      const [, filename] = post.image.split('/images/');
+      fs.unlinkSync(`tmp/images/${filename}`);
+      post.image = `${req.protocol}://${req.get('host')}/images/${
+        file.filename
+      }`;
+    }
+    post.title = title || post.title;
+    post.description = description || post.description;
     const savedPost = await post.save();
     res.json({ post: savedPost });
   } catch (error) {
-    res.status(400).json({ error });
+    try {
+      // remove already uploaded new image if there is an error during updating
+      if (file) {
+        fs.unlinkSync(`tmp/images/${file.filename}`);
+      }
+      res.status(500).json({ error });
+    } catch (unlinkError) {
+      res.status(500).json({ error: unlinkError });
+    }
   }
 };
 
@@ -33,7 +46,6 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body;
-  console.log({ file: req.file, text: post });
   const { userId } = req.user;
   try {
     const savedPost = await new Post({
