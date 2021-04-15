@@ -9,16 +9,19 @@ const AuthenticatedApp = loadable(() =>
     /* webpackChunkName: "AuthenticatedApp" */ '~components/AuthenticatedApp'
   )
 );
+const Public = loadable(() =>
+  import(/* webpackChunkName: "Public" */ '~components/Public')
+);
 
 const App = () => {
-  const [user] = useState(true);
+  const [user] = useState(false);
   return (
     <BrowserRouter>
       <GlobalStyle />
       {user ? (
         <AuthenticatedApp fallback={<Spinner />} />
       ) : (
-        <div>Unauthenticated</div>
+        <Public fallback={<Spinner />} />
       )}
     </BrowserRouter>
   );
