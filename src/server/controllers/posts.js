@@ -1,20 +1,34 @@
+import fs from 'fs';
 import Post from '../models/post';
 
 export const updatePost = async (req, res) => {
   const { _id } = req.params;
   const { title, description } = req.body;
-  if (!title || !description) {
-    res.status(400).json('Title and/or description can not be empty value(s)');
-    return;
-  }
+  const { file } = req;
+
   try {
     const post = await Post.findById(_id).exec();
-    if (post.title !== title) post.title = title;
-    if (post.description !== description) post.description = description;
+    if (file) {
+      const [, filename] = post.image.split('/images/');
+      fs.unlinkSync(`tmp/images/${filename}`);
+      post.image = `${req.protocol}://${req.get('host')}/images/${
+        file.filename
+      }`;
+    }
+    post.title = title || post.title;
+    post.description = description || post.description;
     const savedPost = await post.save();
     res.json({ post: savedPost });
   } catch (error) {
-    res.status(400).json({ error });
+    try {
+      // remove already uploaded new image if there is an error during updating
+      if (file) {
+        fs.unlinkSync(`tmp/images/${file.filename}`);
+      }
+      res.status(500).json({ error });
+    } catch (unlinkError) {
+      res.status(500).json({ error: unlinkError });
+    }
   }
 };
 
@@ -34,7 +48,11 @@ export const createPost = async (req, res) => {
   const post = req.body;
   const { userId } = req.user;
   try {
-    const savedPost = await new Post({ ...post, userId }).save();
+    const savedPost = await new Post({
+      ...post,
+      userId,
+      image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    }).save();
     res.status(201).json({ post: savedPost });
   } catch (error) {
     res.status(400).json({ error });
@@ -43,11 +61,27 @@ export const createPost = async (req, res) => {
 
 export const deletePost = (req, res) => {
   const { _id } = req.params;
-  Post.deleteOne({ _id }, (error, message) => {
-    if (error) {
-      res.status(400).json({ error });
-    } else {
-      res.status(200).json({ message });
+  Post.findById(_id, (findError, post) => {
+    if (findError) {
+      res.status(404).json({ error: findError });
+      return;
     }
+
+    const [, filename] = post.image.split('/images/');
+    fs.unlink(`tmp/images/${filename}`, unlinkError => {
+      if (unlinkError) {
+        res.status(500).json({ error: unlinkError });
+        return;
+      }
+
+      Post.deleteOne({ _id }, (deleteError, message) => {
+        if (deleteError) {
+          res.status(400).json({ error: deleteError });
+          return;
+        }
+
+        res.status(200).json({ message });
+      });
+    });
   });
 };

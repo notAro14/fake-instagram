@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 app.use(express.json({ limit: '30mb' }));
 
 // routes
+app.use('/images', express.static(path.join(__dirname, '../../tmp/images')));
 app.use('/api/posts', postsRoutes);
 app.use('/api/users', usersRoutes);
 
