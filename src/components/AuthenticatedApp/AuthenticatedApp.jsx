@@ -13,17 +13,19 @@ const PublishPost = loadable(() =>
 
 const AuthenticatedApp = () => {
   return (
-    <Layout>
+    <>
       <Navbar />
-      <Switch>
-        <Route exact path="/">
-          <Feed fallback={<Spinner />} />
-        </Route>
-        <Route exact path="/publish">
-          <PublishPost fallback={<Spinner />} />
-        </Route>
-      </Switch>
-    </Layout>
+      <Layout>
+        <Switch>
+          <Route exact path="/">
+            <Feed fallback={<Spinner />} />
+          </Route>
+          <Route exact path="/publish">
+            <PublishPost fallback={<Spinner />} />
+          </Route>
+        </Switch>
+      </Layout>
+    </>
   );
 };
 
