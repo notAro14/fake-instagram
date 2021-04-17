@@ -1,3 +1,4 @@
 export { default } from './Form';
 export { default as TextField } from './TextField';
 export { default as Button } from './Button';
+export { default as PasswordField } from './PasswordField';
