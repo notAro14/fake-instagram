@@ -6,6 +6,8 @@ import Form, {
   Button,
   PasswordField,
 } from '~components/common/Form';
+import { Box } from '~components/common/Box';
+import { PrimaryLink } from '~components/common/Link';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
@@ -21,21 +23,28 @@ const schema = yup.object().shape({
 });
 
 const SignUp = () => (
-  <SignUpWrapper>
-    <Title>Instagram</Title>
-    <CatchPhrase>
-      Sign up to see your friend&apos;s photos and videos.
-    </CatchPhrase>
-    <Form yupSchema={schema} onSubmit={data => console.log(data)}>
-      <TextField type="email" name="email">
-        Email
-      </TextField>
-      <TextField name="fullName">Full name</TextField>
-      <TextField name="username">Username</TextField>
-      <PasswordField name="password">Password</PasswordField>
-      <Button type="submit">Next</Button>
-    </Form>
-  </SignUpWrapper>
+  <>
+    <SignUpWrapper>
+      <Title>Instagram</Title>
+      <CatchPhrase>
+        Sign up to see your friend&apos;s photos and videos.
+      </CatchPhrase>
+      <Form yupSchema={schema} onSubmit={data => console.log(data)}>
+        <TextField type="email" name="email">
+          Email
+        </TextField>
+        <TextField name="fullName">Full name</TextField>
+        <TextField name="username">Username</TextField>
+        <PasswordField name="password">Password</PasswordField>
+        <Button type="submit">Next</Button>
+      </Form>
+    </SignUpWrapper>
+    <Box>
+      <p>
+        Already have an account ? <PrimaryLink to="signin">Sign in</PrimaryLink>
+      </p>
+    </Box>
+  </>
 );
 
 export default SignUp;
