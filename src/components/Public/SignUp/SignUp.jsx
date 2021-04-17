@@ -1,6 +1,6 @@
 import React from 'react';
 import * as yup from 'yup';
-import { SignUpWrapper, Title, CatchPhrase } from './SignUp.style';
+import { Title, CatchPhrase } from './SignUp.style';
 import Form, {
   TextField,
   Button,
@@ -24,7 +24,7 @@ const schema = yup.object().shape({
 
 const SignUp = () => (
   <>
-    <SignUpWrapper>
+    <Box>
       <Title>Instagram</Title>
       <CatchPhrase>
         Sign up to see your friend&apos;s photos and videos.
@@ -38,7 +38,7 @@ const SignUp = () => (
         <PasswordField name="password">Password</PasswordField>
         <Button type="submit">Next</Button>
       </Form>
-    </SignUpWrapper>
+    </Box>
     <Box>
       <p>
         Already have an account ? <PrimaryLink to="signin">Sign in</PrimaryLink>

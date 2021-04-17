@@ -9,7 +9,7 @@ export default createGlobalStyle`
     --navbar-height: 66px;
     --inter-post-space: 50px;
     --primary-font: 'Montserrat';
-    --secondary-font: 'Dancing Script';
+    --secondary-font: 'Pacifico';
   }
   * {
     margin: 0;

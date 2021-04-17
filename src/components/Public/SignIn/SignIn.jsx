@@ -1,6 +1,6 @@
 import React from 'react';
 import * as yup from 'yup';
-import { SignInWrapper, Title } from './SignIn.style';
+import { Title } from './SignIn.style';
 import Form, {
   TextField,
   Button,
@@ -16,7 +16,7 @@ const schema = yup.object().shape({
 
 const SignIn = () => (
   <>
-    <SignInWrapper>
+    <Box>
       <Title>Instagram</Title>
       <Form yupSchema={schema} onSubmit={data => console.log(data)}>
         <TextField type="email" name="email">
@@ -25,7 +25,7 @@ const SignIn = () => (
         <PasswordField name="password">Password</PasswordField>
         <Button type="submit">Sign in</Button>
       </Form>
-    </SignInWrapper>
+    </Box>
     <Box>
       <p>
         Don&apos;t have an account ?{' '}
