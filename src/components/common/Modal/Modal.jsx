@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import './Modal.scss';
 
-ReactModal.setAppElement('#root');
 ReactModal.defaultStyles = {
   overlay: {
     position: 'fixed',

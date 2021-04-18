@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import ReactModal from 'react-modal';
 import loadable from '@loadable/component';
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from '~components/globalStyle.js';
 import Spinner from '~components/common/Spinner';
+
+ReactModal.setAppElement('#root');
 
 const AuthenticatedApp = loadable(() =>
   import(

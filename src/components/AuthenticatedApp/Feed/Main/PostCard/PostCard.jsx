@@ -37,7 +37,7 @@ const Card = ({
 }) => {
   const commentRef = createRef();
   return (
-    <CardWrapper key={_id}>
+    <CardWrapper data-test-id="postCard" key={_id}>
       <CardHeader>
         <CardHeaderContent>
           <CardUserAvatar />
@@ -92,12 +92,12 @@ Card.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.number,
     creatorDisplayName: PropTypes.string,
-    creatorId: PropTypes.string,
+    creatorId: PropTypes.number,
     image: PropTypes.string,
     liked: PropTypes.bool,
     bookmarked: PropTypes.bool,
     description: PropTypes.string,
-    hearts: PropTypes.string,
+    hearts: PropTypes.number,
     comments: PropTypes.arrayOf(
       PropTypes.shape({
         _id: PropTypes.number,

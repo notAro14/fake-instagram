@@ -1,0 +1,19 @@
+module.exports = {
+  env: {
+    production: {
+      plugins: ['transform-react-remove-prop-types'],
+    },
+  },
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        useBuiltIns: 'usage',
+        corejs: { version: 3, proposals: true },
+        targets: { browsers: ['>1%', 'not ie 11, not op_mini all'] },
+      },
+    ],
+    '@babel/preset-react',
+  ],
+  plugins: ['babel-plugin-styled-components'],
+};
