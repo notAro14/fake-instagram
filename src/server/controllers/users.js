@@ -2,6 +2,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
 
+const { JWT_SECRET } = process.env;
+
 export const signup = async (req, res) => {
   const saltRounds = 10;
   const { email, displayname, username, password } = req.body;
@@ -56,7 +58,7 @@ export const login = async (req, res) => {
         res.json({
           user: {
             ...userInfo,
-            token: jwt.sign(userInfo, 'RANDOM_TOKEN_SECRET', {
+            token: jwt.sign(userInfo, JWT_SECRET, {
               expiresIn: '24h',
             }),
           },
