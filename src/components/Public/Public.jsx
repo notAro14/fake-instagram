@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import FourOFour from '~components/FourOFour';
 
 const Public = () => {
   return (
@@ -12,6 +13,9 @@ const Public = () => {
         </Route>
         <Route exact path="/signin">
           <SignIn />
+        </Route>
+        <Route>
+          <FourOFour />
         </Route>
       </Switch>
     </>
