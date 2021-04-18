@@ -1,6 +1,5 @@
 import React from 'react';
 import * as yup from 'yup';
-import { Title, CatchPhrase } from './SignUp.style';
 import Form, {
   TextField,
   Button,
@@ -8,6 +7,8 @@ import Form, {
 } from '~components/common/Form';
 import { Box } from '~components/common/Box';
 import { PrimaryLink } from '~components/common/Link';
+import { Title } from '~components/common/Title';
+import { CatchPhrase } from '~components/common/CatchPhrase';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
