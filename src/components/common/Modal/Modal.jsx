@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
+import './Modal.scss';
 
 ReactModal.setAppElement('#root');
 ReactModal.defaultStyles = {
@@ -28,6 +29,7 @@ const Modal = ({ isOpen, onClose, children }) => {
       isOpen={isOpen}
       shouldCloseOnOverlayClick
       onRequestClose={onClose}
+      closeTimeoutMS={200}
     >
       {children}
     </ReactModal>
