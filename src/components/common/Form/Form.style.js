@@ -5,8 +5,8 @@ const FormWrapper = styled.form`
   flex-direction: column;
   width: 100%;
   justify-content: space-evenly;
-  min-height: 150px;
   align-items: center;
+  gap: 2px;
 `;
 
 export default FormWrapper;
