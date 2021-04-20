@@ -13,8 +13,8 @@ const NotFoundPage = loadable(() =>
   import(/* webpackChunkName: "NotFoundPage" */ '../NotFoundPage')
 );
 
-const PublishPost = loadable(() =>
-  import(/* webpackChunkName: "PublishPost" */ './PublishPost')
+const PublishPage = loadable(() =>
+  import(/* webpackChunkName: "PublishPage" */ './PublishPage')
 );
 
 const AuthenticatedApp = () => {
@@ -27,7 +27,7 @@ const AuthenticatedApp = () => {
             <NewsFeedPage fallback={<Spinner />} />
           </Route>
           <Route exact path="/publish">
-            <PublishPost fallback={<Spinner />} />
+            <PublishPage fallback={<Spinner />} />
           </Route>
           <Route>
             <NotFoundPage fallback={<Spinner />} />
