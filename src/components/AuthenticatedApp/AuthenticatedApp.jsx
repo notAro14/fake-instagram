@@ -3,7 +3,7 @@ import loadable from '@loadable/component';
 import { Switch, Route } from 'react-router-dom';
 import Layout from './Layout';
 import { Spinner } from '~components/common';
-import FourOFour from '~components/FourOFour';
+import NotFoundPage from '~components/NotFoundPage';
 import Navbar from './Navbar';
 
 const Feed = loadable(() => import(/* webpackChunkName: "Feed" */ './Feed'));
@@ -25,7 +25,7 @@ const AuthenticatedApp = () => {
             <PublishPost fallback={<Spinner />} />
           </Route>
           <Route>
-            <FourOFour />
+            <NotFoundPage />
           </Route>
         </Switch>
       </Layout>

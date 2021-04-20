@@ -12,8 +12,8 @@ const AuthenticatedApp = loadable(() =>
     /* webpackChunkName: "AuthenticatedApp" */ '~components/AuthenticatedApp'
   )
 );
-const Public = loadable(() =>
-  import(/* webpackChunkName: "Public" */ '~components/Public')
+const PublicApp = loadable(() =>
+  import(/* webpackChunkName: "Public" */ '~components/PublicApp')
 );
 
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
       {user ? (
         <AuthenticatedApp fallback={<Spinner />} />
       ) : (
-        <Public fallback={<Spinner />} />
+        <PublicApp fallback={<Spinner />} />
       )}
       <button type="button" onClick={() => setUser(x => !x)}>
         toggle

@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import SignUpPage from './SignUpPage';
 import SignInPage from './SignInPage';
-import FourOFour from '~components/FourOFour';
+import NotFoundPage from '~components/NotFoundPage';
 
 const Public = () => {
   return (
@@ -15,7 +15,7 @@ const Public = () => {
           <SignInPage />
         </Route>
         <Route>
-          <FourOFour />
+          <NotFoundPage />
         </Route>
       </Switch>
     </>
