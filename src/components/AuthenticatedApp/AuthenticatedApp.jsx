@@ -2,7 +2,7 @@ import React from 'react';
 import loadable from '@loadable/component';
 import { Switch, Route } from 'react-router-dom';
 import Layout from './Layout';
-import Spinner from '~components/common/Spinner';
+import { Spinner } from '~components/common';
 import FourOFour from '~components/FourOFour';
 import Navbar from './Navbar';
 

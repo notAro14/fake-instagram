@@ -92,7 +92,7 @@ Card.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.number,
     creatorDisplayName: PropTypes.string,
-    creatorId: PropTypes.number,
+    creatorId: PropTypes.string,
     image: PropTypes.string,
     liked: PropTypes.bool,
     bookmarked: PropTypes.bool,

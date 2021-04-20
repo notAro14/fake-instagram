@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import SignUp from './SignUp';
-import SignIn from './SignIn';
+import SignUpPage from './SignUpPage';
+import SignInPage from './SignInPage';
 import FourOFour from '~components/FourOFour';
 
 const Public = () => {
@@ -9,10 +9,10 @@ const Public = () => {
     <>
       <Switch>
         <Route exact path="/signup">
-          <SignUp />
+          <SignUpPage />
         </Route>
         <Route exact path="/signin">
-          <SignIn />
+          <SignInPage />
         </Route>
         <Route>
           <FourOFour />

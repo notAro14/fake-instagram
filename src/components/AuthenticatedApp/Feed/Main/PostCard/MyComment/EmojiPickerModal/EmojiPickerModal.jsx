@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import loadable from '@loadable/component';
-import Spinner from '~components/common/Spinner';
-import Modal from '~components/common/Modal';
+import { Spinner, Modal } from '~components/common';
 
 const EmojiPicker = loadable(() =>
   import(/* webpackChunkName: "EmojiPicker" */ './EmojiPicker')

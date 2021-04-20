@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Button = styled.button`
+export const Button = styled.button`
   width: 100%;
   border: none;
   border-radius: 5px;
@@ -10,5 +10,3 @@ const Button = styled.button`
   color: white;
   font-weight: 700;
 `;
-
-export default Button;

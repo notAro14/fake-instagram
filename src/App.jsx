@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import loadable from '@loadable/component';
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from '~components/globalStyle.js';
-import Spinner from '~components/common/Spinner';
+import { Spinner } from '~components/common';
 
 ReactModal.setAppElement('#root');
 
