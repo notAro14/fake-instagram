@@ -56,10 +56,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '~components': path.resolve(__dirname, '..', 'src', 'components'),
-      '~hooks': path.resolve(__dirname, '..', 'src', 'hooks'),
-      '~public': path.resolve(__dirname, '..', 'src', 'public'),
-      '~data': path.resolve(__dirname, '..', 'src', 'data'),
+      Components: path.resolve(__dirname, '..', 'src', 'components'),
+      Hooks: path.resolve(__dirname, '..', 'src', 'hooks'),
+      Public: path.resolve(__dirname, '..', 'src', 'public'),
+      Data: path.resolve(__dirname, '..', 'src', 'data'),
     },
     extensions: ['*', '.js', '.jsx'],
   },

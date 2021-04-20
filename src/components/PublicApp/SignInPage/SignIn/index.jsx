@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { Button, SimpleInput, Password, FormWrapper } from '~components/common';
+import { Button, SimpleInput, Password, FormWrapper } from 'Components/common';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),

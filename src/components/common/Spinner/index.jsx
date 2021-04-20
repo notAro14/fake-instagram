@@ -1,5 +1,5 @@
 import React from 'react';
-import { SpinnerOverlay } from './Spinner.style';
+import { SpinnerOverlay } from './index.style';
 
 const Spinner = () => {
   return <SpinnerOverlay />;

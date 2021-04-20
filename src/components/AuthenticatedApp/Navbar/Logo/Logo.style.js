@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from '~components/common';
+import { Link } from 'Components/common';
 
 export const LogoPrefix = styled.span`
   color: red;

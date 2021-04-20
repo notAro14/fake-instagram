@@ -1,8 +1,7 @@
 import React from 'react';
 import loadable from '@loadable/component';
 import { Switch, Route } from 'react-router-dom';
-import Layout from './Layout';
-import { Spinner } from '~components/common';
+import { Spinner, Layout } from 'Components/common';
 import Navbar from './Navbar';
 
 const NewsFeedPage = loadable(() =>

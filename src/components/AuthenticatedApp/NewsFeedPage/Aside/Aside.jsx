@@ -1,5 +1,5 @@
 import React from 'react';
-import useMediaQuery from '~hooks/useMediaQuery';
+import useMediaQuery from 'Hooks/useMediaQuery';
 import { AsideWrapper } from './Aside.style';
 import ProfileCard from './ProfileCard';
 import Footer from './Footer';

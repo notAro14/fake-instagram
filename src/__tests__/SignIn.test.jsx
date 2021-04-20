@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, render, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
-import SignIn from './SignIn';
+import SignIn from 'Components/PublicApp/SignInPage/SignIn';
 
 describe('SignIn form', () => {
   const mock = { email: 'john.doe@email.com', password: '1234' };

@@ -8,7 +8,7 @@ import {
   FormWrapper,
   SimpleInput,
   Button,
-} from '~components/common';
+} from 'Components/common';
 
 const schema = yup.object().shape({
   title: yup.string().max(30).required(),

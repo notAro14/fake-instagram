@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import loadable from '@loadable/component';
 import { BrowserRouter } from 'react-router-dom';
-import GlobalStyle from '~components/globalStyle.js';
-import { Spinner } from '~components/common';
+import GlobalStyle from 'Components/globalStyle.js';
+import { Spinner } from 'Components/common';
 
 ReactModal.setAppElement('#root');
 
 const AuthenticatedApp = loadable(() =>
   import(
-    /* webpackChunkName: "AuthenticatedApp" */ '~components/AuthenticatedApp'
+    /* webpackChunkName: "AuthenticatedApp" */ 'Components/AuthenticatedApp'
   )
 );
 const PublicApp = loadable(() =>
-  import(/* webpackChunkName: "Public" */ '~components/PublicApp')
+  import(/* webpackChunkName: "Public" */ 'Components/PublicApp')
 );
 
 const App = () => {

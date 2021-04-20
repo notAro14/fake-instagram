@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '~public/images/logo.png';
+import logo from 'Public/images/logo.png';
 import { LogoWrapper, LogoPrefix } from './Logo.style';
 
 const Logo = () => {

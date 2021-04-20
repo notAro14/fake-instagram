@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavbarWrapper, NavbarContent } from './Navbar.style';
+import { NavbarWrapper, NavbarContent } from './index.style';
 import SearchUser from './SearchUser';
 import NavLinks from './NavLinks';
 import Logo from './Logo';

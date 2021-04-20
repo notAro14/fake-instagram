@@ -1,5 +1,5 @@
 import React from 'react';
-import postsJSON from '~data/posts.json';
+import postsJSON from 'Data/posts.json';
 import { MainWrapper } from './Main.style';
 import PostCard from './PostCard/PostCard';
 

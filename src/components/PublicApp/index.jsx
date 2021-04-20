@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import NotFoundPage from 'Components/NotFoundPage';
 import SignUpPage from './SignUpPage';
 import SignInPage from './SignInPage';
-import NotFoundPage from '~components/NotFoundPage';
 
 const Public = () => {
   return (
