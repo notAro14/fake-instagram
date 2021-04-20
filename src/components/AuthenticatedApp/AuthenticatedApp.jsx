@@ -3,10 +3,15 @@ import loadable from '@loadable/component';
 import { Switch, Route } from 'react-router-dom';
 import Layout from './Layout';
 import { Spinner } from '~components/common';
-import NotFoundPage from '~components/NotFoundPage';
 import Navbar from './Navbar';
 
-const Feed = loadable(() => import(/* webpackChunkName: "Feed" */ './Feed'));
+const NewsFeedPage = loadable(() =>
+  import(/* webpackChunkName: "NewsFeedPage" */ './NewsFeedPage')
+);
+
+const NotFoundPage = loadable(() =>
+  import(/* webpackChunkName: "NotFoundPage" */ '../NotFoundPage')
+);
 
 const PublishPost = loadable(() =>
   import(/* webpackChunkName: "PublishPost" */ './PublishPost')
@@ -19,13 +24,13 @@ const AuthenticatedApp = () => {
       <Layout>
         <Switch>
           <Route exact path="/">
-            <Feed fallback={<Spinner />} />
+            <NewsFeedPage fallback={<Spinner />} />
           </Route>
           <Route exact path="/publish">
             <PublishPost fallback={<Spinner />} />
           </Route>
           <Route>
-            <NotFoundPage />
+            <NotFoundPage fallback={<Spinner />} />
           </Route>
         </Switch>
       </Layout>
