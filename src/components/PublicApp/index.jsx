@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import NotFoundPage from 'Components/NotFoundPage';
 import SignUpPage from './SignUpPage';
 import SignInPage from './SignInPage';
@@ -18,6 +18,7 @@ const Public = () => {
           <NotFoundPage />
         </Route>
       </Switch>
+      <Redirect from="/" to="/signup" />
     </>
   );
 };

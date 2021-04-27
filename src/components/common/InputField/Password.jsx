@@ -17,7 +17,11 @@ const PasswordField = forwardRef(
     }, [value]);
     return (
       <SimpleInput
-        extra={<Toggle onClick={togglePassword}>Display</Toggle>}
+        extra={
+          <Toggle onClick={togglePassword}>
+            {hidden ? 'Display' : 'Hide'}
+          </Toggle>
+        }
         placeholder={placeholder}
         name={name}
         type={hidden ? 'password' : 'text'}

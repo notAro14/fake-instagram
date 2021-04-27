@@ -17,7 +17,7 @@ const PublicApp = loadable(() =>
 );
 
 const App = () => {
-  const [user, setUser] = useState(false);
+  const [user] = useState(false);
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -26,9 +26,6 @@ const App = () => {
       ) : (
         <PublicApp fallback={<Spinner />} />
       )}
-      <button type="button" onClick={() => setUser(x => !x)}>
-        toggle
-      </button>
     </BrowserRouter>
   );
 };
