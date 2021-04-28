@@ -1,0 +1,33 @@
+/* eslint-disable react/jsx-filename-extension, react/prop-types */
+
+import React, { createContext, useContext, useReducer } from 'react';
+
+const UserContext = createContext();
+
+const userReducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_USER':
+      return action.payload;
+    case 'ERASE_USER':
+      return null;
+
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
+};
+
+const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('useUser must be used inside a UserProvider');
+  }
+  return context;
+};
+
+const UserProvider = ({ children }) => {
+  const [user, dispatch] = useReducer(userReducer, null);
+  const value = { user, dispatch };
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
+
+export { UserProvider, useUser };

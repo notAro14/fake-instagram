@@ -1,15 +1,24 @@
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
 
+dotenv.config();
+
 const { JWT_SECRET } = process.env;
+const TOKEN_EXPIRATION = 60;
+
+export const verifyUser = async (req, res) => {
+  const { user } = req;
+  res.status(200).json({ ...user });
+};
 
 export const signup = async (req, res) => {
   const saltRounds = 10;
   const { email, displayname, username, password } = req.body;
   try {
     const alreadyExistingUser = await User.find({ email });
-    if (alreadyExistingUser) {
+    if (alreadyExistingUser.length) {
       return res
         .status(400)
         .send({ error: 'You already have an account. Sign in instead.' });
@@ -30,7 +39,9 @@ export const signup = async (req, res) => {
       email: userSaved.email,
     };
 
-    const token = jwt.sign(userInfo, JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign(userInfo, JWT_SECRET, {
+      expiresIn: TOKEN_EXPIRATION,
+    });
 
     res.cookie('token', token, { httpOnly: true });
     return res.status(201).json({
@@ -67,7 +78,7 @@ export const login = async (req, res) => {
       username: user.username,
     };
     const token = jwt.sign(userInfo, JWT_SECRET, {
-      expiresIn: '24h',
+      expiresIn: TOKEN_EXPIRATION,
     });
     return res.json({
       user: {

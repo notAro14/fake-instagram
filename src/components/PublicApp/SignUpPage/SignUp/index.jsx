@@ -1,5 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -11,10 +12,11 @@ import {
   Button,
   Spinner,
 } from 'Components/common';
+import { useUser } from 'Context/user.context';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
-  fullName: yup.string().max(20).required('Enter your name'),
+  displayname: yup.string().max(20).required('Enter your name'),
   password: yup
     .string()
     .required('Enter a valid password')
@@ -28,7 +30,6 @@ const schema = yup.object().shape({
 const IDLE = 'IDLE';
 const LOADING = 'LOADING';
 const INITIAL_STATE = {
-  data: null,
   label: IDLE,
 };
 
@@ -39,11 +40,12 @@ const SignUp = () => {
     formState: { errors },
     reset,
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) });
+  const history = useHistory();
+  const { dispatch } = useUser();
 
   const [state, setState] = useState(INITIAL_STATE);
   const onSubmit = async data => {
     setState({
-      data: null,
       label: LOADING,
     });
     try {
@@ -56,8 +58,14 @@ const SignUp = () => {
       });
       const message = await response.json();
       if (response.ok) {
-        setState({ data: message, label: IDLE });
+        const { displayname, userId, email, username } = message;
+        setState(INITIAL_STATE);
         reset();
+        dispatch({
+          type: 'SET_USER',
+          payload: { displayname, userId, email, username },
+        });
+        history.push('/');
       } else {
         toast.error(message.error);
         setState(INITIAL_STATE);
@@ -72,7 +80,7 @@ const SignUp = () => {
       <SimpleInput errors={errors} ref={register} type="email" name="email">
         Email
       </SimpleInput>
-      <SimpleInput errors={errors} ref={register} name="fullName">
+      <SimpleInput errors={errors} ref={register} name="displayname">
         Full name
       </SimpleInput>
       <SimpleInput errors={errors} ref={register} name="username">
