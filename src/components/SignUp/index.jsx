@@ -41,10 +41,10 @@ const SignUp = () => {
     reset,
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) });
   const history = useHistory();
-  const { dispatch } = useUser();
+  const { setUser } = useUser();
 
   const [state, setState] = useState(INITIAL_STATE);
-  const onSubmit = async data => {
+  const onSubmit = async formData => {
     setState({
       label: LOADING,
     });
@@ -54,20 +54,16 @@ const SignUp = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
-      const message = await response.json();
+      const data = await response.json();
       if (response.ok) {
-        const { displayname, userId, email, username } = message;
         setState(INITIAL_STATE);
         reset();
-        dispatch({
-          type: 'SET_USER',
-          payload: { displayname, userId, email, username },
-        });
+        setUser(data.user);
         history.push('/');
       } else {
-        toast.error(message.error);
+        toast.error(data.error);
         setState(INITIAL_STATE);
       }
     } catch (error) {

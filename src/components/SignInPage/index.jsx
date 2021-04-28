@@ -1,12 +1,12 @@
 import React from 'react';
 import { PrimaryLink, Title, Box } from 'Components/common';
-import SignIn from './SignIn';
+import SignIn from '../SignIn';
 
 const SignInPage = () => (
   <>
     <Box>
       <Title>Instagram</Title>
-      <SignIn onSubmit={data => console.log(data)} />
+      <SignIn />
     </Box>
     <Box>
       <p>

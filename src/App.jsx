@@ -1,51 +1,38 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactModal from 'react-modal';
-import loadable from '@loadable/component';
-import { useHistory } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import GlobalStyle from 'Components/globalStyle.js';
-import { Spinner } from 'Components/common';
-import { useUser } from './context/user.context';
+import { ProtectedRoute } from 'Components/common';
+// import { Spinner } from 'Components/common';
+import NewsFeedPage from './components/NewsFeedPage';
+import PublishPage from './components/PublishPage';
+import SignInPage from './components/SignInPage';
+import SignUpPage from './components/SignUpPage';
+import NotFoundPage from './components/NotFoundPage';
 
 ReactModal.setAppElement('#root');
 
-const AuthenticatedApp = loadable(() =>
-  import(
-    /* webpackChunkName: "AuthenticatedApp" */ 'Components/AuthenticatedApp'
-  )
-);
-const PublicApp = loadable(() =>
-  import(/* webpackChunkName: "PublicApp" */ 'Components/PublicApp')
-);
-
 const App = () => {
-  const { user, dispatch } = useUser();
-  const history = useHistory();
-
-  useEffect(() => {
-    const verifyToken = async () => {
-      const response = await fetch('/api/users/verify');
-      const data = await response.json();
-      if (response.status === 403 && data.error === 'Invalid request!') {
-        history.push('/signin');
-        return dispatch({ type: 'ERASE_USER' });
-      }
-      const { userId, displayname, email, username } = data;
-      return dispatch({
-        type: 'SET_USER',
-        payload: { userId, displayname, email, username },
-      });
-    };
-    verifyToken();
-  }, [dispatch, history]);
-
   return (
     <>
       <GlobalStyle />
-      {user ? (
-        <AuthenticatedApp fallback={<Spinner />} />
-      ) : (
-        <PublicApp fallback={<Spinner />} />
-      )}
+      <Switch>
+        <ProtectedRoute exact path="/">
+          <NewsFeedPage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/publish">
+          <PublishPage />
+        </ProtectedRoute>
+        <Route path="/signin">
+          <SignInPage />
+        </Route>
+        <Route path="/signup">
+          <SignUpPage />
+        </Route>
+        <Route path="*">
+          <NotFoundPage />
+        </Route>
+      </Switch>
     </>
   );
 };

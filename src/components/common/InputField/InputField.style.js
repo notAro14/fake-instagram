@@ -47,9 +47,9 @@ export const Error = styled.div`
 
 export const Toggle = styled.span`
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 1.2rem;
   font-weight: 600;
   position: absolute;
   right: 5px;
-  top: 10px;
+  top: 8px;
 `;

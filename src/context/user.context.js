@@ -7,9 +7,9 @@ const UserContext = createContext();
 const userReducer = (state, action) => {
   switch (action.type) {
     case 'SET_USER':
-      return action.payload;
+      return { ...state, user: action.payload };
     case 'ERASE_USER':
-      return null;
+      return { ...state, user: null };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -25,8 +25,13 @@ const useUser = () => {
 };
 
 const UserProvider = ({ children }) => {
-  const [user, dispatch] = useReducer(userReducer, null);
-  const value = { user, dispatch };
+  const [state, dispatch] = useReducer(userReducer, { user: null });
+  const setUser = user =>
+    dispatch({
+      type: 'SET_USER',
+      payload: user,
+    });
+  const value = { state, setUser, dispatch };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 

@@ -43,7 +43,7 @@ export const signup = async (req, res) => {
       expiresIn: TOKEN_EXPIRATION,
     });
 
-    res.cookie('token', token, { httpOnly: true });
+    // res.cookie('token', token, { httpOnly: true });
     return res.status(201).json({
       user: {
         ...userInfo,
@@ -80,6 +80,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(userInfo, JWT_SECRET, {
       expiresIn: TOKEN_EXPIRATION,
     });
+    // res.cookie('token', token, { httpOnly: true });
     return res.json({
       user: {
         ...userInfo,

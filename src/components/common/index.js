@@ -8,4 +8,4 @@ export { Link, PrimaryLink } from './Link';
 export { default as Modal } from './Modal';
 export { default as Spinner } from './Spinner';
 export { Title } from './Title';
-export { Layout } from './Layout';
+export { default as ProtectedRoute } from './ProtectedRoute';

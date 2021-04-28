@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, forwardRef } from 'react';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import { Toggle } from './InputField.style';
 import SimpleInput from './SimpleInput';
@@ -13,7 +14,7 @@ const PasswordField = forwardRef(
       <SimpleInput
         extra={
           <Toggle onClick={togglePassword}>
-            {hidden ? 'Display' : 'Hide'}
+            {hidden ? <BsEye /> : <BsEyeSlash />}
           </Toggle>
         }
         placeholder={placeholder}

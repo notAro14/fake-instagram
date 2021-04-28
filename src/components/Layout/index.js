@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Layout = styled.section`
+const Layout = styled.section`
   /* height: calc(100vh - 66px); */
   /* height: 1500px; */
   margin: 0 auto;
@@ -9,3 +9,5 @@ export const Layout = styled.section`
     width: 90%;
   }
 `;
+
+export default Layout;

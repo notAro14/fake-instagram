@@ -1,6 +1,6 @@
 import React from 'react';
 import { CatchPhrase, Title, PrimaryLink, Box } from 'Components/common';
-import SignUp from './SignUp';
+import SignUp from '../SignUp';
 
 const SignUpPage = () => {
   return (
