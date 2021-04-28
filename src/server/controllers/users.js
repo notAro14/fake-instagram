@@ -29,10 +29,14 @@ export const signup = async (req, res) => {
       username: userSaved.username,
       email: userSaved.email,
     };
+
+    const token = jwt.sign(userInfo, JWT_SECRET, { expiresIn: '24h' });
+
+    res.cookie('token', token, { httpOnly: true });
     return res.status(201).json({
       user: {
         ...userInfo,
-        token: jwt.sign(userInfo, JWT_SECRET, { expiresIn: '24h' }),
+        token,
       },
     });
   } catch (error) {
@@ -62,12 +66,13 @@ export const login = async (req, res) => {
       displayname: user.displayname,
       username: user.username,
     };
+    const token = jwt.sign(userInfo, JWT_SECRET, {
+      expiresIn: '24h',
+    });
     return res.json({
       user: {
         ...userInfo,
-        token: jwt.sign(userInfo, JWT_SECRET, {
-          expiresIn: '24h',
-        }),
+        token,
       },
     });
   } catch (error) {

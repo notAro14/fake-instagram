@@ -3,8 +3,10 @@ import jwt from 'jsonwebtoken';
 const { JWT_SECRET } = process.env;
 
 const authenticateToken = (req, res, next) => {
-  const { authorization } = req.headers;
-  const token = authorization && authorization.split(' ')[1];
+  // const { authorization } = req.headers;
+  // const token = authorization && authorization.split(' ')[1];
+  const { token } = req.cookies;
+
   if (!token) res.status(401).json({ error: 'No token provided' });
   else {
     jwt.verify(token, JWT_SECRET, (err, decodedToken) => {

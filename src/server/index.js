@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 import postsRoutes from './routes/posts';
 import usersRoutes from './routes/users';
@@ -18,6 +19,7 @@ const CONNECTION_URL = isDev
 // middlewares
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 app.use(express.json({ limit: '30mb' }));
+app.use(cookieParser());
 
 // routes
 app.use('/images', express.static(path.join(__dirname, '../../tmp/images')));
