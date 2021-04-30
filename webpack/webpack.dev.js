@@ -15,6 +15,7 @@ module.exports = () =>
       port: 4000,
       proxy: {
         '/api': 'http://localhost:4001',
+        '/images': 'http://localhost:4001',
       },
       publicPath: '/assets/',
     },

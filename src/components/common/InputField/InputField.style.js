@@ -1,5 +1,17 @@
 import styled from 'styled-components';
 
+export const FileInputLabel = styled.label`
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+`;
+
+export const FileInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+`;
+
 export const Label = styled.label`
   position: absolute;
   top: 27%;

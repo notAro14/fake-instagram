@@ -4,6 +4,7 @@ export { CatchPhrase } from './CatchPhrase';
 export { FormWrapper } from './Form';
 export { default as Password } from './InputField/Password';
 export { default as SimpleInput } from './InputField/SimpleInput';
+export { default as FileInput } from './InputField/FileInput';
 export { Link, PrimaryLink } from './Link';
 export { default as Modal } from './Modal';
 export { default as Spinner } from './Spinner';
