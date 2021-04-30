@@ -14,7 +14,9 @@ const ProfileCard = () => {
   } = useUser();
   return (
     <ProfileCardWrapper>
-      <ProfileAvatar />
+      <ProfileAvatar>
+        {user.displayname.slice(0, 1).toUpperCase()}
+      </ProfileAvatar>
       <ProfileName>
         <ProfileUserName to="/profile">{user.username}</ProfileUserName>
         <ProfileDisplayName>{user.displayname}</ProfileDisplayName>

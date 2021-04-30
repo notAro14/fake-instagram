@@ -9,7 +9,7 @@ import {
   Error,
 } from './InputField.style';
 
-const InputField = forwardRef(
+const SimpleInput = forwardRef(
   ({ name, children, placeholder, type, errors, extra }, ref) => {
     const fieldError = errors[name];
 
@@ -33,14 +33,14 @@ const InputField = forwardRef(
   }
 );
 
-InputField.defaultProps = {
+SimpleInput.defaultProps = {
   extra: null,
   placeholder: 'I am a placeholder',
   type: 'text',
   errors: {},
 };
 
-InputField.propTypes = {
+SimpleInput.propTypes = {
   extra: PropTypes.element,
   name: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
@@ -50,4 +50,4 @@ InputField.propTypes = {
   errors: PropTypes.objectOf(PropTypes.shape({ message: PropTypes.string })),
 };
 
-export default InputField;
+export default SimpleInput;
