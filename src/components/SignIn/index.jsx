@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import {
@@ -12,6 +12,7 @@ import {
   Spinner,
 } from 'Components/common';
 import { useUser } from '../../context/user.context';
+import { login } from '../../api/user';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
@@ -26,39 +27,26 @@ const SignIn = () => {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) });
   const [state, setState] = useState(IDLE);
-
   const { setUser } = useUser();
-
   const history = useHistory();
-
-  const onSubmit = async formData => {
+  const onSubmit = ({ email, password }) => {
     setState(LOADING);
-    try {
-      const response = await fetch('/api/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      if (response.ok) {
+    login({ email, password }).then(
+      user => {
         setState(IDLE);
-        reset();
-        setUser(data.user);
+        setUser(user);
         history.push('/');
-      } else {
-        toast.error(data.error);
+        toast.success(`Welcome back ${user.displayname.split(' ')[0]} !`);
+      },
+      error => {
+        toast.error(error.message.split('Error: ')[1]);
         setState(IDLE);
       }
-    } catch (error) {
-      toast.error(error.error);
-      setState(IDLE);
-    }
+    );
   };
+
   return (
     <FormWrapper
       onSubmit={handleSubmit(({ email, password }) =>
@@ -73,12 +61,6 @@ const SignIn = () => {
       </Password>
       <Button type="submit">Sign in</Button>
       {state.label === LOADING && <Spinner />}
-      <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar
-        draggable
-      />
     </FormWrapper>
   );
 };

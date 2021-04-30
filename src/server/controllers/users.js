@@ -6,7 +6,7 @@ import User from '../models/user';
 dotenv.config();
 
 const { JWT_SECRET } = process.env;
-const TOKEN_EXPIRATION = 60;
+const TOKEN_EXPIRATION = '24h';
 
 export const verifyUser = async (req, res) => {
   const { user } = req;

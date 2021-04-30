@@ -25,7 +25,10 @@ const useUser = () => {
 };
 
 const UserProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(userReducer, { user: null });
+  const [state, dispatch] = useReducer(userReducer, {
+    user: null,
+    // user: { displayname: 'aro', username: 'notAro14' },
+  });
   const setUser = user =>
     dispatch({
       type: 'SET_USER',

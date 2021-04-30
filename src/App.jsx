@@ -1,4 +1,6 @@
 import React from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ToastContainer } from 'react-toastify';
 import ReactModal from 'react-modal';
 import { Switch, Route } from 'react-router-dom';
 import GlobalStyle from 'Components/globalStyle.js';
@@ -14,7 +16,17 @@ ReactModal.setAppElement('#root');
 
 const App = () => {
   return (
-    <>
+    <ErrorBoundary
+      FallbackComponent={({ error, resetErrorBoundary }) => (
+        <div role="alert">
+          <p>Oops something bad happened</p>
+          <pre>{error.message}</pre>
+          <button type="button" onClick={resetErrorBoundary}>
+            Reset
+          </button>
+        </div>
+      )}
+    >
       <GlobalStyle />
       <Switch>
         <ProtectedRoute exact path="/">
@@ -33,7 +45,13 @@ const App = () => {
           <NotFoundPage />
         </Route>
       </Switch>
-    </>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar
+        draggable
+      />
+    </ErrorBoundary>
   );
 };
 

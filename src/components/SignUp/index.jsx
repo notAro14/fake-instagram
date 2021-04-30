@@ -1,7 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,6 +13,7 @@ import {
   Spinner,
 } from 'Components/common';
 import { useUser } from 'Context/user.context';
+import { signup } from '../../api/user';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
@@ -29,47 +30,31 @@ const schema = yup.object().shape({
 
 const IDLE = 'IDLE';
 const LOADING = 'LOADING';
-const INITIAL_STATE = {
-  label: IDLE,
-};
 
 const SignUp = () => {
   const {
     handleSubmit,
     register,
     formState: { errors },
-    reset,
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) });
   const history = useHistory();
   const { setUser } = useUser();
 
-  const [state, setState] = useState(INITIAL_STATE);
-  const onSubmit = async formData => {
-    setState({
-      label: LOADING,
-    });
-    try {
-      const response = await fetch('/api/users/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setState(INITIAL_STATE);
-        reset();
-        setUser(data.user);
+  const [state, setState] = useState(IDLE);
+  const onSubmit = async ({ email, password, username, displayname }) => {
+    setState(LOADING);
+    signup({ email, password, username, displayname }).then(
+      user => {
+        setState(IDLE);
+        setUser(user);
         history.push('/');
-      } else {
-        toast.error(data.error);
-        setState(INITIAL_STATE);
+        toast.success(`Welcome ${user.displayname.split(' ')[0]}`);
+      },
+      error => {
+        toast.error(error.message.split('Error: ')[1]);
+        setState(IDLE);
       }
-    } catch (error) {
-      toast.error(error.error);
-      setState(INITIAL_STATE);
-    }
+    );
   };
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
@@ -87,12 +72,6 @@ const SignUp = () => {
       </Password>
       <Button type="submit">Next</Button>
       {state.label === LOADING && <Spinner />}
-      <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar
-        draggable
-      />
     </FormWrapper>
   );
 };
