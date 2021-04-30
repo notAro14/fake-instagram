@@ -23,6 +23,12 @@ export const signup = async (req, res) => {
         .status(400)
         .send({ error: 'You already have an account. Sign in instead.' });
     }
+    const existingUsername = await User.find({ username });
+    if (existingUsername.length) {
+      return res.status(400).send({
+        error: `Username ${username} is already taken. Please choose another one.`,
+      });
+    }
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const user = new User({

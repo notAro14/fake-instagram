@@ -17,7 +17,11 @@ import { signup } from '../../api/user';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
-  displayname: yup.string().max(20).required('Enter your name'),
+  displayname: yup
+    .string()
+    .max(30)
+    .required('Enter your name')
+    .matches(/^[a-zA-Z]{2,}(?: [a-zA-Z]+){0,2}$/, 'Name is not valid'),
   password: yup
     .string()
     .required('Enter a valid password')
@@ -25,7 +29,14 @@ const schema = yup.object().shape({
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
       'password must contain 8 characters: uppercase, lowercase, number, special character'
     ),
-  username: yup.string().max(10).required('Enter your username'),
+  username: yup
+    .string()
+    .max(10)
+    .required('Enter your username')
+    .matches(
+      /^[a-z_-]{4,}$/,
+      'Username is invalid. Don\'t use uppercase and special characters except "_" and "-"'
+    ),
 });
 
 const IDLE = 'IDLE';
