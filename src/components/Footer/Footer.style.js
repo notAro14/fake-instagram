@@ -5,7 +5,11 @@ export const FooterWrapper = styled.footer`
   margin-top: 20px;
   color: var(--text-secondary);
   a {
-    color: inherit;
+    color: #333;
+    font-weight: bold;
     text-decoration: none;
+  }
+  p {
+    font-size: 0.9rem;
   }
 `;

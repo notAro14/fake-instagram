@@ -5,7 +5,7 @@ const Footer = () => (
   <FooterWrapper>
     <p>{`@${new Date().getFullYear()} INSTAGRAM CLONE`}</p>
     <p>
-      By <a href="https://github.com/notAro14">notAro14</a>
+      By <a href="https://twitter.com/notarodev">notAro14</a>
     </p>
   </FooterWrapper>
 );
