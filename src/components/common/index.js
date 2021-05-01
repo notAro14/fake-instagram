@@ -10,3 +10,4 @@ export { default as Modal } from './Modal';
 export { default as Spinner } from './Spinner';
 export { Title } from './Title';
 export { default as ProtectedRoute } from './ProtectedRoute';
+export { default as Kaboom } from './Kaboom';

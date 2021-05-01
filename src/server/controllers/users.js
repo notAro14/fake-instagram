@@ -2,11 +2,11 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
+import { TOKEN_EXPIRATION } from '../../constants';
 
 dotenv.config();
 
 const { JWT_SECRET } = process.env;
-const TOKEN_EXPIRATION = '24h';
 
 export const verifyUser = async (req, res) => {
   const { user } = req;

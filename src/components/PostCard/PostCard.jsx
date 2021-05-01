@@ -23,13 +23,9 @@ import {
   PublicationDate,
 } from './PostCard.style';
 import MyComment from './MyComment';
-import { IDLE, LOADING, SUCCESS, ERROR } from '../../constants';
-import { Spinner } from '../common';
+import { LOADING, SUCCESS, ERROR } from '../../constants';
+import { Spinner, Kaboom } from '../common';
 import { useUser } from '../../context/user.context';
-
-const Kaboom = ({ error }) => {
-  throw new Error(error);
-};
 
 const Card = ({
   post: {
@@ -42,7 +38,7 @@ const Card = ({
   },
 }) => {
   const commentRef = createRef();
-  const [state, setState] = useState({ label: IDLE, message: '' });
+  const [state, setState] = useState({ label: LOADING, message: '' });
   const [userInfo, setUserInfo] = useState(null);
   const {
     state: { user },

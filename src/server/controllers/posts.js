@@ -34,13 +34,26 @@ export const updatePost = async (req, res) => {
 
 export const getPosts = async (req, res) => {
   const { _id } = req.params;
+  if (_id) {
+    try {
+      const docs = await Post.findById(_id).exec();
+      if (!docs) {
+        return res.status(404).json({ error: "Post can't be found" });
+      }
+      return res.json({
+        posts: [docs],
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
   try {
-    const docs = _id
-      ? await Post.findById(_id).exec()
-      : await Post.find().sort({ createdAt: -1 }).exec();
-    res.json({ posts: _id ? [docs] : docs });
+    const docs = await Post.find().sort({ createdAt: -1 }).exec();
+    return res.json({
+      posts: docs,
+    });
   } catch (error) {
-    res.status(404).json({ error });
+    return res.status(500).json({ error: error.message });
   }
 };
 
