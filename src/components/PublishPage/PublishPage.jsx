@@ -13,10 +13,25 @@ import {
 } from '../common';
 import { useUser } from '../../context/user.context';
 
+const MIME_TYPES = ['image/jpg', 'image/jpeg', 'image/png'];
+const FILE_SIZE_LIMIT = 1024 * 1024;
+
 const schema = yup.object().shape({
   title: yup.string().max(30).required(),
   description: yup.string().max(30).required(),
-  images: yup.mixed().required(),
+  images: yup
+    .mixed()
+    .required()
+    .test(
+      'fileExtension',
+      'Only jpeg, jpg and png extensions are allowed',
+      value => value && MIME_TYPES.includes(value[0].type)
+    )
+    .test(
+      'fileSize',
+      'The file can not be bigger than 2 mo',
+      value => value && value[0].size <= FILE_SIZE_LIMIT
+    ),
 });
 
 const PublishPost = () => {

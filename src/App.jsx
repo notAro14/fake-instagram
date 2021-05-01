@@ -47,7 +47,7 @@ const App = () => {
       </Switch>
       <ToastContainer
         position="bottom-center"
-        autoClose={20000}
+        autoClose={10000}
         hideProgressBar
         draggable
       />
