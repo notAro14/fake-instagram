@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,9 +11,7 @@ import {
   FileInput,
 } from '../common';
 import { useUser } from '../../context/user.context';
-
-const MIME_TYPES = ['image/jpg', 'image/jpeg', 'image/png'];
-const FILE_SIZE_LIMIT = 1024 * 1024;
+import { MIME_TYPES, FILE_SIZE_LIMIT } from '../../constants';
 
 const schema = yup.object().shape({
   title: yup.string().max(30).required(),
