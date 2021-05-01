@@ -26,6 +26,7 @@ import MyComment from './MyComment';
 import { LOADING, SUCCESS, ERROR } from '../../constants';
 import { Spinner, Kaboom, Button, Box } from '../common';
 import { useUser } from '../../context/user.context';
+import { getUserInfo } from '../../api/user';
 
 const Card = ({
   post: {
@@ -45,21 +46,13 @@ const Card = ({
   } = useUser();
   useEffect(() => {
     setState({ label: LOADING, message: '' });
-    const headers = new Headers({
-      Authorization: `Bearer ${user.token}`,
-    });
-    fetch(`/api/users/profiles/${userId}`, {
-      method: 'GET',
-      headers,
-    })
-      .then(response => response.json())
-      .then(data => {
+    getUserInfo({ userId }, { token: user.token }).then(
+      data => {
         setState({ label: SUCCESS, message: '' });
-        setUserInfo(data.users[0]);
-      })
-      .catch(error => {
-        setState({ label: ERROR, message: error.message });
-      });
+        setUserInfo(data);
+      },
+      error => setState({ label: ERROR, message: error.message })
+    );
   }, [userId, user]);
 
   return (

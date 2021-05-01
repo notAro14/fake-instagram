@@ -42,6 +42,6 @@ export const getPosts = async ({ _id }, { token }) => {
     const data = await response.json();
     return data.posts;
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error);
   }
 };

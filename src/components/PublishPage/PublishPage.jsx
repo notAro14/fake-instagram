@@ -61,7 +61,7 @@ const PublishPost = () => {
       post => {
         setState(IDLE);
         history.push('/');
-        toast.success(`✨ "${post.title}" published with success ✨`);
+        toast.success(`✨ Your post "${post.title}" is (a)live ✨`);
       },
       error => {
         toast.error(error.message.split('Error: ')[1]);

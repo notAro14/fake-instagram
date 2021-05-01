@@ -37,3 +37,24 @@ export const signup = async ({ email, password, username, displayname }) => {
     throw new Error(error);
   }
 };
+
+export const getUserInfo = async ({ userId }, { token }) => {
+  const url = `/api/users/profiles/${userId}`;
+  const headers = new Headers({
+    Authorization: `Bearer ${token}`,
+  });
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers,
+    });
+    if (!response.ok) {
+      const { error } = await response.json();
+      throw new Error(error);
+    }
+    const data = await response.json();
+    return data.users[0];
+  } catch (error) {
+    throw new Error(error);
+  }
+};
