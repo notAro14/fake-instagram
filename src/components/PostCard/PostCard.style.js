@@ -23,9 +23,12 @@ export const CardHeaderContent = styled.div`
 
 export const CardUserAvatar = styled.div`
   --temp: 40px;
+  align-items: center;
   background: lightgrey;
   border-radius: 100%;
+  display: flex;
   height: var(--temp);
+  justify-content: center;
   width: var(--temp);
   img {
     width: 100%;

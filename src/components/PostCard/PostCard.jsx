@@ -74,7 +74,9 @@ const Card = ({
         <CardWrapper data-test-id="postCard" key={_id}>
           <CardHeader>
             <CardHeaderContent>
-              <CardUserAvatar />
+              <CardUserAvatar>
+                {userInfo.displayname.slice(0, 2).toUpperCase()}
+              </CardUserAvatar>
               <CardUserName>
                 <ProfileLink to="/#">{userInfo.username}</ProfileLink>
               </CardUserName>

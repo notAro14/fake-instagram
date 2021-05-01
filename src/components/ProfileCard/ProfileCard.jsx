@@ -15,7 +15,7 @@ const ProfileCard = () => {
   return (
     <ProfileCardWrapper>
       <ProfileAvatar>
-        {user.displayname.slice(0, 1).toUpperCase()}
+        {user.displayname.slice(0, 2).toUpperCase()}
       </ProfileAvatar>
       <ProfileName>
         <ProfileUserName to="/profile">{user.username}</ProfileUserName>
