@@ -24,11 +24,11 @@ import {
 } from './PostCard.style';
 import MyComment from './MyComment';
 import { LOADING, SUCCESS, ERROR } from '../../constants';
-import { Spinner, Kaboom, Button, Box } from '../common';
+import { Spinner, Kaboom, Button, Fallback } from '../common';
 import { useUser } from '../../context/user.context';
 import { getUserInfo } from '../../api/user';
 
-const Card = ({
+const PostCard = ({
   post: {
     _id = '',
     userId = '',
@@ -59,14 +59,14 @@ const Card = ({
     <ErrorBoundary
       FallbackComponent={({ resetErrorBoundary }) => {
         return (
-          <Box role="alert">
+          <Fallback role="alert">
             <p style={{ textAlign: 'center', marginBottom: '15px' }}>
               😨 Oops, this post failed to load
             </p>
             <Button type="button" onClick={resetErrorBoundary}>
               🤔 Try again
             </Button>
-          </Box>
+          </Fallback>
         );
       }}
     >
@@ -133,7 +133,7 @@ const Card = ({
   );
 };
 
-Card.propTypes = {
+PostCard.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
@@ -144,4 +144,4 @@ Card.propTypes = {
   }).isRequired,
 };
 
-export default Card;
+export default PostCard;
