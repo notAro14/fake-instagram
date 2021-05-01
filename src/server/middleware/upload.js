@@ -30,7 +30,7 @@ const uploadImages = multer({
   storage,
   fileFilter,
   limits,
-}).single('images');
+}).single('image');
 
 // ERROR HANDLING
 const upload = (req, res, next) => {

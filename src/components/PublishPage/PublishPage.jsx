@@ -16,7 +16,7 @@ import { MIME_TYPES, FILE_SIZE_LIMIT } from '../../constants';
 const schema = yup.object().shape({
   title: yup.string().max(30).required(),
   description: yup.string().max(30).required(),
-  images: yup
+  image: yup
     .mixed()
     .required()
     .test(
@@ -41,12 +41,12 @@ const PublishPost = () => {
     state: { user },
   } = useUser();
 
-  const onSubmit = ({ title, description, images }) => {
+  const onSubmit = ({ title, description, image }) => {
     const formData = new FormData();
     const headers = new Headers();
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('images', images[0]);
+    formData.append('image', image[0]);
     headers.append('Authorization', `Bearer ${user.token}`);
     fetch('/api/posts', {
       method: 'POST',
@@ -76,7 +76,7 @@ const PublishPost = () => {
           placeholder=".jpg, .jpeg, .png"
           ref={register}
           errors={errors}
-          name="images"
+          name="image"
         >
           Upload an image
         </FileInput>
