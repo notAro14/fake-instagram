@@ -13,14 +13,12 @@ import {
 } from 'Components/common';
 import { useUser } from '../../context/user.context';
 import { login } from '../../api/user';
+import { LOADING, IDLE } from '../../constants';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
   password: yup.string().required('Enter a valid password'),
 });
-
-const LOADING = 'LOADING';
-const IDLE = 'IDLE';
 
 const SignIn = () => {
   const {

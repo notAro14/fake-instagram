@@ -14,6 +14,7 @@ import {
 } from 'Components/common';
 import { useUser } from 'Context/user.context';
 import { signup } from '../../api/user';
+import { LOADING, IDLE } from '../../constants';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
@@ -38,9 +39,6 @@ const schema = yup.object().shape({
       'Username is invalid. Don\'t use uppercase and special characters except "_" and "-"'
     ),
 });
-
-const IDLE = 'IDLE';
-const LOADING = 'LOADING';
 
 const SignUp = () => {
   const {

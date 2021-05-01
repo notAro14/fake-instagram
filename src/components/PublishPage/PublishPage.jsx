@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Box,
@@ -9,9 +11,11 @@ import {
   SimpleInput,
   Button,
   FileInput,
+  Spinner,
 } from '../common';
 import { useUser } from '../../context/user.context';
-import { MIME_TYPES, FILE_SIZE_LIMIT } from '../../constants';
+import { MIME_TYPES, FILE_SIZE_LIMIT, LOADING, IDLE } from '../../constants';
+import { publish } from '../../api/post';
 
 const schema = yup.object().shape({
   title: yup.string().max(30).required(),
@@ -37,52 +41,51 @@ const PublishPost = () => {
     formState: { errors },
     register,
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) });
+  const [state, setState] = useState(IDLE);
+  const history = useHistory();
+
   const {
     state: { user },
   } = useUser();
 
   const onSubmit = ({ title, description, image }) => {
-    const formData = new FormData();
-    const headers = new Headers();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('image', image[0]);
-    headers.append('Authorization', `Bearer ${user.token}`);
-    fetch('/api/posts', {
-      method: 'POST',
-      headers,
-      body: formData,
-    })
-      .then(data => console.log({ data }))
-      .catch(error => console.error({ error }));
-    // const data = await response.json();
-    // if (response.ok) {
-    //   console.log('ALL IS GOOD', { response, data });
-    // } else {
-    //   console.log('NOT OK', { response, data });
-    // }
+    setState(LOADING);
+    publish({ title, description, image }, { token: user.token }).then(
+      post => {
+        setState(IDLE);
+        history.push('/');
+        toast.success(`✨ "${post.title}" published with success ✨`);
+      },
+      error => {
+        toast.error(error.message.split('Error: ')[1]);
+        setState(IDLE);
+      }
+    );
   };
   return (
-    <Box>
-      <Title>Publish your post</Title>
-      <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-        <SimpleInput ref={register} errors={errors} name="title">
-          Give your post a title
-        </SimpleInput>
-        <SimpleInput ref={register} errors={errors} name="description">
-          Add a description
-        </SimpleInput>
-        <FileInput
-          placeholder=".jpg, .jpeg, .png"
-          ref={register}
-          errors={errors}
-          name="image"
-        >
-          Upload an image
-        </FileInput>
-        <Button type="submit">Post</Button>
-      </FormWrapper>
-    </Box>
+    <>
+      <Box>
+        <Title>Publish your post</Title>
+        <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+          <SimpleInput ref={register} errors={errors} name="title">
+            Give your post a title
+          </SimpleInput>
+          <SimpleInput ref={register} errors={errors} name="description">
+            Add a description
+          </SimpleInput>
+          <FileInput
+            placeholder=".jpg, .jpeg, .png"
+            ref={register}
+            errors={errors}
+            name="image"
+          >
+            Upload an image
+          </FileInput>
+          <Button type="submit">Post</Button>
+        </FormWrapper>
+      </Box>
+      {state === LOADING ? <Spinner /> : null}
+    </>
   );
 };
 
