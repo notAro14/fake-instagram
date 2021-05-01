@@ -5,3 +5,5 @@ export const FILE_SIZE_LIMIT = 1024 * 1024;
 // APP STATE
 export const LOADING = 'LOADING';
 export const IDLE = 'IDLE';
+export const SUCCESS = 'SUCCESS';
+export const ERROR = 'ERROR';

@@ -106,6 +106,12 @@ export const Likes = styled.p`
   padding-bottom: 0.5rem;
 `;
 
+export const PublicationDate = styled.p`
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+`;
+
 export const CardInfo = styled.div`
   padding: 0.75rem 0;
 `;

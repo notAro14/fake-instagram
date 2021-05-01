@@ -57,7 +57,7 @@ export const signup = async (req, res) => {
       },
     });
   } catch (error) {
-    return res.status(400).json({ error });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -94,6 +94,41 @@ export const login = async (req, res) => {
       },
     });
   } catch (error) {
-    return res.status(500).json({ error });
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const getUsers = async (req, res) => {
+  const { _id } = req.params;
+  if (_id) {
+    try {
+      const docs = await User.findById(_id).exec();
+      if (!docs) {
+        return res.status(404).json({ error: "User can't be found" });
+      }
+      return res.json({
+        users: [
+          {
+            _id: docs._id,
+            displayname: docs.displayname,
+            username: docs.username,
+          },
+        ],
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+  try {
+    const docs = await User.find().exec();
+    return res.json({
+      users: docs.map(doc => ({
+        _id: doc._id,
+        displayname: doc.displayname,
+        username: doc.username,
+      })),
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 };

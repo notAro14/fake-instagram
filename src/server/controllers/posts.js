@@ -37,7 +37,7 @@ export const getPosts = async (req, res) => {
   try {
     const docs = _id
       ? await Post.findById(_id).exec()
-      : await Post.find().exec();
+      : await Post.find().sort({ createdAt: -1 }).exec();
     res.json({ posts: _id ? [docs] : docs });
   } catch (error) {
     res.status(404).json({ error });
@@ -55,7 +55,7 @@ export const createPost = async (req, res) => {
     }).save();
     res.status(201).json({ post: savedPost });
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(500).json({ error: error.message });
   }
 };
 
