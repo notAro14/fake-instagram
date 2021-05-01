@@ -18,20 +18,27 @@ import { MIME_TYPES, FILE_SIZE_LIMIT, LOADING, IDLE } from '../../constants';
 import { publish } from '../../api/post';
 
 const schema = yup.object().shape({
-  title: yup.string().max(30).required(),
-  description: yup.string().max(30).required(),
+  title: yup.string().max(30).required('A title is needed'),
+  description: yup
+    .string()
+    .max(30)
+    .required('Describe your post with a few words'),
   image: yup
     .mixed()
-    .required()
+    .test(
+      'fileRequired',
+      'Crikey! What is Instagram without pictures ?!',
+      value => value.length > 0
+    )
     .test(
       'fileExtension',
       'Only jpeg, jpg and png extensions are allowed',
-      value => value && MIME_TYPES.includes(value[0].type)
+      value => value.length && MIME_TYPES.includes(value[0].type)
     )
     .test(
       'fileSize',
       'The file can not be bigger than 2 mo',
-      value => value && value[0].size <= FILE_SIZE_LIMIT
+      value => value.length && value[0].size <= FILE_SIZE_LIMIT
     ),
 });
 
@@ -73,12 +80,7 @@ const PublishPost = () => {
           <SimpleInput ref={register} errors={errors} name="description">
             Add a description
           </SimpleInput>
-          <FileInput
-            placeholder=".jpg, .jpeg, .png"
-            ref={register}
-            errors={errors}
-            name="image"
-          >
+          <FileInput ref={register} errors={errors} name="image">
             Upload an image
           </FileInput>
           <Button type="submit">Post</Button>
