@@ -24,7 +24,7 @@ import {
 } from './PostCard.style';
 import MyComment from './MyComment';
 import { LOADING, SUCCESS, ERROR } from '../../constants';
-import { Spinner, Kaboom } from '../common';
+import { Spinner, Kaboom, Button, Box } from '../common';
 import { useUser } from '../../context/user.context';
 
 const Card = ({
@@ -63,7 +63,20 @@ const Card = ({
   }, [userId, user]);
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundary
+      FallbackComponent={({ resetErrorBoundary }) => {
+        return (
+          <Box role="alert">
+            <p style={{ textAlign: 'center', marginBottom: '15px' }}>
+              😨 Oops, this post failed to load
+            </p>
+            <Button type="button" onClick={resetErrorBoundary}>
+              🤔 Try again
+            </Button>
+          </Box>
+        );
+      }}
+    >
       {state.label === LOADING && <Spinner />}
       {state.label === ERROR && <Kaboom error={state.message} />}
       {state.label === SUCCESS && userInfo && (
