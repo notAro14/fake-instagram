@@ -1,4 +1,4 @@
-export const publish = async ({ title, description, image }, { token }) => {
+export const publish = async ({ title, description, image, token }) => {
   const body = new FormData();
   body.append('title', title);
   body.append('description', description);

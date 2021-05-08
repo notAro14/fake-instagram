@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useMutation, useQueryClient } from 'react-query';
 import {
   Box,
   Title,
@@ -14,7 +14,7 @@ import {
   Spinner,
 } from '../common';
 import { useUser } from '../../context/user.context';
-import { MIME_TYPES, FILE_SIZE_LIMIT, LOADING, IDLE } from '../../constants';
+import { MIME_TYPES, FILE_SIZE_LIMIT } from '../../constants';
 import { publish } from '../../api/post';
 
 const schema = yup.object().shape({
@@ -47,27 +47,33 @@ const PublishPost = () => {
     handleSubmit,
     formState: { errors },
     register,
+    reset,
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) });
-  const [state, setState] = useState(IDLE);
-  const history = useHistory();
+  const queryClient = useQueryClient();
 
   const {
     state: { user },
   } = useUser();
-
+  const mutation = useMutation(publish, {
+    // invalidate and refetch
+    onSuccess: newPost => {
+      toast.success(`✨ Your post "${newPost.title}" is (a)live ✨`);
+      reset();
+    },
+    onError: err => {
+      toast.error(err.message);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries('posts');
+    },
+  });
   const onSubmit = ({ title, description, image }) => {
-    setState(LOADING);
-    publish({ title, description, image }, { token: user.token }).then(
-      post => {
-        setState(IDLE);
-        history.push('/');
-        toast.success(`✨ Your post "${post.title}" is (a)live ✨`);
-      },
-      error => {
-        toast.error(error.message.split('Error: ')[1]);
-        setState(IDLE);
-      }
-    );
+    mutation.mutate({
+      title,
+      description,
+      image,
+      token: user.token,
+    });
   };
   return (
     <>
@@ -83,10 +89,12 @@ const PublishPost = () => {
           <FileInput ref={register} errors={errors} name="image">
             Upload an image
           </FileInput>
-          <Button type="submit">Post</Button>
+          <Button type="submit">
+            {mutation.isLoading ? '...uploading...' : 'Post'}
+          </Button>
         </FormWrapper>
       </Box>
-      {state === LOADING ? <Spinner /> : null}
+      {mutation.isLoading ? <Spinner /> : null}
     </>
   );
 };
