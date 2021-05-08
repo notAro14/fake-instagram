@@ -25,9 +25,9 @@ export const updatePost = async (req, res) => {
       if (file) {
         fs.unlinkSync(`tmp/images/${file.filename}`);
       }
-      res.status(500).json({ error });
+      res.status(500).json({ error: error.message });
     } catch (unlinkError) {
-      res.status(500).json({ error: unlinkError });
+      res.status(500).json({ error: unlinkError.message });
     }
   }
 };
@@ -76,20 +76,20 @@ export const deletePost = (req, res) => {
   const { _id } = req.params;
   Post.findById(_id, (findError, post) => {
     if (findError) {
-      res.status(404).json({ error: findError });
+      res.status(404).json({ error: findError.message });
       return;
     }
 
     const [, filename] = post.image.split('/images/');
     fs.unlink(`tmp/images/${filename}`, unlinkError => {
       if (unlinkError) {
-        res.status(500).json({ error: unlinkError });
+        res.status(500).json({ error: unlinkError.message });
         return;
       }
 
       Post.deleteOne({ _id }, (deleteError, message) => {
         if (deleteError) {
-          res.status(400).json({ error: deleteError });
+          res.status(400).json({ error: deleteError.message });
           return;
         }
 

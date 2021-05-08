@@ -20,7 +20,7 @@ export const publish = async ({ title, description, image, token }) => {
     const data = await response.json();
     return data.post;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 };
 
@@ -42,6 +42,6 @@ export const getPosts = async ({ _id, token }) => {
     const data = await response.json();
     return data.posts;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 };

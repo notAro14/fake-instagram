@@ -14,7 +14,7 @@ export const login = async ({ email, password }) => {
     const data = await response.json();
     return data.user;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 };
 
@@ -34,7 +34,7 @@ export const signup = async ({ email, password, username, displayname }) => {
     const data = await response.json();
     return data.user;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 };
 
@@ -55,6 +55,6 @@ export const getUserInfo = async ({ userId, token }) => {
     const data = await response.json();
     return data.users[0];
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 };

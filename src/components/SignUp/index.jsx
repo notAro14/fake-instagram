@@ -60,7 +60,7 @@ const SignUp = () => {
         toast.success(`Welcome ${user.displayname.split(' ')[0]}`);
       },
       error => {
-        toast.error(error.message.split('Error: ')[1]);
+        toast.error(error.message);
         setState(IDLE);
       }
     );
