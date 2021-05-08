@@ -1,9 +1,10 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
 import { FiMoreHorizontal, FiMessageCircle } from 'react-icons/fi';
 import { BsHeart } from 'react-icons/bs';
+import { useQuery } from 'react-query';
 import {
   CardAction,
   CardActions,
@@ -23,7 +24,7 @@ import {
   PublicationDate,
 } from './PostCard.style';
 import MyComment from './MyComment';
-import { LOADING, SUCCESS, ERROR } from '../../constants';
+// import { LOADING, SUCCESS, ERROR } from '../../constants';
 import { Spinner, Kaboom, Button, Fallback } from '../common';
 import { useUser } from '../../context/user.context';
 import { getUserInfo } from '../../api/user';
@@ -39,21 +40,13 @@ const PostCard = ({
   },
 }) => {
   const commentRef = createRef();
-  const [state, setState] = useState({ label: LOADING, message: '' });
-  const [userInfo, setUserInfo] = useState(null);
   const {
     state: { user },
   } = useUser();
-  useEffect(() => {
-    setState({ label: LOADING, message: '' });
-    getUserInfo({ userId }, { token: user.token }).then(
-      data => {
-        setState({ label: SUCCESS, message: '' });
-        setUserInfo(data);
-      },
-      error => setState({ label: ERROR, message: error.message })
-    );
-  }, [userId, user]);
+  const { isLoading, isError, isSuccess, error, data: userInfo } = useQuery(
+    ['users', userId],
+    () => getUserInfo({ userId, token: user.token })
+  );
 
   return (
     <ErrorBoundary
@@ -70,9 +63,9 @@ const PostCard = ({
         );
       }}
     >
-      {state.label === LOADING && <Spinner />}
-      {state.label === ERROR && <Kaboom error={state.message} />}
-      {state.label === SUCCESS && userInfo && (
+      {isLoading && <Spinner />}
+      {isError && <Kaboom error={error.message} />}
+      {isSuccess && (
         <CardWrapper data-test-id="postCard" key={_id}>
           <CardHeader>
             <CardHeaderContent>

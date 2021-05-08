@@ -38,7 +38,7 @@ export const signup = async ({ email, password, username, displayname }) => {
   }
 };
 
-export const getUserInfo = async ({ userId }, { token }) => {
+export const getUserInfo = async ({ userId, token }) => {
   const url = `/api/users/profiles/${userId}`;
   const headers = new Headers({
     Authorization: `Bearer ${token}`,
