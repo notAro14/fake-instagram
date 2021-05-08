@@ -57,7 +57,7 @@ const PublishPost = () => {
   const mutation = useMutation(publish, {
     // invalidate and refetch
     onSuccess: newPost => {
-      toast.success(`✨ Your post "${newPost.title}" is (a)live ✨`);
+      toast.success(`✨ Your post "${newPost.title}" is (a)live`);
       reset();
     },
     onError: err => {

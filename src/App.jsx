@@ -10,10 +10,12 @@ import SignInPage from './components/SignInPage';
 import SignUpPage from './components/SignUpPage';
 import NotFoundPage from './components/NotFoundPage';
 import { ProtectedRoute, Box, Button } from './components/common';
+import useMediaQuery from './hooks/useMediaQuery';
 
 ReactModal.setAppElement('#root');
 
 const App = () => {
+  const isMobile = useMediaQuery('(max-width: 768px');
   return (
     <>
       <GlobalStyle />
@@ -58,7 +60,7 @@ const App = () => {
           </Route>
         </Switch>
         <ToastContainer
-          position="bottom-center"
+          position={isMobile ? 'bottom-center' : 'top-center'}
           autoClose={10000}
           hideProgressBar
           draggable
