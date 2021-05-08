@@ -24,7 +24,7 @@ export const publish = async ({ title, description, image, token }) => {
   }
 };
 
-export const getPosts = async ({ _id }, { token }) => {
+export const getPosts = async ({ _id, token }) => {
   const headers = new Headers();
   headers.append('Authorization', `Bearer ${token}`);
 

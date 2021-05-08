@@ -18,7 +18,7 @@ const Main = () => {
     isSuccess,
     error,
     data: posts,
-  } = useQuery('posts', () => getPosts({ _id: null }, { token: user.token }));
+  } = useQuery('posts', () => getPosts({ _id: null, token: user.token }));
 
   return (
     <ErrorBoundary
