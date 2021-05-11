@@ -38,7 +38,27 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            env: {
+              production: {
+                plugins: ['transform-react-remove-prop-types'],
+              },
+            },
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  corejs: '3',
+                },
+              ],
+              '@babel/preset-react',
+            ],
+            plugins: ['babel-plugin-styled-components'],
+          },
+        },
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
@@ -56,11 +76,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      Components: path.resolve(__dirname, '..', 'src', 'components'),
       Context: path.resolve(__dirname, '..', 'src', 'context'),
       Hooks: path.resolve(__dirname, '..', 'src', 'hooks'),
-      Public: path.resolve(__dirname, '..', 'src', 'public'),
-      Data: path.resolve(__dirname, '..', 'src', 'data'),
     },
     extensions: ['*', '.js', '.jsx'],
   },

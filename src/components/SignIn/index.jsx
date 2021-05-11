@@ -4,13 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import {
-  Button,
-  SimpleInput,
-  Password,
-  FormWrapper,
-  Spinner,
-} from 'Components/common';
+import { Button, SimpleInput, Password, FormWrapper, Spinner } from '../common';
 import { useUser } from '../../context/user.context';
 import { login } from '../../api/user';
 import { LOADING, IDLE } from '../../constants';

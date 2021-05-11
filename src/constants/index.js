@@ -1,6 +1,6 @@
 // FILE UPLOAD
 export const MIME_TYPES = ['image/jpg', 'image/jpeg', 'image/png'];
-export const FILE_SIZE_LIMIT = 1024 * 1024; // 1 mo
+export const FILE_SIZE_LIMIT = 1024 * 1024 * 2; // 2 mo
 
 // APP STATE
 export const LOADING = 'LOADING';

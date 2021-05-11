@@ -5,14 +5,8 @@ import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  SimpleInput,
-  Password,
-  FormWrapper,
-  Button,
-  Spinner,
-} from 'Components/common';
 import { useUser } from 'Context/user.context';
+import { SimpleInput, Password, FormWrapper, Button, Spinner } from '../common';
 import { signup } from '../../api/user';
 import { LOADING, IDLE } from '../../constants';
 

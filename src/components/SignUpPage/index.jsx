@@ -1,5 +1,5 @@
 import React from 'react';
-import { CatchPhrase, Title, PrimaryLink, Box } from 'Components/common';
+import { CatchPhrase, Title, PrimaryLink, Box } from '../common';
 import SignUp from '../SignUp';
 
 const SignUpPage = () => {

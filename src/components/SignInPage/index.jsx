@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrimaryLink, Title, Box } from 'Components/common';
+import { PrimaryLink, Title, Box } from '../common';
 import SignIn from '../SignIn';
 
 const SignInPage = () => (

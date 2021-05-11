@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'Components/common';
+import { Link } from '../../../common';
 import { NavLinkWrapper } from './NavLink.style';
 
 const NavLink = ({ children, to }) => {

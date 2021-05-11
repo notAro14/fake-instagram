@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'Components/common';
+import { Link } from '../common';
 
 export const ProfileCardWrapper = styled.div`
   align-items: center;

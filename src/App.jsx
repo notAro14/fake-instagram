@@ -3,7 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
 import ReactModal from 'react-modal';
 import { Switch, Route } from 'react-router-dom';
-import GlobalStyle from 'Components/globalStyle.js';
+import GlobalStyle from './components/globalStyle';
 import NewsFeedPage from './components/NewsFeedPage';
 import PublishPage from './components/PublishPage';
 import SignInPage from './components/SignInPage';
