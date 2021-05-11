@@ -1,27 +1,27 @@
-import React from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import { ToastContainer } from 'react-toastify';
-import ReactModal from 'react-modal';
-import { Switch, Route } from 'react-router-dom';
-import GlobalStyle from './components/globalStyle';
-import NewsFeedPage from './components/NewsFeedPage';
-import PublishPage from './components/PublishPage';
-import SignInPage from './components/SignInPage';
-import SignUpPage from './components/SignUpPage';
-import NotFoundPage from './components/NotFoundPage';
-import { ProtectedRoute, Box, Button } from './components/common';
-import useMediaQuery from './hooks/useMediaQuery';
+import React from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { ToastContainer } from 'react-toastify'
+import ReactModal from 'react-modal'
+import { Switch, Route } from 'react-router-dom'
+import GlobalStyle from './components/globalStyle'
+import NewsFeedPage from './components/NewsFeedPage'
+import PublishPage from './components/PublishPage'
+import SignInPage from './components/SignInPage'
+import SignUpPage from './components/SignUpPage'
+import NotFoundPage from './components/NotFoundPage'
+import { ProtectedRoute, Box, Button } from './components/common'
+import useMediaQuery from './hooks/useMediaQuery'
 
-ReactModal.setAppElement('#root');
+ReactModal.setAppElement('#root')
 
 const App = () => {
-  const isMobile = useMediaQuery('(max-width: 768px');
+  const isMobile = useMediaQuery('(max-width: 768px')
   return (
     <>
       <GlobalStyle />
       <ErrorBoundary
         FallbackComponent={({ error, resetErrorBoundary }) => (
-          <Box role="alert">
+          <Box role='alert'>
             <p style={{ textAlign: 'center', marginBottom: '15px' }}>
               😱 Oops something very bad happened
             </p>
@@ -36,26 +36,26 @@ const App = () => {
             >
               Possible reason : {error.message}
             </p>
-            <Button type="button" onClick={resetErrorBoundary}>
+            <Button type='button' onClick={resetErrorBoundary}>
               Please save me
             </Button>
           </Box>
         )}
       >
         <Switch>
-          <ProtectedRoute exact path="/">
+          <ProtectedRoute exact path='/'>
             <NewsFeedPage />
           </ProtectedRoute>
-          <ProtectedRoute exact path="/publish">
+          <ProtectedRoute exact path='/publish'>
             <PublishPage />
           </ProtectedRoute>
-          <Route path="/signin">
+          <Route path='/signin'>
             <SignInPage />
           </Route>
-          <Route path="/signup">
+          <Route path='/signup'>
             <SignUpPage />
           </Route>
-          <Route path="*">
+          <Route path='*'>
             <NotFoundPage />
           </Route>
         </Switch>
@@ -67,7 +67,7 @@ const App = () => {
         />
       </ErrorBoundary>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

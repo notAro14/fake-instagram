@@ -1,6 +1,6 @@
-import React from 'react';
-import { CatchPhrase, Title, PrimaryLink, Box } from '../common';
-import SignUp from '../SignUp';
+import React from 'react'
+import { CatchPhrase, Title, PrimaryLink, Box } from '../common'
+import SignUp from '../SignUp'
 
 const SignUpPage = () => {
   return (
@@ -15,11 +15,11 @@ const SignUpPage = () => {
       <Box>
         <p>
           Already have an account ?{' '}
-          <PrimaryLink to="signin">Sign in</PrimaryLink>
+          <PrimaryLink to='signin'>Sign in</PrimaryLink>
         </p>
       </Box>
     </>
-  );
-};
+  )
+}
 
-export default SignUpPage;
+export default SignUpPage

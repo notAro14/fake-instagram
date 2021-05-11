@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { AiOutlineSmile } from 'react-icons/ai';
+import styled from 'styled-components'
+import { AiOutlineSmile } from 'react-icons/ai'
 
 export const MyCommentWrapper = styled.div`
   align-items: center;
@@ -7,20 +7,20 @@ export const MyCommentWrapper = styled.div`
   display: flex;
   padding: 0.75rem 0;
   width: 100%;
-`;
+`
 
 export const OpenEmojiPickerModal = styled(AiOutlineSmile)`
   cursor: pointer;
   font-size: 2rem;
   padding: 0 0.5rem;
   width: auto;
-`;
+`
 
 export const MyCommentForm = styled.form`
   align-items: center;
   display: flex;
   width: 95%;
-`;
+`
 
 export const MyCommentInput = styled.input`
   border: none;
@@ -31,7 +31,7 @@ export const MyCommentInput = styled.input`
   &::placeholder {
     color: var(--text-secondary);
   }
-`;
+`
 
 export const MyCommentSubmitBtn = styled.button`
   background-color: inherit;
@@ -45,4 +45,4 @@ export const MyCommentSubmitBtn = styled.button`
   &:disabled {
     opacity: 0.3;
   }
-`;
+`

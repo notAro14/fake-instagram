@@ -6,17 +6,17 @@ export const login = async ({ email, password }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password }),
-    });
+    })
     if (!response.ok) {
-      const { error } = await response.json();
-      throw new Error(error);
+      const { error } = await response.json()
+      throw new Error(error)
     }
-    const data = await response.json();
-    return data.user;
+    const data = await response.json()
+    return data.user
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error.message)
   }
-};
+}
 
 export const signup = async ({ email, password, username, displayname }) => {
   try {
@@ -26,35 +26,35 @@ export const signup = async ({ email, password, username, displayname }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password, username, displayname }),
-    });
+    })
     if (!response.ok) {
-      const { error } = await response.json();
-      throw new Error(error);
+      const { error } = await response.json()
+      throw new Error(error)
     }
-    const data = await response.json();
-    return data.user;
+    const data = await response.json()
+    return data.user
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error.message)
   }
-};
+}
 
 export const getUserInfo = async ({ userId, token }) => {
-  const url = `/api/users/profiles/${userId}`;
+  const url = `/api/users/profiles/${userId}`
   const headers = new Headers({
     Authorization: `Bearer ${token}`,
-  });
+  })
   try {
     const response = await fetch(url, {
       method: 'GET',
       headers,
-    });
+    })
     if (!response.ok) {
-      const { error } = await response.json();
-      throw new Error(error);
+      const { error } = await response.json()
+      throw new Error(error)
     }
-    const data = await response.json();
-    return data.users[0];
+    const data = await response.json()
+    return data.users[0]
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error.message)
   }
-};
+}

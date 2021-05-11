@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const SearchUserWrapper = styled.div`
   align-items: center;
@@ -13,7 +13,7 @@ export const SearchUserWrapper = styled.div`
   @media (max-width: 765px) {
     display: none;
   }
-`;
+`
 
 export const SearchUserInput = styled.input`
   border: none;
@@ -24,4 +24,4 @@ export const SearchUserInput = styled.input`
   &::placeholder {
     color: var(--text-secondary);
   }
-`;
+`

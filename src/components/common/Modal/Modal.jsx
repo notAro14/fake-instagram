@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReactModal from 'react-modal';
-import './Modal.scss';
+import React from 'react'
+import PropTypes from 'prop-types'
+import ReactModal from 'react-modal'
+import './Modal.scss'
 
 ReactModal.defaultStyles = {
   overlay: {
@@ -20,7 +20,7 @@ ReactModal.defaultStyles = {
     borderRadius: '5px',
     outline: 'none',
   },
-};
+}
 
 const Modal = ({ isOpen, onClose, children }) => {
   return (
@@ -32,13 +32,13 @@ const Modal = ({ isOpen, onClose, children }) => {
     >
       {children}
     </ReactModal>
-  );
-};
+  )
+}
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
-};
+}
 
-export default Modal;
+export default Modal

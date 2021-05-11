@@ -1,8 +1,8 @@
-import React from 'react';
-import { NavbarWrapper, NavbarContent } from './index.style';
-import SearchUser from './SearchUser';
-import NavLinks from './NavLinks';
-import Logo from './Logo';
+import React from 'react'
+import { NavbarWrapper, NavbarContent } from './index.style'
+import SearchUser from './SearchUser'
+import NavLinks from './NavLinks'
+import Logo from './Logo'
 
 const Navbar = () => {
   return (
@@ -13,7 +13,7 @@ const Navbar = () => {
         <NavLinks />
       </NavbarContent>
     </NavbarWrapper>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

@@ -1,10 +1,10 @@
-import React, { createRef } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import { formatDistanceToNow } from 'date-fns';
-import PropTypes from 'prop-types';
-import { FiMoreHorizontal, FiMessageCircle } from 'react-icons/fi';
-import { BsHeart } from 'react-icons/bs';
-import { useQuery } from 'react-query';
+import React, { createRef } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { formatDistanceToNow } from 'date-fns'
+import PropTypes from 'prop-types'
+import { FiMoreHorizontal, FiMessageCircle } from 'react-icons/fi'
+import { BsHeart } from 'react-icons/bs'
+import { useQuery } from 'react-query'
 import {
   CardAction,
   CardActions,
@@ -22,12 +22,12 @@ import {
   Likes,
   ProfileLink,
   PublicationDate,
-} from './PostCard.style';
-import MyComment from './MyComment';
+} from './PostCard.style'
+import MyComment from './MyComment'
 // import { LOADING, SUCCESS, ERROR } from '../../constants';
-import { Spinner, Kaboom, Button, Fallback } from '../common';
-import { useUser } from '../../context/user.context';
-import { getUserInfo } from '../../api/user';
+import { Spinner, Kaboom, Button, Fallback } from '../common'
+import { useUser } from '../../context/user.context'
+import { getUserInfo } from '../../api/user'
 
 const PostCard = ({
   post: {
@@ -39,41 +39,41 @@ const PostCard = ({
     title,
   },
 }) => {
-  const commentRef = createRef();
+  const commentRef = createRef()
   const {
     state: { user },
-  } = useUser();
+  } = useUser()
   const { isLoading, isError, isSuccess, error, data: userInfo } = useQuery(
     ['users', userId],
     () => getUserInfo({ userId, token: user.token })
-  );
+  )
 
   return (
     <ErrorBoundary
       FallbackComponent={({ resetErrorBoundary }) => {
         return (
-          <Fallback role="alert">
+          <Fallback role='alert'>
             <p style={{ textAlign: 'center', marginBottom: '15px' }}>
               😨 Oops, this post failed to load
             </p>
-            <Button type="button" onClick={resetErrorBoundary}>
+            <Button type='button' onClick={resetErrorBoundary}>
               🤔 Try again
             </Button>
           </Fallback>
-        );
+        )
       }}
     >
       {isLoading && <Spinner />}
       {isError && <Kaboom error={error.message} />}
       {isSuccess && (
-        <CardWrapper data-test-id="postCard" key={_id}>
+        <CardWrapper data-test-id='postCard' key={_id}>
           <CardHeader>
             <CardHeaderContent>
               <CardUserAvatar>
                 {userInfo.displayname.slice(0, 2).toUpperCase()}
               </CardUserAvatar>
               <CardUserName>
-                <ProfileLink to="/#">{userInfo.username}</ProfileLink>
+                <ProfileLink to='/#'>{userInfo.username}</ProfileLink>
               </CardUserName>
             </CardHeaderContent>
             <CardHeaderAction>
@@ -94,7 +94,7 @@ const PostCard = ({
                 </CardAction>
                 <CardAction
                   onClick={() => {
-                    commentRef.current.focus();
+                    commentRef.current.focus()
                   }}
                 >
                   <FiMessageCircle />
@@ -104,7 +104,7 @@ const PostCard = ({
             <CardInfo>
               {/* <Likes>{`${hearts} Like${hearts > 1 ? 's' : ''}`}</Likes> */}
               <Likes>14 likes</Likes>
-              <ProfileLink to="/#">{userInfo.username}</ProfileLink>{' '}
+              <ProfileLink to='/#'>{userInfo.username}</ProfileLink>{' '}
               <Description>{description}</Description>
             </CardInfo>
             {/* <Comments>
@@ -123,8 +123,8 @@ const PostCard = ({
         </CardWrapper>
       )}
     </ErrorBoundary>
-  );
-};
+  )
+}
 
 PostCard.propTypes = {
   post: PropTypes.shape({
@@ -135,6 +135,6 @@ PostCard.propTypes = {
     title: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
   }).isRequired,
-};
+}
 
-export default PostCard;
+export default PostCard

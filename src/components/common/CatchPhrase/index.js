@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const CatchPhrase = styled.h2`
   color: rgb(142, 142, 142);
@@ -6,4 +6,4 @@ export const CatchPhrase = styled.h2`
   font-weight: 600;
   margin-bottom: 15px;
   text-align: center;
-`;
+`

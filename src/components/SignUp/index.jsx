@@ -1,14 +1,14 @@
-import 'react-toastify/dist/ReactToastify.css';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useUser } from 'Context/user.context';
-import { SimpleInput, Password, FormWrapper, Button, Spinner } from '../common';
-import { signup } from '../../api/user';
-import { LOADING, IDLE } from '../../constants';
+import 'react-toastify/dist/ReactToastify.css'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useUser } from 'Context/user.context'
+import { SimpleInput, Password, FormWrapper, Button, Spinner } from '../common'
+import { signup } from '../../api/user'
+import { LOADING, IDLE } from '../../constants'
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
@@ -32,51 +32,51 @@ const schema = yup.object().shape({
       /^[a-z_-]{4,}$/,
       'Username is invalid. Don\'t use uppercase and special characters except "_" and "-"'
     ),
-});
+})
 
 const SignUp = () => {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) });
-  const history = useHistory();
-  const { setUser } = useUser();
+  } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) })
+  const history = useHistory()
+  const { setUser } = useUser()
 
-  const [state, setState] = useState(IDLE);
+  const [state, setState] = useState(IDLE)
   const onSubmit = async ({ email, password, username, displayname }) => {
-    setState(LOADING);
+    setState(LOADING)
     signup({ email, password, username, displayname }).then(
-      user => {
-        setState(IDLE);
-        setUser(user);
-        history.push('/');
-        toast.success(`Welcome ${user.displayname.split(' ')[0]}`);
+      (user) => {
+        setState(IDLE)
+        setUser(user)
+        history.push('/')
+        toast.success(`Welcome ${user.displayname.split(' ')[0]}`)
       },
-      error => {
-        toast.error(error.message);
-        setState(IDLE);
+      (error) => {
+        toast.error(error.message)
+        setState(IDLE)
       }
-    );
-  };
+    )
+  }
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-      <SimpleInput errors={errors} ref={register} type="email" name="email">
+      <SimpleInput errors={errors} ref={register} type='email' name='email'>
         Email
       </SimpleInput>
-      <SimpleInput errors={errors} ref={register} name="displayname">
+      <SimpleInput errors={errors} ref={register} name='displayname'>
         Full name
       </SimpleInput>
-      <SimpleInput errors={errors} ref={register} name="username">
+      <SimpleInput errors={errors} ref={register} name='username'>
         Username
       </SimpleInput>
-      <Password errors={errors} ref={register} name="password">
+      <Password errors={errors} ref={register} name='password'>
         Password
       </Password>
-      <Button type="submit">Next</Button>
+      <Button type='submit'>Next</Button>
       {state.label === LOADING && <Spinner />}
     </FormWrapper>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
-const { Schema, model } = mongoose;
+const { Schema, model } = mongoose
 
 const postSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
@@ -9,8 +9,8 @@ const postSchema = new Schema({
   hearts: { type: Number, default: 0 },
   image: String,
   title: { type: String, required: true },
-});
+})
 
-const Post = model('Post', postSchema);
+const Post = model('Post', postSchema)
 
-export default Post;
+export default Post

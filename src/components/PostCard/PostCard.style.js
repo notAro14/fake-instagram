@@ -1,25 +1,25 @@
-import styled from 'styled-components';
-import { Link } from '../common';
+import styled from 'styled-components'
+import { Link } from '../common'
 
 export const CardWrapper = styled.div`
   background-color: white;
   border: 1px solid var(--border-color);
   border-radius: 3px;
   margin-bottom: var(--inter-post-space);
-`;
+`
 
 export const CardHeader = styled.header`
   align-items: center;
   display: flex;
   justify-content: space-between;
   padding: 1.2rem 0.75rem;
-`;
+`
 
 export const CardHeaderContent = styled.div`
   align-items: center;
   display: flex;
   width: 100%;
-`;
+`
 
 export const CardUserAvatar = styled.div`
   --temp: 40px;
@@ -34,21 +34,21 @@ export const CardUserAvatar = styled.div`
     width: 100%;
     height: auto;
   }
-`;
+`
 
 export const CardUserName = styled.span`
   font-size: 0.95rem;
   margin-left: 0.85rem;
-`;
+`
 
 export const CardHeaderAction = styled.div`
   cursor: pointer;
-`;
+`
 
 export const CardMedia = styled.img`
   background: lightgray;
   width: 100%;
-`;
+`
 
 export const CardActions = styled.div`
   align-items: center;
@@ -56,28 +56,28 @@ export const CardActions = styled.div`
   font-size: 1.75rem;
   justify-content: space-between;
   padding: 0.1rem 0;
-`;
+`
 
 export const CardAction = styled.span`
   cursor: pointer;
-`;
+`
 
 export const CardContent = styled.div`
   padding: 0.5rem 0.75rem;
-`;
+`
 
 export const CardLeftActions = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-around;
   width: 125px;
-`;
+`
 
 export const CardRightActions = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-`;
+`
 
 export const ProfileLink = styled(Link)`
   font-size: 0.9rem;
@@ -101,30 +101,30 @@ export const ProfileLink = styled(Link)`
     transform-origin: left center;
     transition-timing-function: ease-in;
   }
-`;
+`
 
 export const Likes = styled.p`
   font-size: 0.9rem;
   font-weight: 700;
   padding-bottom: 0.5rem;
-`;
+`
 
 export const PublicationDate = styled.p`
   color: var(--text-secondary);
   font-size: 0.75rem;
   padding: 0.5rem 0.75rem;
-`;
+`
 
 export const CardInfo = styled.div`
   padding: 0.75rem 0;
-`;
+`
 
 export const Description = styled.span`
   font-size: 0.8rem;
-`;
+`
 
 export const Comment = styled.div`
   padding-bottom: 0.2rem;
-`;
+`
 
-export const Comments = styled.div``;
+export const Comments = styled.div``

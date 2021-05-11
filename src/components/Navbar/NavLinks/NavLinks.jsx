@@ -1,9 +1,9 @@
-import React from 'react';
-import { AiFillHome } from 'react-icons/ai';
-import { CgProfile } from 'react-icons/cg';
-import { MdPhotoCamera } from 'react-icons/md';
-import NavLink from './NavLink';
-import { NavLinksWrapper } from './NavLinks.style';
+import React from 'react'
+import { AiFillHome } from 'react-icons/ai'
+import { CgProfile } from 'react-icons/cg'
+import { MdPhotoCamera } from 'react-icons/md'
+import NavLink from './NavLink'
+import { NavLinksWrapper } from './NavLinks.style'
 
 const navLinks = [
   {
@@ -21,7 +21,7 @@ const navLinks = [
     key: 'profile',
     icon: <CgProfile />,
   },
-];
+]
 
 const NavLinks = () => (
   <NavLinksWrapper>
@@ -31,6 +31,6 @@ const NavLinks = () => (
       </NavLink>
     ))}
   </NavLinksWrapper>
-);
+)
 
-export default NavLinks;
+export default NavLinks

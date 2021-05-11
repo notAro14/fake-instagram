@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import { Link } from '../common';
+import styled from 'styled-components'
+import { Link } from '../common'
 
 export const ProfileCardWrapper = styled.div`
   align-items: center;
   display: flex;
-`;
+`
 
 export const ProfileAvatar = styled.div`
   --avatar-size: 50px;
@@ -20,15 +20,15 @@ export const ProfileAvatar = styled.div`
     border-radius: 50%;
     width: 100%;
   }
-`;
+`
 
-export const ProfileName = styled.div``;
+export const ProfileName = styled.div``
 
 export const ProfileDisplayName = styled.p`
   color: var(--text-secondary);
   font-size: 0.8rem;
-`;
+`
 
 export const ProfileUserName = styled(Link)`
   font-weight: 700;
-`;
+`

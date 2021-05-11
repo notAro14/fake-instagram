@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
   html {
@@ -23,4 +23,4 @@ export default createGlobalStyle`
   ul {
     list-style-type: none
   }
-`;
+`

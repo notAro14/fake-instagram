@@ -1,1 +1,1 @@
-export { default } from './EmojiPickerModal';
+export { default } from './EmojiPickerModal'

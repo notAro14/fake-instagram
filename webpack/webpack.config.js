@@ -1,11 +1,11 @@
 // node
-const path = require('path');
+const path = require('path')
 // plugins
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const { ProgressPlugin } = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+const { ProgressPlugin } = require('webpack')
 
 module.exports = {
   entry: path.resolve(__dirname, '..', 'src', 'index'),
@@ -81,4 +81,4 @@ module.exports = {
     },
     extensions: ['*', '.js', '.jsx'],
   },
-};
+}

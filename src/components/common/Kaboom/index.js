@@ -1,5 +1,5 @@
 const Kaboom = ({ error }) => {
-  throw new Error(error);
-};
+  throw new Error(error)
+}
 
-export default Kaboom;
+export default Kaboom

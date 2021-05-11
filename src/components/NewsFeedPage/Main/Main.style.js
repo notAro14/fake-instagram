@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const MainWrapper = styled.main`
   height: 100%;
@@ -8,4 +8,4 @@ export const MainWrapper = styled.main`
     margin: 20px auto 0 auto;
     width: 100%;
   }
-`;
+`

@@ -1,8 +1,8 @@
-const path = require('path');
-const nodeExternals = require('webpack-node-externals');
-const WebpackShellPluginNext = require('webpack-shell-plugin-next');
+const path = require('path')
+const nodeExternals = require('webpack-node-externals')
+const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
@@ -36,4 +36,4 @@ module.exports = {
         }),
       ]
     : [],
-};
+}

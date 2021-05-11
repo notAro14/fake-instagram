@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Layout = styled.section`
   /* height: calc(100vh - 66px); */
@@ -8,6 +8,6 @@ const Layout = styled.section`
   @media (max-width: 1200px) {
     width: 90%;
   }
-`;
+`
 
-export default Layout;
+export default Layout

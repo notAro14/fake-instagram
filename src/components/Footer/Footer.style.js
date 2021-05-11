@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const FooterWrapper = styled.footer`
   line-height: 2;
@@ -12,4 +12,4 @@ export const FooterWrapper = styled.footer`
   p {
     font-size: 0.9rem;
   }
-`;
+`

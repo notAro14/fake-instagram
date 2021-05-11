@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const FormWrapper = styled.form`
   display: flex;
@@ -7,4 +7,4 @@ export const FormWrapper = styled.form`
   justify-content: space-evenly;
   align-items: center;
   gap: 15px;
-`;
+`

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const NavbarWrapper = styled.nav`
   background-color: #fff;
@@ -8,7 +8,7 @@ export const NavbarWrapper = styled.nav`
   width: 100%;
   top: 0;
   z-index: 1;
-`;
+`
 
 export const NavbarContent = styled.div`
   align-items: center;
@@ -19,4 +19,4 @@ export const NavbarContent = styled.div`
   @media (max-width: 1200px) {
     width: 95%;
   }
-`;
+`

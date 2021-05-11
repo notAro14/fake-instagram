@@ -1,7 +1,7 @@
-import React from 'react';
-import { FeedWrapper } from './NewsFeedPage.style';
-import Aside from './Aside';
-import Main from './Main';
+import React from 'react'
+import { FeedWrapper } from './NewsFeedPage.style'
+import Aside from './Aside'
+import Main from './Main'
 
 const NewsFeedPage = () => {
   return (
@@ -9,7 +9,7 @@ const NewsFeedPage = () => {
       <Main />
       <Aside />
     </FeedWrapper>
-  );
-};
+  )
+}
 
-export default NewsFeedPage;
+export default NewsFeedPage

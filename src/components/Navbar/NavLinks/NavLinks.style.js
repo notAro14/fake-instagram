@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const NavLinksWrapper = styled.ul`
   align-items: center;
@@ -8,4 +8,4 @@ export const NavLinksWrapper = styled.ul`
   @media (max-width: 280px) {
     width: 95px;
   }
-`;
+`

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Fallback = styled.div`
   background-color: white;
@@ -6,4 +6,4 @@ export const Fallback = styled.div`
   border-radius: 3px;
   margin-bottom: var(--inter-post-space);
   padding: 25px;
-`;
+`

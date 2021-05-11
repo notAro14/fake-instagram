@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Button = styled.button`
   width: 100%;
@@ -9,4 +9,4 @@ export const Button = styled.button`
   background-color: var(--bg-color-btn);
   color: white;
   font-weight: 700;
-`;
+`

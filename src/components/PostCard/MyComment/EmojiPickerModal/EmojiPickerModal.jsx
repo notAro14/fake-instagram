@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import loadable from '@loadable/component';
-import { Spinner, Modal } from '../../../common';
+import React from 'react'
+import PropTypes from 'prop-types'
+import loadable from '@loadable/component'
+import { Spinner, Modal } from '../../../common'
 
 const EmojiPicker = loadable(() =>
   import(/* webpackChunkName: "EmojiPicker" */ './EmojiPicker')
-);
+)
 
 const EmojiPickerModal = ({
   onEmojiSelection,
@@ -20,13 +20,13 @@ const EmojiPickerModal = ({
         closeEmojiPicker={closeEmojiPicker}
       />
     </Modal>
-  );
-};
+  )
+}
 
 EmojiPickerModal.propTypes = {
   onEmojiSelection: PropTypes.func.isRequired,
   isEmojiPickerOpen: PropTypes.bool.isRequired,
   closeEmojiPicker: PropTypes.func.isRequired,
-};
+}
 
-export default EmojiPickerModal;
+export default EmojiPickerModal

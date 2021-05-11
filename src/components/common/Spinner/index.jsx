@@ -1,8 +1,8 @@
-import React from 'react';
-import { SpinnerOverlay } from './index.style';
+import React from 'react'
+import { SpinnerOverlay } from './index.style'
 
 const Spinner = () => {
-  return <SpinnerOverlay role="progressbar" />;
-};
+  return <SpinnerOverlay role='progressbar' />
+}
 
-export default Spinner;
+export default Spinner

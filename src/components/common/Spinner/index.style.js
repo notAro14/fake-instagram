@@ -1,10 +1,10 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components'
 
 const spin = keyframes`
   to {
       transform: rotate(360deg);
     }
-`;
+`
 
 export const SpinnerOverlay = styled.div`
   --size: 30px;
@@ -17,4 +17,4 @@ export const SpinnerOverlay = styled.div`
   margin: 0 auto;
   margin-top: 20px;
   width: var(--size);
-`;
+`

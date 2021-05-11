@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const AsideWrapper = styled.aside`
   align-self: flex-start;
@@ -10,4 +10,4 @@ export const AsideWrapper = styled.aside`
   position: sticky;
   top: calc(var(--navbar-height) + 34px);
   width: 38%;
-`;
+`

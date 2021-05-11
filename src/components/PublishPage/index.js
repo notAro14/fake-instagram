@@ -1,1 +1,1 @@
-export { default } from './PublishPage';
+export { default } from './PublishPage'

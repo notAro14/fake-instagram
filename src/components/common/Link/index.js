@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Link as RouterLink } from 'react-router-dom';
+import styled from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 
 export const Link = styled(RouterLink)`
   color: #333;
@@ -7,8 +7,8 @@ export const Link = styled(RouterLink)`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 export const PrimaryLink = styled(Link)`
   color: var(--bg-color-btn);
-`;
+`

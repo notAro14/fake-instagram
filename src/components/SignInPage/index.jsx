@@ -1,6 +1,6 @@
-import React from 'react';
-import { PrimaryLink, Title, Box } from '../common';
-import SignIn from '../SignIn';
+import React from 'react'
+import { PrimaryLink, Title, Box } from '../common'
+import SignIn from '../SignIn'
 
 const SignInPage = () => (
   <>
@@ -11,10 +11,10 @@ const SignInPage = () => (
     <Box>
       <p>
         Don&apos;t have an account ?{' '}
-        <PrimaryLink to="signup">Sign up</PrimaryLink>
+        <PrimaryLink to='signup'>Sign up</PrimaryLink>
       </p>
     </Box>
   </>
-);
+)
 
-export default SignInPage;
+export default SignInPage
