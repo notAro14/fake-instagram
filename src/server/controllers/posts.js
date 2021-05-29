@@ -32,6 +32,28 @@ export const updatePost = async (req, res) => {
   }
 }
 
+export const likePost = async (req, res) => {
+  const { _id } = req.params
+  const { userId } = req.user
+  try {
+    const post = await Post.findById(_id).exec()
+    if (!post) return res.status(404).json({ error: 'Post does not exist' })
+    if (post.hearts.includes(userId)) {
+      post.hearts = post.hearts.filter((heart) => heart !== userId)
+    } else {
+      post.hearts.push(userId)
+    }
+    const savedPost = await post.save()
+    return res.json({ post: savedPost })
+  } catch (error) {
+    try {
+      return res.status(500).json({ error: error.message })
+    } catch (unlinkError) {
+      return res.status(500).json({ error: unlinkError.message })
+    }
+  }
+}
+
 export const getPosts = async (req, res) => {
   const { _id } = req.params
   if (_id) {
