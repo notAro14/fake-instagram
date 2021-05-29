@@ -45,3 +45,24 @@ export const getPosts = async ({ _id, token }) => {
     throw new Error(error.message)
   }
 }
+
+export const likePost = async ({ _id, token }) => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${token}`)
+
+  const url = `/api/posts/like/${_id}`
+  try {
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers,
+    })
+
+    if (!response.ok) {
+      const { error } = await response.json()
+      throw new Error(error)
+    }
+    return response.json()
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
