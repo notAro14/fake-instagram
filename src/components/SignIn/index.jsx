@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import { Button, SimpleInput, Password, FormWrapper, Spinner } from '../common'
 import { useUser } from '../../context/user.context'
 import { login } from '../../api/user'
 import { LOADING, IDLE } from '../../constants'
+import notify from '../../helpers/notification'
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
@@ -30,10 +30,10 @@ const SignIn = () => {
         setState(IDLE)
         setUser(user)
         history.push('/')
-        toast.success(`Welcome back ${user.displayname.split(' ')[0]} !`)
+        notify.success(`Welcome back ${user.displayname.split(' ')[0]} !`)
       },
       (error) => {
-        toast.error(error.message)
+        notify.error(error.message)
         setState(IDLE)
       }
     )

@@ -1,7 +1,6 @@
 import React from 'react'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from 'react-query'
 import {
@@ -16,6 +15,7 @@ import {
 import { useUser } from '../../context/user.context'
 import { MIME_TYPES, FILE_SIZE_LIMIT } from '../../constants'
 import { publish } from '../../api/post'
+import notify from '../../helpers/notification'
 
 const schema = yup.object().shape({
   title: yup.string().max(30).required('A title is needed'),
@@ -57,11 +57,11 @@ const PublishPost = () => {
   const mutation = useMutation(publish, {
     // invalidate and refetch
     onSuccess: (newPost) => {
-      toast.success(`✨ Your post "${newPost.title}" is (a)live`)
+      notify.success(`✨ Your post "${newPost.title}" is (a)live`)
       reset()
     },
     onError: (err) => {
-      toast.error(err.message)
+      notify.error(err.message)
     },
     onSettled: () => {
       queryClient.invalidateQueries('posts')

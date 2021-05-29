@@ -1,7 +1,5 @@
-import 'react-toastify/dist/ReactToastify.css'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -9,6 +7,7 @@ import { useUser } from 'Context/user.context'
 import { SimpleInput, Password, FormWrapper, Button, Spinner } from '../common'
 import { signup } from '../../api/user'
 import { LOADING, IDLE } from '../../constants'
+import notify from '../../helpers/notification'
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
@@ -51,10 +50,10 @@ const SignUp = () => {
         setState(IDLE)
         setUser(user)
         history.push('/')
-        toast.success(`Welcome ${user.displayname.split(' ')[0]}`)
+        notify.success(`Welcome ${user.displayname.split(' ')[0]}`)
       },
       (error) => {
-        toast.error(error.message)
+        notify.error(error.message)
         setState(IDLE)
       }
     )

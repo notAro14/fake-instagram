@@ -1,6 +1,6 @@
 import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { ToastContainer } from 'react-toastify'
+import { Toaster } from 'react-hot-toast'
 import ReactModal from 'react-modal'
 import { Switch, Route } from 'react-router-dom'
 import GlobalStyle from './components/globalStyle'
@@ -59,12 +59,8 @@ const App = () => {
             <NotFoundPage />
           </Route>
         </Switch>
-        <ToastContainer
-          position={isMobile ? 'bottom-center' : 'top-center'}
-          autoClose={10000}
-          hideProgressBar
-          draggable
-        />
+
+        <Toaster position={isMobile ? 'bottom-center' : 'bottom-right'} />
       </ErrorBoundary>
     </>
   )
