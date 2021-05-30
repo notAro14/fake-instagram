@@ -1,9 +1,9 @@
-import React, { createRef } from 'react'
+import React, { createRef, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { formatDistanceToNow } from 'date-fns'
 import PropTypes from 'prop-types'
 import { FiMoreHorizontal, FiMessageCircle } from 'react-icons/fi'
-import { BsHeart } from 'react-icons/bs'
+import { BsHeart, BsHeartFill } from 'react-icons/bs'
 import { useQuery } from 'react-query'
 import {
   CardAction,
@@ -28,6 +28,8 @@ import MyComment from './MyComment'
 import { Spinner, Kaboom, Button, Fallback } from '../common'
 import { useUser } from '../../context/user.context'
 import { getUserInfo } from '../../api/user'
+import { likePost } from '../../api/post'
+import notify from '../../helpers/notification'
 
 const PostCard = ({
   post: {
@@ -37,16 +39,24 @@ const PostCard = ({
     description = '',
     createdAt,
     title,
+    hearts = [],
   },
 }) => {
   const commentRef = createRef()
   const {
     state: { user },
   } = useUser()
-  const { isLoading, isError, isSuccess, error, data: userInfo } = useQuery(
-    ['users', userId],
-    () => getUserInfo({ userId, token: user.token })
+  const {
+    isLoading,
+    isError,
+    isSuccess,
+    error,
+    data: userInfo,
+  } = useQuery(['users', userId], () =>
+    getUserInfo({ userId, token: user.token })
   )
+
+  const [heartsCount, setHeartsCount] = useState(hearts)
 
   return (
     <ErrorBoundary
@@ -80,17 +90,24 @@ const PostCard = ({
               <FiMoreHorizontal />
             </CardHeaderAction>
           </CardHeader>
-          <CardMedia alt={title} src={image} />
+          <CardMedia alt={title} src={image} loading='lazy' />
           <CardContent>
             <CardActions>
               <CardLeftActions>
-                <CardAction>
-                  {/* {liked ? (
-                <BsHeartFill style={{ color: 'tomato' }} />
-              ) : (
-                <BsHeart />
-              )} */}
-                  <BsHeart />
+                <CardAction
+                  onClick={() => {
+                    likePost({ _id, token: user.token })
+                      .then(({ post }) => setHeartsCount(post.hearts))
+                      .catch((err) => {
+                        notify.error(err.message)
+                      })
+                  }}
+                >
+                  {heartsCount.includes(user.userId) ? (
+                    <BsHeartFill style={{ color: 'tomato' }} />
+                  ) : (
+                    <BsHeart />
+                  )}
                 </CardAction>
                 <CardAction
                   onClick={() => {
@@ -102,8 +119,9 @@ const PostCard = ({
               </CardLeftActions>
             </CardActions>
             <CardInfo>
-              {/* <Likes>{`${hearts} Like${hearts > 1 ? 's' : ''}`}</Likes> */}
-              <Likes>14 likes</Likes>
+              <Likes>{`${heartsCount.length} Like${
+                heartsCount.length > 1 ? 's' : ''
+              }`}</Likes>
               <ProfileLink to='/#'>{userInfo.username}</ProfileLink>{' '}
               <Description>{description}</Description>
             </CardInfo>
@@ -131,6 +149,7 @@ PostCard.propTypes = {
     _id: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    hearts: PropTypes.arrayOf(PropTypes.string),
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
