@@ -51,7 +51,7 @@ const PostCard = ({
     isSuccess,
     error,
     data: userInfo,
-  } = useQuery(['users', userId], () =>
+  } = useQuery(['user', userId], () =>
     getUserInfo({ userId, token: user.token })
   )
 
