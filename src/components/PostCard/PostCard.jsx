@@ -1,10 +1,10 @@
-import React, { createRef, useState } from 'react'
+import React, { createRef } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { formatDistanceToNow } from 'date-fns'
 import PropTypes from 'prop-types'
 import { FiMoreHorizontal, FiMessageCircle } from 'react-icons/fi'
 import { BsHeart, BsHeartFill } from 'react-icons/bs'
-import { useQuery } from 'react-query'
+import { useQuery, useMutation, useQueryClient } from 'react-query'
 import {
   CardAction,
   CardActions,
@@ -28,18 +28,17 @@ import MyComment from './MyComment'
 import { Spinner, Kaboom, Button, Fallback } from '../common'
 import { useUser } from '../../context/user.context'
 import { getUserInfo } from '../../api/user'
-import { likePost } from '../../api/post'
+import { getPosts, likePost } from '../../api/post'
 import notify from '../../helpers/notification'
 
 const PostCard = ({
   post: {
-    _id = '',
+    _id: postId = '',
     userId = '',
     image = '',
     description = '',
     createdAt,
     title,
-    hearts = [],
   },
 }) => {
   const commentRef = createRef()
@@ -56,7 +55,15 @@ const PostCard = ({
     getUserInfo({ userId, token: user.token })
   )
 
-  const [heartsCount, setHeartsCount] = useState(hearts)
+  const postQuery = useQuery(['post', postId], () =>
+    getPosts({ _id: postId, token: user.token })
+  )
+  const queryClient = useQueryClient()
+  const postMutation = useMutation(likePost, {
+    onSuccess: () => notify.success('Action succeed'),
+    onError: (err) => notify.error(err.message || "Oops that didn 't work"),
+    onSettled: () => queryClient.invalidateQueries(['post', postId]),
+  })
 
   return (
     <ErrorBoundary
@@ -76,7 +83,7 @@ const PostCard = ({
       {isLoading && <Spinner />}
       {isError && <Kaboom error={error.message} />}
       {isSuccess && (
-        <CardWrapper data-test-id='postCard' key={_id}>
+        <CardWrapper data-test-id='postCard' key={postId}>
           <CardHeader>
             <CardHeaderContent>
               <CardUserAvatar>
@@ -95,19 +102,17 @@ const PostCard = ({
             <CardActions>
               <CardLeftActions>
                 <CardAction
-                  onClick={() => {
-                    likePost({ _id, token: user.token })
-                      .then(({ post }) => setHeartsCount(post.hearts))
-                      .catch((err) => {
-                        notify.error(err.message)
-                      })
-                  }}
+                  onClick={() =>
+                    postMutation.mutate({ _id: postId, token: user.token })
+                  }
                 >
-                  {heartsCount.includes(user.userId) ? (
-                    <BsHeartFill style={{ color: 'tomato' }} />
-                  ) : (
-                    <BsHeart />
-                  )}
+                  {postQuery.isSuccess &&
+                    postQuery.data &&
+                    (postQuery.data[0].hearts.includes(user.userId) ? (
+                      <BsHeartFill style={{ color: 'tomato' }} />
+                    ) : (
+                      <BsHeart />
+                    ))}
                 </CardAction>
                 <CardAction
                   onClick={() => {
@@ -119,9 +124,13 @@ const PostCard = ({
               </CardLeftActions>
             </CardActions>
             <CardInfo>
-              <Likes>{`${heartsCount.length} Like${
-                heartsCount.length > 1 ? 's' : ''
-              }`}</Likes>
+              <Likes>
+                {postQuery.isSuccess &&
+                  postQuery.data &&
+                  `${postQuery.data[0].hearts.length} Like${
+                    postQuery.data[0].hearts.length > 1 ? 's' : ''
+                  }`}
+              </Likes>
               <ProfileLink to='/#'>{userInfo.username}</ProfileLink>{' '}
               <Description>{description}</Description>
             </CardInfo>
