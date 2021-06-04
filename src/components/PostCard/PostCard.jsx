@@ -60,7 +60,19 @@ const PostCard = ({
   )
   const queryClient = useQueryClient()
   const postMutation = useMutation(likePost, {
-    onSuccess: () => notify.success('Action succeed'),
+    onSuccess: (data) => {
+      switch (data.action) {
+        case 'like':
+          notify.success('😁 Awesome')
+          break
+        case 'unlike':
+          notify.success('👎🏼 Boo !!! Shame on you !')
+          break
+        default:
+          notify.success('Action succeed')
+          break
+      }
+    },
     onError: (err) => notify.error(err.message || "Oops that didn 't work"),
     onSettled: () => queryClient.invalidateQueries(['post', postId]),
   })

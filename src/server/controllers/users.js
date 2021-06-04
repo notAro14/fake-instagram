@@ -2,11 +2,12 @@ import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import User from '../models/user'
-import { TOKEN_EXPIRATION } from '../../constants'
 
 dotenv.config()
 
-const { JWT_SECRET } = process.env
+const { JWT_SECRET, TOKEN_EXPIRATION } = process.env
+
+const isDev = process.env.NODE_ENV === 'development'
 
 export const verifyUser = async (req, res) => {
   const { user } = req
@@ -45,9 +46,14 @@ export const signup = async (req, res) => {
       email: userSaved.email,
     }
 
-    const token = jwt.sign(userInfo, JWT_SECRET, {
-      expiresIn: TOKEN_EXPIRATION,
-    })
+    let token
+    if (isDev) {
+      token = jwt.sign(userInfo, JWT_SECRET)
+    } else {
+      token = jwt.sign(userInfo, JWT_SECRET, {
+        expiresIn: TOKEN_EXPIRATION,
+      })
+    }
 
     // res.cookie('token', token, { httpOnly: true });
     return res.status(201).json({
@@ -83,9 +89,15 @@ export const login = async (req, res) => {
       displayname: user.displayname,
       username: user.username,
     }
-    const token = jwt.sign(userInfo, JWT_SECRET, {
-      expiresIn: TOKEN_EXPIRATION,
-    })
+    let token
+    if (isDev) {
+      token = jwt.sign(userInfo, JWT_SECRET)
+    } else {
+      token = jwt.sign(userInfo, JWT_SECRET, {
+        expiresIn: TOKEN_EXPIRATION,
+      })
+    }
+
     // res.cookie('token', token, { httpOnly: true });
     return res.json({
       user: {

@@ -7,6 +7,3 @@ export const LOADING = 'LOADING'
 export const IDLE = 'IDLE'
 export const SUCCESS = 'SUCCESS'
 export const ERROR = 'ERROR'
-
-// JWT
-export const TOKEN_EXPIRATION = 900 // 15 min
