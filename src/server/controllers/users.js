@@ -48,11 +48,14 @@ export const signup = async (req, res) => {
       expiresIn: TOKEN_EXPIRATION,
     })
 
+    const { exp } = jwt.decode(token)
+
     // res.cookie('token', token, { httpOnly: true });
     return res.status(201).json({
       user: {
         ...userInfo,
         token,
+        expiresAt: exp,
       },
     })
   } catch (error) {
@@ -88,10 +91,12 @@ export const login = async (req, res) => {
     })
 
     // res.cookie('token', token, { httpOnly: true });
+    const { exp } = jwt.decode(token)
     return res.json({
       user: {
         ...userInfo,
         token,
+        expiresAt: exp,
       },
     })
   } catch (error) {
