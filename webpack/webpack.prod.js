@@ -1,7 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 // node
 const path = require('path')
 // plugins
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 // webpack
 const { merge } = require('webpack-merge')
 const webpackCfgCommon = require('./webpack.config')
@@ -24,6 +26,7 @@ module.exports = () => {
       ],
     },
     optimization: {
+      minimizer: [new CssMinimizerPlugin()],
       runtimeChunk: {
         name: 'runtime',
       },
