@@ -53,7 +53,7 @@ export const signup = async (req, res) => {
     // res.cookie('token', token, { httpOnly: true });
     return res.status(201).json({
       user: {
-        ...userInfo,
+        userInfo,
         token,
         expiresAt: exp,
       },
@@ -94,7 +94,7 @@ export const login = async (req, res) => {
     const { exp } = jwt.decode(token)
     return res.json({
       user: {
-        ...userInfo,
+        userInfo,
         token,
         expiresAt: exp,
       },

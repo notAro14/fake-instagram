@@ -9,17 +9,19 @@ import {
 import { useUser } from '../../context/user.context'
 
 const ProfileCard = () => {
-  const {
-    state: { user },
-  } = useUser()
+  const { authState } = useUser()
   return (
     <ProfileCardWrapper>
       <ProfileAvatar>
-        {user.displayname.slice(0, 2).toUpperCase()}
+        {authState.userInfo.displayname.slice(0, 2).toUpperCase()}
       </ProfileAvatar>
       <ProfileName>
-        <ProfileUserName to='/profile'>{user.username}</ProfileUserName>
-        <ProfileDisplayName>{user.displayname}</ProfileDisplayName>
+        <ProfileUserName to='/profile'>
+          {authState.userInfo.username}
+        </ProfileUserName>
+        <ProfileDisplayName>
+          {authState.userInfo.displayname}
+        </ProfileDisplayName>
       </ProfileName>
     </ProfileCardWrapper>
   )

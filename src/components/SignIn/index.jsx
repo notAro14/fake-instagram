@@ -21,16 +21,18 @@ const SignIn = () => {
     handleSubmit,
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) })
   const [state, setState] = useState(IDLE)
-  const { setUser } = useUser()
+  const { setAuthState } = useUser()
   const history = useHistory()
   const onSubmit = ({ email, password }) => {
     setState(LOADING)
     login({ email, password }).then(
       (user) => {
         setState(IDLE)
-        setUser(user)
+        setAuthState(user)
         history.push('/')
-        notify.success(`Welcome back ${user.displayname.split(' ')[0]} !`)
+        notify.success(
+          `Welcome back ${user.userInfo.displayname.split(' ')[0]} !`
+        )
       },
       (error) => {
         notify.error(error.message)

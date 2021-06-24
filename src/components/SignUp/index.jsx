@@ -40,7 +40,7 @@ const SignUp = () => {
     formState: { errors },
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) })
   const history = useHistory()
-  const { setUser } = useUser()
+  const { setAuthState } = useUser()
 
   const [state, setState] = useState(IDLE)
   const onSubmit = async ({ email, password, username, displayname }) => {
@@ -48,9 +48,9 @@ const SignUp = () => {
     signup({ email, password, username, displayname }).then(
       (user) => {
         setState(IDLE)
-        setUser(user)
+        setAuthState(user)
         history.push('/')
-        notify.success(`Welcome ${user.displayname.split(' ')[0]}`)
+        notify.success(`Welcome ${user.userInfo.displayname.split(' ')[0]}`)
       },
       (error) => {
         notify.error(error.message)

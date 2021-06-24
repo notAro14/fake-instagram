@@ -42,9 +42,7 @@ const PostCard = ({
   },
 }) => {
   const commentRef = createRef()
-  const {
-    state: { user },
-  } = useUser()
+  const { authState } = useUser()
   const {
     isLoading,
     isError,
@@ -52,11 +50,11 @@ const PostCard = ({
     error,
     data: userInfo,
   } = useQuery(['user', userId], () =>
-    getUserInfo({ userId, token: user.token })
+    getUserInfo({ userId, token: authState.token })
   )
 
   const postQuery = useQuery(['post', postId], () =>
-    getPosts({ _id: postId, token: user.token })
+    getPosts({ _id: postId, token: authState.token })
   )
   const queryClient = useQueryClient()
   const postMutation = useMutation(likePost, {
@@ -115,12 +113,14 @@ const PostCard = ({
               <CardLeftActions>
                 <CardAction
                   onClick={() =>
-                    postMutation.mutate({ _id: postId, token: user.token })
+                    postMutation.mutate({ _id: postId, token: authState.token })
                   }
                 >
                   {postQuery.isSuccess &&
                     postQuery.data &&
-                    (postQuery.data[0].hearts.includes(user.userId) ? (
+                    (postQuery.data[0].hearts.includes(
+                      authState.userInfo.userId
+                    ) ? (
                       <BsHeartFill style={{ color: 'tomato' }} />
                     ) : (
                       <BsHeart />
