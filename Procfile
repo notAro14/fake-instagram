@@ -1,1 +1,1 @@
-web: NODE_ENV=production node ./src/server/server.js
+web: NODE_ENV=production node ./dist/server/index.js
