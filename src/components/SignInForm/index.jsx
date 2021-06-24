@@ -14,7 +14,7 @@ const schema = yup.object().shape({
   password: yup.string().required('Enter a valid password'),
 })
 
-const SignIn = () => {
+const SignInForm = () => {
   const {
     register,
     formState: { errors },
@@ -59,4 +59,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignInForm
