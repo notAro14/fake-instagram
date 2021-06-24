@@ -25,11 +25,6 @@ const navLinks = [
     key: 'publish',
     icon: <MdPhotoCamera />,
   },
-  // {
-  //   to: '/profile',
-  //   key: 'profile',
-  //   icon: <CgProfile />,
-  // },
 ]
 
 const NavLinks = () => {

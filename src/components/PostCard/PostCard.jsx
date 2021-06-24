@@ -61,10 +61,10 @@ const PostCard = ({
     onSuccess: (data) => {
       switch (data.action) {
         case 'like':
-          notify.success('😁 Awesome')
+          notify.emoji('Awesome', '😸')
           break
         case 'unlike':
-          notify.success('👎🏼 Boo !!! Shame on you !')
+          notify.emoji('Boo !!! Shame on you !', '👎🏼')
           break
         default:
           notify.success('Action succeed')

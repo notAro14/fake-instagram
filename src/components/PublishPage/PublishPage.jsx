@@ -55,7 +55,7 @@ const PublishPost = () => {
   const mutation = useMutation(publish, {
     // invalidate and refetch
     onSuccess: (newPost) => {
-      notify.success(`✨ Your post "${newPost.title}" is (a)live`)
+      notify.emoji(`Your post "${newPost.title}" is (a)live`, '✨')
       reset()
     },
     onError: (err) => {
