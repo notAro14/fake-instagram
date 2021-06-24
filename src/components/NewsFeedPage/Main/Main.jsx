@@ -8,9 +8,7 @@ import { Spinner, Kaboom, PrimaryLink, Button, Box } from '../../common'
 import { getPosts } from '../../../api/post'
 
 const Main = () => {
-  const {
-    state: { user },
-  } = useUser()
+  const { authState } = useUser()
 
   const {
     isLoading,
@@ -18,7 +16,7 @@ const Main = () => {
     isSuccess,
     error,
     data: posts,
-  } = useQuery('posts', () => getPosts({ _id: null, token: user.token }))
+  } = useQuery('posts', () => getPosts({ _id: null, token: authState.token }))
 
   return (
     <ErrorBoundary

@@ -51,13 +51,11 @@ const PublishPost = () => {
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) })
   const queryClient = useQueryClient()
 
-  const {
-    state: { user },
-  } = useUser()
+  const { authState } = useUser()
   const mutation = useMutation(publish, {
     // invalidate and refetch
     onSuccess: (newPost) => {
-      notify.success(`✨ Your post "${newPost.title}" is (a)live`)
+      notify.emoji(`Your post "${newPost.title}" is (a)live`, '✨')
       reset()
     },
     onError: (err) => {
@@ -72,7 +70,7 @@ const PublishPost = () => {
       title,
       description,
       image,
-      token: user.token,
+      token: authState.token,
     })
   }
   return (

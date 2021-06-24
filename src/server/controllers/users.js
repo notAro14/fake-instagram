@@ -7,8 +7,6 @@ dotenv.config()
 
 const { JWT_SECRET, TOKEN_EXPIRATION } = process.env
 
-const isDev = process.env.NODE_ENV === 'development'
-
 export const verifyUser = async (req, res) => {
   const { user } = req
   res.status(200).json({ ...user })
@@ -46,20 +44,18 @@ export const signup = async (req, res) => {
       email: userSaved.email,
     }
 
-    let token
-    if (isDev) {
-      token = jwt.sign(userInfo, JWT_SECRET)
-    } else {
-      token = jwt.sign(userInfo, JWT_SECRET, {
-        expiresIn: TOKEN_EXPIRATION,
-      })
-    }
+    const token = jwt.sign(userInfo, JWT_SECRET, {
+      expiresIn: TOKEN_EXPIRATION,
+    })
+
+    const { exp } = jwt.decode(token)
 
     // res.cookie('token', token, { httpOnly: true });
     return res.status(201).json({
       user: {
-        ...userInfo,
+        userInfo,
         token,
+        expiresAt: exp,
       },
     })
   } catch (error) {
@@ -89,20 +85,18 @@ export const login = async (req, res) => {
       displayname: user.displayname,
       username: user.username,
     }
-    let token
-    if (isDev) {
-      token = jwt.sign(userInfo, JWT_SECRET)
-    } else {
-      token = jwt.sign(userInfo, JWT_SECRET, {
-        expiresIn: TOKEN_EXPIRATION,
-      })
-    }
+
+    const token = jwt.sign(userInfo, JWT_SECRET, {
+      expiresIn: TOKEN_EXPIRATION,
+    })
 
     // res.cookie('token', token, { httpOnly: true });
+    const { exp } = jwt.decode(token)
     return res.json({
       user: {
-        ...userInfo,
+        userInfo,
         token,
+        expiresAt: exp,
       },
     })
   } catch (error) {
