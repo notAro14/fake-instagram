@@ -1,6 +1,6 @@
 import React from 'react'
 import { CatchPhrase, Title, PrimaryLink, Box } from '../common'
-import SignUp from '../SignUp'
+import SignUpForm from '../SignUpForm'
 
 const SignUpPage = () => {
   return (
@@ -10,7 +10,7 @@ const SignUpPage = () => {
         <CatchPhrase>
           Sign up to see your friend&apos;s photos and videos.
         </CatchPhrase>
-        <SignUp />
+        <SignUpForm />
       </Box>
       <Box>
         <p>

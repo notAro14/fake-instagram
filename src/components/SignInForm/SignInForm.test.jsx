@@ -1,7 +1,7 @@
 import React from 'react'
 import userEvent from '@testing-library/user-event'
 
-import SignInForm from '.'
+import SignInForm from './SignInForm'
 import { render, screen, waitFor } from '../../tests/test-utils'
 
 test('SignInForm submits email and password', async () => {
