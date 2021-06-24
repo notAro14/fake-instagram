@@ -19,6 +19,23 @@ export default createGlobalStyle`
   body {
     background-color: var(--bg-color);
     font-family: var(--primary-font);
+
+    [data-reach-menu-button] {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    [data-reach-menu-popover] {
+      border-radius: 6px;
+      z-index: 1;
+    }
+
+    [data-reach-menu-item][data-selected] {
+      background: lightgray;
+      color: #333
+    }
   }
   ul {
     list-style-type: none
