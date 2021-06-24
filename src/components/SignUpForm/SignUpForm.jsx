@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React from 'react'
+import { func } from 'prop-types'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useUser } from 'Context/user.context'
-import { SimpleInput, Password, FormWrapper, Button, Spinner } from '../common'
-import { signup } from '../../api/user'
-import { LOADING, IDLE } from '../../constants'
-import notify from '../../helpers/notification'
+import { SimpleInput, Password, FormWrapper, Button } from '../common'
 
 const schema = yup.object().shape({
   email: yup.string().email().required('Enter a valid email'),
@@ -33,31 +29,13 @@ const schema = yup.object().shape({
     ),
 })
 
-const SignUp = () => {
+const SignUpForm = ({ onSubmit }) => {
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) })
-  const history = useHistory()
-  const { setAuthState } = useUser()
 
-  const [state, setState] = useState(IDLE)
-  const onSubmit = async ({ email, password, username, displayname }) => {
-    setState(LOADING)
-    signup({ email, password, username, displayname }).then(
-      (user) => {
-        setState(IDLE)
-        setAuthState(user)
-        history.push('/')
-        notify.success(`Welcome ${user.userInfo.displayname.split(' ')[0]}`)
-      },
-      (error) => {
-        notify.error(error.message)
-        setState(IDLE)
-      }
-    )
-  }
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
       <SimpleInput errors={errors} ref={register} type='email' name='email'>
@@ -73,9 +51,12 @@ const SignUp = () => {
         Password
       </Password>
       <Button type='submit'>Next</Button>
-      {state.label === LOADING && <Spinner />}
     </FormWrapper>
   )
 }
 
-export default SignUp
+SignUpForm.propTypes = {
+  onSubmit: func.isRequired,
+}
+
+export default SignUpForm
