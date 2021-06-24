@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 // node
 const path = require('path')
 // webpack

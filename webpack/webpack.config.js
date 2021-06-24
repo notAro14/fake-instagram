@@ -1,7 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 // node
 const path = require('path')
 // plugins
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
@@ -18,7 +18,6 @@ module.exports = {
   plugins: [
     // html-webpack-plugin throws a warning DEP_WEBPACK_COMPILATION_ASSETS
     // See this issue https://github.com/jantimon/html-webpack-plugin/issues/1523
-    // new CleanWebpackPlugin(),
     new ProgressPlugin(),
     new HtmlWebpackPlugin({
       title: 'Fake - Instagram',

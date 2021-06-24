@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
