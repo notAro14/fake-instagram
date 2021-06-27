@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import User from '../models/user'
+import { getRefreshToken, saveRefreshToken } from '../helpers/token'
 
 dotenv.config()
 
@@ -50,6 +51,10 @@ export const signup = async (req, res) => {
 
     const { exp } = jwt.decode(token)
 
+    const refreshToken = getRefreshToken()
+    await saveRefreshToken({ refreshToken, userId: userSaved._id })
+    res.cookie('refreshToken', refreshToken, { httpOnly: true })
+
     // res.cookie('token', token, { httpOnly: true });
     return res.status(201).json({
       user: {
@@ -89,6 +94,10 @@ export const login = async (req, res) => {
     const token = jwt.sign(userInfo, JWT_SECRET, {
       expiresIn: TOKEN_EXPIRATION,
     })
+
+    const refreshToken = getRefreshToken()
+    await saveRefreshToken({ refreshToken, userId: user._id })
+    res.cookie('refreshToken', refreshToken, { httpOnly: true })
 
     // res.cookie('token', token, { httpOnly: true });
     const { exp } = jwt.decode(token)

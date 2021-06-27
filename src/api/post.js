@@ -36,6 +36,9 @@ export const getPosts = async ({ _id, token }) => {
     })
 
     if (!response.ok) {
+      if (response.status === 403) {
+        // refresh token
+      }
       const { error } = await response.json()
       throw new Error(error)
     }
