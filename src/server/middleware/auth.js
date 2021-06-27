@@ -11,13 +11,13 @@ const authenticateToken = (req, res, next) => {
   // const { token } = req.cookies;
   if (!token)
     res.status(403).json({
-      error: 'Invalid request!',
+      error: 'Token not found!',
     })
   else {
     jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
       if (err) {
         res.status(403).json({
-          error: 'Invalid request!',
+          error: 'Invalid token!',
         })
       } else {
         const user = decodedToken
