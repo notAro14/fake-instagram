@@ -4,19 +4,23 @@ import { useQuery } from 'react-query'
 import { MainWrapper } from './Main.style'
 import PostCard from '../../PostCard/PostCard'
 import { useUser } from '../../../context/user.context'
-import { Spinner, Kaboom, PrimaryLink, Button, Box } from '../../common'
+import { Spinner, PrimaryLink, Button, Box } from '../../common'
 import { getPosts } from '../../../api/post'
+import notify from '../../../helpers/notification'
 
 const Main = () => {
   const { authState } = useUser()
 
   const {
     isLoading,
-    isError,
     isSuccess,
-    error,
+    isError,
     data: posts,
-  } = useQuery('posts', () => getPosts({ _id: null, token: authState.token }))
+  } = useQuery('posts', () => getPosts({ _id: null, token: authState.token }), {
+    onError: () => {
+      notify.error('Oops, could not get new posts')
+    },
+  })
 
   return (
     <ErrorBoundary
@@ -35,7 +39,11 @@ const Main = () => {
     >
       <MainWrapper>
         {isLoading && <Spinner />}
-        {isError && <Kaboom error={error.message} />}
+        {isError && (
+          <p style={{ color: 'tomato' }} role='alert'>
+            Oops, new posts couldn&apos;t be fetched
+          </p>
+        )}
         {isSuccess && posts.length > 0
           ? posts.map((post) => <PostCard key={post._id} post={post} />)
           : null}

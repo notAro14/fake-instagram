@@ -23,9 +23,9 @@ import {
   ProfileLink,
   PublicationDate,
 } from './PostCard.style'
-import MyComment from './MyComment'
+// import MyComment from './MyComment'
 // import { LOADING, SUCCESS, ERROR } from '../../constants';
-import { Spinner, Kaboom, Button, Fallback } from '../common'
+import { Spinner, Button, Fallback } from '../common'
 import { useUser } from '../../context/user.context'
 import { getUserInfo } from '../../api/user'
 import { getPosts, likePost } from '../../api/post'
@@ -47,7 +47,6 @@ const PostCard = ({
     isLoading,
     isError,
     isSuccess,
-    error,
     data: userInfo,
   } = useQuery(['user', userId], () =>
     getUserInfo({ userId, token: authState.token })
@@ -91,7 +90,11 @@ const PostCard = ({
       }}
     >
       {isLoading && <Spinner />}
-      {isError && <Kaboom error={error.message} />}
+      {isError && (
+        <p style={{ color: 'tomato' }} role='alert'>
+          This post couldn&apos;t be fetched
+        </p>
+      )}
       {isSuccess && (
         <CardWrapper data-test-id='postCard' key={postId}>
           <CardHeader>
@@ -158,7 +161,7 @@ const PostCard = ({
           <PublicationDate>
             {`${formatDistanceToNow(new Date(createdAt))} ago`}
           </PublicationDate>
-          <MyComment ref={commentRef} />
+          {/* <MyComment ref={commentRef} /> */}
         </CardWrapper>
       )}
     </ErrorBoundary>
