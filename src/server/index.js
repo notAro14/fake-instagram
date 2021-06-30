@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 
 import postsRoutes from './routes/posts'
 import usersRoutes from './routes/users'
+import commentsRoutes from './routes/comments'
 
 dotenv.config()
 
@@ -25,6 +26,7 @@ app.use(cookieParser())
 app.use('/images', express.static(path.join(__dirname, '../../tmp/images')))
 app.use('/api/posts', postsRoutes)
 app.use('/api/users', usersRoutes)
+app.use('/api/comments', commentsRoutes)
 
 // serving static files in production
 if (!isDev) {
