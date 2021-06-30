@@ -1,5 +1,6 @@
 import React from 'react'
 import * as yup from 'yup'
+import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from 'react-query'
@@ -43,11 +44,11 @@ const schema = yup.object().shape({
 })
 
 const PublishPost = () => {
+  const history = useHistory()
   const {
     handleSubmit,
     formState: { errors },
     register,
-    reset,
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) })
   const queryClient = useQueryClient()
 
@@ -56,7 +57,7 @@ const PublishPost = () => {
     // invalidate and refetch
     onSuccess: (newPost) => {
       notify.emoji(`Your post "${newPost.title}" is (a)live`, '✨')
-      reset()
+      history.push('/')
     },
     onError: (err) => {
       notify.error(err.message)
