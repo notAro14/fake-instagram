@@ -127,4 +127,7 @@ export const Comment = styled.div`
   padding-bottom: 0.2rem;
 `
 
-export const Comments = styled.div``
+export const Comments = styled.div`
+  max-height: 100px;
+  overflow-y: auto;
+`
