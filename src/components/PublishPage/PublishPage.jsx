@@ -49,7 +49,7 @@ const PublishPost = () => {
     handleSubmit,
     formState: { errors },
     register,
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) })
+  } = useForm({ mode: 'onChange', resolver: yupResolver(schema) })
   const queryClient = useQueryClient()
 
   const { authState } = useUser()
