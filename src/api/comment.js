@@ -51,7 +51,7 @@ export const getAllCommentsForAPost = async ({ postId, token }) => {
         hearts: hearts.length,
         user: {
           userId: user._id,
-          name: user.displayname,
+          name: user.username,
         },
       })
     )

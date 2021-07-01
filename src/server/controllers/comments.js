@@ -39,7 +39,7 @@ export const getAllCommentsForAPost = async (req, res) => {
           _id,
           user: {
             _id: userId,
-            displayname: user ? user.displayname : null,
+            username: user ? user.username : null,
           },
         }
       })
