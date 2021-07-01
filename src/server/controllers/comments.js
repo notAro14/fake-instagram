@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 import Comment from '../models/comment'
 import User from '../models/user'
 
@@ -57,21 +58,23 @@ export const likeComment = async (req, res) => {
     const comment = await Comment.findById(commentId).exec()
     if (!comment)
       return res.status(404).json({ error: 'Like failed: comment not found' })
-    let action
     if (comment.hearts.includes(userId)) {
-      comment.hearts = comment.hearts.filter((heart) => heart !== userId)
-      action = 'unlike'
-    } else {
-      comment.hearts.push(userId)
-      action = 'like'
+      const savedComment = await Comment.updateOne(
+        { _id: commentId },
+        { $pull: { hearts: Types.ObjectId(userId) } }
+      )
+      return res.json({ comment: savedComment, action: 'unlike' })
     }
-    const savedComment = await comment.save()
-    return res.json({ comment: savedComment, action })
+    const savedComment = await Comment.updateOne(
+      { _id: commentId },
+      { $push: { hearts: Types.ObjectId(userId) } }
+    )
+    return res.json({ comment: savedComment, action: 'like' })
   } catch (error) {
     try {
       return res.status(500).json({ error: error.message })
-    } catch (unLinkeError) {
-      return res.status(500).json({ error: unLinkeError.message })
+    } catch (unLikeError) {
+      return res.status(500).json({ error: unLikeError.message })
     }
   }
 }
