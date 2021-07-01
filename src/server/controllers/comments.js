@@ -21,13 +21,16 @@ export const getAllCommentsForAPost = async (req, res) => {
   const { postId } = req.params
 
   try {
-    const rawComments = await Comment.find({ postId })
+    const rawComments = await Comment.find({ postId }).exec()
+
+    if (!rawComments)
+      return res.status(400).json({ error: 'Comment not found' })
     if (rawComments.length === 0) return res.json({ comments: rawComments })
 
     const comments = await Promise.allSettled(
       rawComments.map(async (comment) => {
         const { userId, _id, createdAt, content, hearts } = comment
-        const user = await User.findOne({ _id: userId })
+        const user = await User.findById(userId)
         return {
           content,
           createdAt,
@@ -44,5 +47,31 @@ export const getAllCommentsForAPost = async (req, res) => {
     return res.json({ comments })
   } catch (err) {
     return res.status(500).json({ error: err.message })
+  }
+}
+
+export const likeComment = async (req, res) => {
+  const { commentId } = req.params
+  const { userId } = req.user
+  try {
+    const comment = await Comment.findById(commentId).exec()
+    if (!comment)
+      return res.status(404).json({ error: 'Like failed: comment not found' })
+    let action
+    if (comment.hearts.includes(userId)) {
+      comment.hearts = comment.hearts.filter((heart) => heart !== userId)
+      action = 'unlike'
+    } else {
+      comment.hearts.push(userId)
+      action = 'like'
+    }
+    const savedComment = await comment.save()
+    return res.json({ comment: savedComment, action })
+  } catch (error) {
+    try {
+      return res.status(500).json({ error: error.message })
+    } catch (unLinkeError) {
+      return res.status(500).json({ error: unLinkeError.message })
+    }
   }
 }
