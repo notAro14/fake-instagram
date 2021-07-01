@@ -1,4 +1,6 @@
 import React, { useState, forwardRef } from 'react'
+import { func, string } from 'prop-types'
+import { useMutation, useQueryClient } from 'react-query'
 import {
   MyCommentWrapper,
   MyCommentForm,
@@ -8,6 +10,7 @@ import {
 } from './MyComment.style'
 import EmojiPickerModal from './EmojiPickerModal'
 import useEmojiPicker from './useEmojiPicker'
+// import { createComment } from '../../../api/comment'
 
 const MyComment = forwardRef((props, ref) => {
   const [input, setInput] = useState('')
@@ -17,6 +20,7 @@ const MyComment = forwardRef((props, ref) => {
     setInput((prev) => prev + emoji.native)
     inputRef.current.focus()
   }
+  const { onCreateComment, postId } = props
 
   const {
     isEmojiPickerOpen,
@@ -24,6 +28,11 @@ const MyComment = forwardRef((props, ref) => {
     closeEmojiPicker,
     openEmojiPicker,
   } = useEmojiPicker(onEmojiSelected)
+
+  const queryClient = useQueryClient()
+  const commentsMutation = useMutation(onCreateComment, {
+    onSettled: () => queryClient.invalidateQueries(['comments', postId]),
+  })
 
   return (
     <MyCommentWrapper>
@@ -36,6 +45,7 @@ const MyComment = forwardRef((props, ref) => {
       <MyCommentForm
         onSubmit={(evt) => {
           evt.preventDefault()
+          commentsMutation.mutate(input)
           setInput('')
         }}
       >
@@ -54,5 +64,10 @@ const MyComment = forwardRef((props, ref) => {
     </MyCommentWrapper>
   )
 })
+
+MyComment.propTypes = {
+  onCreateComment: func.isRequired,
+  postId: string.isRequired,
+}
 
 export default MyComment

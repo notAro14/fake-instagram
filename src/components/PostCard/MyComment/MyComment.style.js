@@ -24,7 +24,7 @@ export const MyCommentForm = styled.form`
 
 export const MyCommentInput = styled.input`
   border: none;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   outline: none;
   padding: 0 1rem;
   width: 100%;

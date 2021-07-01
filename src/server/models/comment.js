@@ -2,15 +2,14 @@ import mongoose from 'mongoose'
 
 const { Schema, model, Types } = mongoose
 
-const postSchema = new Schema({
+const commentSchema = new Schema({
+  content: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-  description: { type: String, required: true },
   hearts: { type: [Types.ObjectId], default: [] },
-  image: String,
-  title: { type: String, required: true },
+  postId: { type: Types.ObjectId, required: true },
   userId: { type: Types.ObjectId, required: true },
 })
 
-const Post = model('Post', postSchema)
+const Comment = model('Comment', commentSchema)
 
-export default Post
+export default Comment

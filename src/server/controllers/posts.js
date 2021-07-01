@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 import fs from 'fs'
 import Post from '../models/post'
 
@@ -82,16 +83,18 @@ export const likePost = async (req, res) => {
     const post = await Post.findById(_id).exec()
     if (!post)
       return res.status(404).json({ error: 'Like failed: post not found' })
-    let action
     if (post.hearts.includes(userId)) {
-      post.hearts = post.hearts.filter((heart) => heart !== userId)
-      action = 'unlike'
-    } else {
-      post.hearts.push(userId)
-      action = 'like'
+      const savedPost = await Post.updateOne(
+        { _id },
+        { $pull: { hearts: Types.ObjectId(userId) } }
+      )
+      return res.json({ post: savedPost, action: 'unlike' })
     }
-    const savedPost = await post.save()
-    return res.json({ post: savedPost, action })
+    const savedPost = await Post.updateOne(
+      { _id },
+      { $push: { hearts: Types.ObjectId(userId) } }
+    )
+    return res.json({ post: savedPost, action: 'like' })
   } catch (error) {
     try {
       return res.status(500).json({ error: error.message })

@@ -18,17 +18,20 @@ import {
   CardUserAvatar,
   CardUserName,
   CardWrapper,
+  Comment,
+  Comments,
   Description,
   Likes,
   ProfileLink,
   PublicationDate,
 } from './PostCard.style'
-// import MyComment from './MyComment'
+import MyComment from './MyComment'
 // import { LOADING, SUCCESS, ERROR } from '../../constants';
 import { Spinner, Button, Fallback } from '../common'
 import { useUser } from '../../context/user.context'
 import { getUserInfo } from '../../api/user'
 import { getPosts, likePost } from '../../api/post'
+import { createComment, getAllCommentsForAPost } from '../../api/comment'
 import notify from '../../helpers/notification'
 
 const PostCard = ({
@@ -55,6 +58,11 @@ const PostCard = ({
   const postQuery = useQuery(['post', postId], () =>
     getPosts({ _id: postId, token: authState.token })
   )
+
+  const commentsQuery = useQuery(['comments', postId], () =>
+    getAllCommentsForAPost({ postId, token: authState.token })
+  )
+
   const queryClient = useQueryClient()
   const postMutation = useMutation(likePost, {
     onSuccess: (data) => {
@@ -149,19 +157,27 @@ const PostCard = ({
               <ProfileLink to='/#'>{userInfo.username}</ProfileLink>{' '}
               <Description>{description}</Description>
             </CardInfo>
-            {/* <Comments>
-          {comments.map(comment => (
-            <Comment key={comment._id}>
-              <ProfileLink to="/#">{comment.profileId}</ProfileLink>{' '}
-              <Description>{comment.comment}</Description>
-            </Comment>
-          ))}
-        </Comments> */}
+            <Comments>
+              {commentsQuery.isSuccess && commentsQuery.data
+                ? commentsQuery.data.map(({ commentId, content, user }) => (
+                    <Comment key={commentId}>
+                      <ProfileLink to='/#'>{user.name}</ProfileLink>{' '}
+                      <Description>{content}</Description>
+                    </Comment>
+                  ))
+                : null}
+            </Comments>
           </CardContent>
           <PublicationDate>
             {`${formatDistanceToNow(new Date(createdAt))} ago`}
           </PublicationDate>
-          {/* <MyComment ref={commentRef} /> */}
+          <MyComment
+            onCreateComment={async (content) =>
+              createComment({ postId, content, token: authState.token })
+            }
+            postId={postId}
+            ref={commentRef}
+          />
         </CardWrapper>
       )}
     </ErrorBoundary>
