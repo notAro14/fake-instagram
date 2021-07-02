@@ -19,6 +19,7 @@ import {
   CardUserName,
   CardWrapper,
   Comment,
+  CommentLikeButton,
   Comments,
   Description,
   Likes,
@@ -31,7 +32,11 @@ import { Spinner, Button, Fallback } from '../common'
 import { useUser } from '../../context/user.context'
 import { getUserInfo } from '../../api/user'
 import { getPosts, likePost } from '../../api/post'
-import { createComment, getAllCommentsForAPost } from '../../api/comment'
+import {
+  createComment,
+  getAllCommentsForAPost,
+  likeAComment,
+} from '../../api/comment'
 import notify from '../../helpers/notification'
 
 const PostCard = ({
@@ -80,6 +85,16 @@ const PostCard = ({
     },
     onError: (err) => notify.error(err.message || "Oops that didn 't work"),
     onSettled: () => queryClient.invalidateQueries(['post', postId]),
+  })
+
+  const likeCommentMutation = useMutation(likeAComment, {
+    onSettled: () => queryClient.invalidateQueries(['comments', postId]),
+    onSuccess: (data) => {
+      if (data.action === 'like') notify.emoji('nice', '🌱')
+      if (data.action === 'unlike') notify.emoji('moron', '❌')
+    },
+    onError: (err) =>
+      notify.error(err.message || "Oopsy, you can't like this comment for now"),
   })
 
   return (
@@ -159,12 +174,30 @@ const PostCard = ({
             </CardInfo>
             <Comments>
               {commentsQuery.isSuccess && commentsQuery.data
-                ? commentsQuery.data.map(({ commentId, content, user }) => (
-                    <Comment key={commentId}>
-                      <ProfileLink to='/#'>{user.name}</ProfileLink>{' '}
-                      <Description>{content}</Description>
-                    </Comment>
-                  ))
+                ? commentsQuery.data.map(
+                    ({ commentId, content, user, hearts }) => (
+                      <Comment key={commentId}>
+                        <div>
+                          <ProfileLink to='/#'>{user.name}</ProfileLink>{' '}
+                          <Description>{content}</Description>
+                        </div>
+                        <CommentLikeButton
+                          onClick={() =>
+                            likeCommentMutation.mutate({
+                              commentId,
+                              token: authState.token,
+                            })
+                          }
+                        >
+                          {hearts.includes(authState.userInfo.userId) ? (
+                            <BsHeartFill style={{ color: 'tomato' }} />
+                          ) : (
+                            <BsHeart />
+                          )}
+                        </CommentLikeButton>
+                      </Comment>
+                    )
+                  )
                 : null}
             </Comments>
           </CardContent>

@@ -124,10 +124,22 @@ export const Description = styled.span`
 `
 
 export const Comment = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
   padding-bottom: 0.2rem;
 `
 
+export const CommentLikeButton = styled.span`
+  cursor: pointer;
+  font-size: 0.65rem;
+`
+
 export const Comments = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   max-height: 100px;
   overflow-y: auto;
+  padding: 0.25rem 0;
 `
