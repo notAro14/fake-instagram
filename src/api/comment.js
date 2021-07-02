@@ -48,7 +48,7 @@ export const getAllCommentsForAPost = async ({ postId, token }) => {
         content,
         commentId: _id,
         createdAt,
-        hearts: hearts.length,
+        hearts,
         user: {
           userId: user._id,
           name: user.username,
@@ -77,12 +77,7 @@ export const likeAComment = async ({ commentId, token }) => {
     }
     const { comment, action } = await response.json()
     return {
-      hearts: comment.hearts.length,
-      commentId: comment._id,
-      content: comment.content,
-      postId: comment.postId,
-      userId: comment.userId,
-      createdAt: comment.createdAt,
+      ...comment,
       action,
     }
   } catch (error) {
