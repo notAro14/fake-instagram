@@ -10,6 +10,7 @@ import {
 } from './MyComment.style'
 import EmojiPickerModal from './EmojiPickerModal'
 import useEmojiPicker from './useEmojiPicker'
+import notify from '../../../helpers/notification'
 // import { createComment } from '../../../api/comment'
 
 const MyComment = forwardRef((props, ref) => {
@@ -32,6 +33,8 @@ const MyComment = forwardRef((props, ref) => {
   const queryClient = useQueryClient()
   const commentsMutation = useMutation(onCreateComment, {
     onSettled: () => queryClient.invalidateQueries(['comments', postId]),
+    onSuccess: () => notify.emoji('✨✨✨', '🚀'),
+    onError: (err) => notify.error(err.message),
   })
 
   return (

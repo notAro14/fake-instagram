@@ -89,6 +89,10 @@ const PostCard = ({
 
   const likeCommentMutation = useMutation(likeAComment, {
     onSettled: () => queryClient.invalidateQueries(['comments', postId]),
+    onSuccess: (data) => {
+      if (data.action === 'like') notify.emoji('nice', '🌱')
+      if (data.action === 'unlike') notify.emoji('moron', '❌')
+    },
     onError: (err) =>
       notify.error(err.message || "Oopsy, you can't like this comment for now"),
   })
